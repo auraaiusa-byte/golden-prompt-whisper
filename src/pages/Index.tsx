@@ -1,16 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Nav } from "@/components/Nav";
+import { Hero } from "@/components/Hero";
+import { Concierge } from "@/components/Concierge";
+import { Voice } from "@/components/Voice";
+import { Pricing } from "@/components/Pricing";
+import { Footer } from "@/components/Footer";
+import { useEffect } from "react";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  useEffect(() => {
+    document.title = "Aurelia · The Silent Partner for Elite Med Spas";
+    const meta = document.querySelector('meta[name="description"]') || (() => {
+      const m = document.createElement("meta");
+      m.setAttribute("name", "description");
+      document.head.appendChild(m);
+      return m;
+    })();
+    meta.setAttribute("content", "Aurelia is the discreet AI concierge for America's most distinguished med spas — instant bookings, signature-voice DM replies, $299/mo all-inclusive.");
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <main className="min-h-screen">
+      <Nav />
+      <Hero />
+      <Concierge />
+      <Voice />
+      <Pricing />
+      <Footer />
+    </main>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
