@@ -11,8 +11,7 @@ export const Hero = () => (
         width={1600}
         height={1200}
       />
-      <div className="absolute inset-0 bg-background/70" />
-      <div className="absolute inset-0" style={{ background: "var(--gradient-veil)" }} />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-background/10 md:from-background/90 md:via-background/40 md:to-transparent" />
     </div>
 
     <div className="container relative z-10 grid md:grid-cols-12 gap-8 items-center py-24">
