@@ -61,9 +61,6 @@ export const Hero = () => (
       </div>
     </div>
 
-      </div>
-    </div>
-
     {/* Glassmorphism live booking notification */}
     <div className="hidden lg:block absolute bottom-16 right-10 z-20 reveal reveal-delay-4">
       <div className="glass rounded-2xl p-5 w-[320px] border border-gold/40">
