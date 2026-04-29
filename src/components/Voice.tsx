@@ -17,7 +17,7 @@ export const Voice = () => (
           <br /><span className="italic">never asleep.</span>
         </h2>
         <p className="text-muted-foreground leading-relaxed text-lg font-light mb-12">
-          Aurelia studies the cadence of your brand — the warmth, the discretion, the
+          Aura studies the cadence of your brand — the warmth, the discretion, the
           quiet confidence — then replies to every Instagram DM, every comment, every
           inquiry, with prose indistinguishable from your own.
         </p>

@@ -8,14 +8,14 @@ import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
-    document.title = "Aurelia · The Silent Partner for Elite Med Spas";
+    document.title = "Aura · The Silent Partner for Elite Med Spas";
     const meta = document.querySelector('meta[name="description"]') || (() => {
       const m = document.createElement("meta");
       m.setAttribute("name", "description");
       document.head.appendChild(m);
       return m;
     })();
-    meta.setAttribute("content", "Aurelia is the discreet AI concierge for America's most distinguished med spas — instant bookings, signature-voice DM replies, $299/mo all-inclusive.");
+    meta.setAttribute("content", "Aura is the discreet AI concierge for America's most distinguished med spas — instant bookings, signature-voice DM replies, $299/mo all-inclusive.");
   }, []);
 
   return (

@@ -29,11 +29,11 @@ export const Concierge = () => (
           <div className="relative h-full rounded-[2rem] overflow-hidden luxe-shadow animate-float">
             <div className="absolute inset-0 bg-gradient-to-br from-secondary to-background" />
             <div className="relative p-8 flex flex-col h-full">
-              <div className="text-[10px] uppercase tracking-luxe text-muted-foreground mb-6">Aurelia Concierge · Live</div>
+              <div className="text-[10px] uppercase tracking-luxe text-muted-foreground mb-6">Aura Concierge · Live</div>
 
               <div className="space-y-4 flex-1">
                 <div className="glass rounded-2xl p-4 max-w-[80%]">
-                  <p className="text-sm text-foreground/80">Hi Aurelia, I'd love a HydraFacial Friday evening.</p>
+                  <p className="text-sm text-foreground/80">Hi Aura, I'd love a HydraFacial Friday evening.</p>
                 </div>
                 <div className="ml-auto rounded-2xl p-4 max-w-[80%] bg-primary text-primary-foreground">
                   <p className="text-sm">Of course, Madeline. Friday 6:30pm with Dr. Lane is reserved for you. Shall I add a Vitamin Glow infusion? ✶</p>

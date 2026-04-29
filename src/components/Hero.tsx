@@ -31,7 +31,7 @@ export const Hero = () => (
         </h1>
 
         <p className="reveal reveal-delay-2 max-w-xl text-lg text-muted-foreground leading-relaxed mb-12 font-light">
-          From manual chaos to AI-driven serenity. Aurelia is the discreet intelligence
+          From manual chaos to AI-driven serenity. Aura is the discreet intelligence
           behind America's most distinguished aesthetic practices — answering, booking, and
           delighting your patients while you focus on the artistry.
         </p>

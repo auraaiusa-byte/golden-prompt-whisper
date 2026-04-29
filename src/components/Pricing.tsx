@@ -22,7 +22,7 @@ export const Pricing = () => (
         </h2>
         <p className="text-background/60 font-light text-lg">
           We do not believe in feature gates or hidden ledgers. One graceful price for
-          everything Aurelia offers — and everything she will become.
+          everything Aura offers — and everything she will become.
         </p>
       </div>
 
@@ -31,7 +31,7 @@ export const Pricing = () => (
           <div className="absolute -inset-px rounded-sm" style={{ background: "var(--gradient-gold)" }} />
           <div className="relative bg-foreground p-12 rounded-sm">
             <div className="text-center mb-8">
-              <div className="text-xs uppercase tracking-luxe text-gold mb-6">The Aurelia Membership</div>
+              <div className="text-xs uppercase tracking-luxe text-gold mb-6">The Aura Membership</div>
               <div className="hairline mx-auto w-24 mb-8" />
               <div className="flex items-baseline justify-center gap-2">
                 <span className="font-serif text-7xl text-background">$299</span>
