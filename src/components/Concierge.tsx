@@ -13,7 +13,7 @@ export const Concierge = () => (
           No forms. No waiting. No phone tag. Just an effortless, app-grade experience
           delivered through the channels they already adore.
         </p>
-        <ul className="space-y-4 text-sm">
+        <ul className="space-y-4 text-sm mb-10">
           {["Instant confirmation, calendar-synced","Discreet pre-care instructions","White-glove rescheduling, automated"].map((t) => (
             <li key={t} className="flex items-center gap-4 border-b border-border pb-4">
               <span className="text-gold">◆</span>
@@ -21,6 +21,17 @@ export const Concierge = () => (
             </li>
           ))}
         </ul>
+
+        <div className="grid grid-cols-2 gap-6 pt-2">
+          <div>
+            <div className="font-serif text-4xl md:text-5xl text-gold leading-none">98%</div>
+            <div className="mt-2 text-xs uppercase tracking-luxe text-muted-foreground">Booking Accuracy</div>
+          </div>
+          <div className="border-l border-gold/30 pl-6">
+            <div className="font-serif text-4xl md:text-5xl text-gold leading-none">24/7</div>
+            <div className="mt-2 text-xs uppercase tracking-luxe text-muted-foreground">AI Concierge</div>
+          </div>
+        </div>
       </div>
 
       <div className="md:col-span-7 md:order-1 relative">
