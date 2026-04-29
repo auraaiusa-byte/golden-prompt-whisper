@@ -11,7 +11,7 @@ export const Hero = () => (
         width={1600}
         height={1200}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-background/10 md:from-background/90 md:via-background/40 md:to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20 md:from-background md:via-background/75 md:to-transparent" />
     </div>
 
     <div className="container relative z-10 grid md:grid-cols-12 gap-8 items-center py-24">
@@ -21,12 +21,12 @@ export const Hero = () => (
           <span className="text-xs uppercase tracking-luxe text-gold">Private Beta · By Invitation</span>
         </div>
 
-        <h1 className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8">
-          The Silent Partner
+        <h1 className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-[#0a0a0a]">
+          Elevate Your
           <br />
-          in Your Clinic's
+          Clinic's Digital
           <br />
-          <span className="italic gold-shimmer">growth.</span>
+          <span className="italic gold-shimmer">Presence.</span>
         </h1>
 
         <p className="reveal reveal-delay-2 max-w-xl text-lg text-muted-foreground leading-relaxed mb-12 font-light">
