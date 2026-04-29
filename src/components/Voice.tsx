@@ -4,7 +4,7 @@ export const Voice = () => (
   <section id="voice" className="relative py-32 md:py-48 bg-secondary overflow-hidden">
     <div className="container grid md:grid-cols-12 gap-16 items-center">
       <div className="md:col-span-6">
-        <div className="relative aspect-[4/5] overflow-hidden luxe-shadow">
+        <div className="relative aspect-[4/5] overflow-hidden luxe-card rounded-sm">
           <img src={voiceImg} alt="Champagne silk symbolizing the signature voice" loading="lazy" width={1200} height={1400} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/40 via-transparent to-transparent" />
         </div>

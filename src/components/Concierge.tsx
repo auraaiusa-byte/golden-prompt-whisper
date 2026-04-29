@@ -26,7 +26,7 @@ export const Concierge = () => (
       <div className="md:col-span-7 md:order-1 relative">
         <div className="relative aspect-[4/5] max-w-md mx-auto">
           <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-gold-soft/30 via-transparent to-gold/20 blur-3xl" />
-          <div className="relative h-full rounded-[2rem] overflow-hidden luxe-shadow animate-float">
+          <div className="relative h-full rounded-[2rem] overflow-hidden luxe-card animate-float">
             <div className="absolute inset-0 bg-gradient-to-br from-secondary to-background" />
             <div className="relative p-8 flex flex-col h-full">
               <div className="text-[10px] uppercase tracking-luxe text-muted-foreground mb-6">Aura Concierge · Live</div>
