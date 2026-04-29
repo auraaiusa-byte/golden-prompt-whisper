@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,33 +6,33 @@
 
 @layer base {
   :root {
-    /* Cloud White base */
-    --background: 40 33% 98%;
-    --foreground: 0 0% 7%;
+    /* Absolute White base */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 13%;
 
-    --card: 40 33% 99%;
-    --card-foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
 
-    --popover: 40 33% 99%;
-    --popover-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
 
-    /* Obsidian Black */
-    --primary: 0 0% 7%;
-    --primary-foreground: 40 33% 98%;
+    /* Deep Charcoal */
+    --primary: 0 0% 13%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 20% 94%;
-    --secondary-foreground: 0 0% 7%;
+    --secondary: 40 20% 97%;
+    --secondary-foreground: 0 0% 13%;
 
-    --muted: 40 15% 92%;
+    --muted: 40 15% 95%;
     --muted-foreground: 0 0% 35%;
 
-    /* Champagne Gold */
-    --accent: 39 45% 58%;
-    --accent-foreground: 0 0% 7%;
+    /* Champagne Gold #C5A059 */
+    --accent: 39 50% 56%;
+    --accent-foreground: 0 0% 13%;
 
-    --gold: 39 45% 58%;
-    --gold-soft: 39 50% 75%;
-    --gold-deep: 35 40% 45%;
+    --gold: 39 50% 56%;
+    --gold-soft: 39 55% 72%;
+    --gold-deep: 35 45% 42%;
 
     --destructive: 0 70% 45%;
     --destructive-foreground: 40 33% 98%;
@@ -61,9 +61,9 @@
     font-feature-settings: "ss01", "cv11";
   }
   h1, h2, h3, h4, .font-serif {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
   }
 }
 
@@ -113,6 +113,16 @@
     50% { transform: translateY(-12px); }
   }
   .animate-float { animation: float 6s ease-in-out infinite; }
+  @keyframes goldPulse {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--gold) / 0.5), 0 10px 30px -10px hsl(var(--gold) / 0.4); }
+    50% { box-shadow: 0 0 0 12px hsl(var(--gold) / 0), 0 14px 40px -8px hsl(var(--gold) / 0.55); }
+  }
+  .animate-gold-pulse { animation: goldPulse 2.8s ease-in-out infinite; }
+  .luxe-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--gold) / 0.6);
+    box-shadow: 0 1px 2px hsl(0 0% 0% / 0.03), 0 12px 40px -16px hsl(var(--gold) / 0.18), 0 4px 16px -8px hsl(0 0% 0% / 0.06);
+  }
   @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }

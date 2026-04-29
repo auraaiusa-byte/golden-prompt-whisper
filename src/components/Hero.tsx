@@ -36,7 +36,7 @@ export const Hero = () => (
         </p>
 
         <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-6">
-          <LuxeButton>Request Invitation</LuxeButton>
+          <LuxeButton className="animate-gold-pulse">Request Invitation</LuxeButton>
           <a href="#concierge" className="text-xs uppercase tracking-luxe text-foreground/70 hover:text-gold transition-colors border-b border-foreground/20 hover:border-gold pb-1">
             Witness the Experience
           </a>
@@ -57,6 +57,27 @@ export const Hero = () => (
             <div className="font-serif text-3xl text-foreground normal-case tracking-normal">312</div>
             <div className="mt-1">Elite Clinics</div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Glassmorphism live booking notification */}
+    <div className="hidden lg:block absolute bottom-16 right-10 z-20 reveal reveal-delay-4">
+      <div className="glass rounded-2xl p-5 w-[320px] border border-gold/40">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-gold opacity-75 animate-ping" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
+          </span>
+          <span className="text-[10px] uppercase tracking-luxe text-gold">Aura · Live Booking</span>
+          <span className="ml-auto text-[10px] text-muted-foreground">just now</span>
+        </div>
+        <p className="font-serif text-base text-foreground leading-snug">
+          Madeline R. just booked a <em className="text-gold not-italic">HydraFacial Signature</em> for Friday, 6:30pm.
+        </p>
+        <div className="mt-3 pt-3 border-t border-border flex items-center justify-between text-[10px] uppercase tracking-luxe text-muted-foreground">
+          <span>Booked in 2.1s</span>
+          <span className="text-gold">◆ Confirmed</span>
         </div>
       </div>
     </div>
