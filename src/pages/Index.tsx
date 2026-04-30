@@ -1,22 +1,26 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { AsSeenIn } from "@/components/AsSeenIn";
+import { Industries } from "@/components/Industries";
 import { Concierge } from "@/components/Concierge";
 import { Voice } from "@/components/Voice";
 import { Pricing } from "@/components/Pricing";
+import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { AuraChat } from "@/components/AuraChat";
+import { ExitIntent } from "@/components/ExitIntent";
 import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
-    document.title = "Aura · The Silent Partner for Elite Med Spas";
+    document.title = "NavAura AI · Unified Intelligence for Modern Business";
     const meta = document.querySelector('meta[name="description"]') || (() => {
       const m = document.createElement("meta");
       m.setAttribute("name", "description");
       document.head.appendChild(m);
       return m;
     })();
-    meta.setAttribute("content", "Aura is the discreet AI concierge for America's most distinguished med spas — instant bookings, signature-voice DM replies, $299/mo all-inclusive.");
+    meta.setAttribute("content", "NavAura AI deploys specialized agents for med spas, law firms, and gyms — managing leads, appointments, and client relations 24/7. Request private access.");
   }, []);
 
   return (
@@ -24,10 +28,14 @@ const Index = () => {
       <Nav />
       <Hero />
       <AsSeenIn />
+      <Industries />
       <Concierge />
       <Voice />
       <Pricing />
+      <Contact />
       <Footer />
+      <AuraChat />
+      <ExitIntent />
     </main>
   );
 };

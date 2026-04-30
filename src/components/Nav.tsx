@@ -7,12 +7,13 @@ export const Nav = () => (
         <span className="font-serif text-2xl tracking-tight">NavAura</span>
         <span className="text-gold text-xs tracking-luxe uppercase pt-2">AI</span>
       </a>
-      <div className="hidden md:flex items-center gap-10 text-xs uppercase tracking-luxe text-muted-foreground">
-        <a href="#concierge" className="hover:text-gold transition-colors">Concierge</a>
-        <a href="#voice" className="hover:text-gold transition-colors">Voice</a>
-        <a href="#invitation" className="hover:text-gold transition-colors">Invitation</a>
+      <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-luxe text-muted-foreground">
+        <a href="#medspa" className="hover:text-gold transition-colors">Med Spa</a>
+        <a href="#law" className="hover:text-gold transition-colors">Law</a>
+        <a href="#gym" className="hover:text-gold transition-colors">Gym</a>
+        <a href="#invitation" className="hover:text-gold transition-colors">Membership</a>
       </div>
-      <LuxeButton variant="ghost" className="hidden md:inline-flex !py-3 !px-6">Request Access</LuxeButton>
+      <a href="#contact"><LuxeButton variant="ghost" className="hidden md:inline-flex !py-3 !px-6">Request Access</LuxeButton></a>
     </div>
   </nav>
 );
