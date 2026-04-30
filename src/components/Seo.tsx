@@ -71,8 +71,8 @@ const baseGraph = [
 ];
 
 export const Seo = ({
-  title = "NavAura AI · AI Agency for Med Spas, Law Firms & Gyms",
-  description = "NavAura AI deploys specialized AI agents for medical spas, law firms, and gyms — automated patient intake, AI law firm efficiency, and gym lead management. 24/7 booking accuracy.",
+  title = "NavAura AI · AI Agency for Med Spas, Law & Gyms",
+  description = "NavAura AI deploys luxury AI agents for med spas, law firms, and gyms — automating intake, booking, and retention 24/7. Request private access today.",
   path = "/",
   keywords = "NavAura AI, AI agency, Medical Spa AI Automation, Automated Patient Intake, Legal Workflow AI, AI Law Firm Efficiency, Gym Lead Management, AI voice concierge, 24/7 AI booking",
 }: SeoProps = {}) => {

@@ -1,23 +1,26 @@
 import { Mail } from "lucide-react";
 
 export const Footer = () => (
-  <footer className="border-t border-border py-16 bg-background">
-    <div className="container grid md:grid-cols-3 gap-8 items-center">
-      <div className="flex items-center gap-2 justify-center md:justify-start">
+  <footer className="border-t border-border py-12 bg-background">
+    <div className="container flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="flex items-center gap-2">
         <span className="font-serif text-xl">NavAura</span>
         <span className="text-gold text-[10px] tracking-luxe uppercase pt-1">AI</span>
       </div>
 
-      <a
-        href="mailto:aura.usa@gmail.com"
-        className="flex items-center justify-center gap-3 text-sm text-foreground/80 hover:text-gold transition-colors group"
-      >
-        <Mail className="w-4 h-4 text-gold" strokeWidth={1.5} />
-        <span className="border-b border-gold/30 group-hover:border-gold pb-0.5">aura.usa@gmail.com</span>
-      </a>
-
-      <p className="text-xs text-muted-foreground text-center md:text-right">
-        © 2026 NavAura AI. All rights reserved.
+      <p className="text-xs md:text-sm text-muted-foreground text-center flex flex-wrap items-center justify-center gap-2">
+        <span>© 2026 NavAura AI. All rights reserved.</span>
+        <span className="text-gold/40 hidden md:inline">|</span>
+        <span className="flex items-center gap-2">
+          Contact:
+          <a
+            href="mailto:aura.usa@gmail.com"
+            className="inline-flex items-center gap-1.5 text-foreground/85 hover:text-gold transition-colors group"
+          >
+            <Mail className="w-3.5 h-3.5 text-gold" strokeWidth={1.5} />
+            <span className="border-b border-gold/30 group-hover:border-gold pb-0.5">aura.usa@gmail.com</span>
+          </a>
+        </span>
       </p>
     </div>
   </footer>

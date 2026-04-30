@@ -23,8 +23,8 @@ const LawFirm = () => (
     ]}
     cities={["Manhattan, NY", "Washington, DC", "Chicago, IL", "Houston, TX", "Atlanta, GA", "San Francisco, CA"]}
     localCopy="We build city-specific practice-area pages with structured legal schema, optimize Google Business Profile signals, and automate review collection from won cases — so when locals search 'best [practice area] attorney,' your firm dominates the map pack."
-    seoTitle="Legal Workflow AI · AI Law Firm Efficiency · NavAura AI"
-    seoDescription="NavAura AI delivers 24/7 case intake triage, automated conflict checks, and document classification AI for boutique and multi-partner law firms. Discreet. Compliant. Always on."
+    seoTitle="Legal Workflow AI for Modern Law Firms · NavAura"
+    seoDescription="NavAura AI delivers 24/7 case intake triage, automated conflict checks, and document AI for boutique and multi-partner law firms. Request access."
     seoKeywords="Legal Workflow AI, AI Law Firm Efficiency, law firm automation, 24/7 legal intake, conflict check AI, attorney AI assistant, NavAura AI"
     chatGreeting="Hi! I am NavAura AI. Want to see how we triage legal intakes 24/7?"
     chatSuggestions={[
