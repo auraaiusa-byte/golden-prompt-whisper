@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const LuxeButton = forwardRef<HTMLButtonElement, Props>(
   ({ className, variant = "primary", children, ...props }, ref) => {
     const base =
-      "group relative inline-flex items-center justify-center gap-3 px-10 py-4 text-xs uppercase tracking-luxe transition-all duration-500 overflow-hidden";
+      "group relative inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 min-h-[48px] text-xs uppercase tracking-luxe transition-all duration-500 overflow-hidden";
     const styles =
       variant === "primary"
         ? "bg-primary text-primary-foreground hover:bg-foreground"
