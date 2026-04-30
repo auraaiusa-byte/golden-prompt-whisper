@@ -3,7 +3,7 @@ import { LuxeButton } from "./LuxeButton";
 import { Cross, Scale, Dumbbell } from "lucide-react";
 
 export const Hero = () => (
-  <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+  <section className="relative min-h-screen flex items-center overflow-x-hidden pt-20 pb-32 md:pb-24">
     <div className="absolute inset-0">
       <img
         src={heroImg}
@@ -30,15 +30,15 @@ export const Hero = () => (
       </div>
     </div>
 
-    <div className="container relative z-10 grid md:grid-cols-12 gap-8 items-center py-24">
-      <div className="md:col-span-7">
+    <div className="container relative z-10 grid md:grid-cols-12 gap-8 items-center py-16 md:py-24 px-4 sm:px-6">
+      <div className="md:col-span-7 w-full">
         <div className="reveal flex items-center gap-4 mb-10">
           <div className="w-16 h-px bg-gold" />
           <span className="text-xs uppercase tracking-luxe text-gold">Private Beta · By Invitation</span>
         </div>
 
         <h1
-          className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-white"
+          className="reveal reveal-delay-1 font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] mb-6 md:mb-8 text-white break-words"
           style={{ textShadow: "0 2px 30px hsl(222 30% 4% / 0.85), 0 1px 4px hsl(222 30% 4% / 0.9)" }}
         >
           The Unified
@@ -61,20 +61,20 @@ export const Hero = () => (
           </a>
         </div>
 
-        <div className="reveal reveal-delay-4 mt-20 flex items-center gap-10 text-xs uppercase tracking-luxe text-white/60">
-          <div>
-            <div className="font-serif text-3xl text-white normal-case tracking-normal">2.1s</div>
-            <div className="mt-1">Avg. Response</div>
+        <div className="reveal reveal-delay-4 mt-12 md:mt-20 grid grid-cols-3 sm:flex sm:items-center gap-3 sm:gap-10 text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-luxe text-white/60">
+          <div className="text-center sm:text-left">
+            <div className="font-serif text-2xl sm:text-3xl text-white normal-case tracking-normal">2.1s</div>
+            <div className="mt-1 leading-tight">Avg. Response</div>
           </div>
-          <div className="w-px h-10 bg-white/20" />
-          <div>
-            <div className="font-serif text-3xl text-white normal-case tracking-normal">$2.4M</div>
-            <div className="mt-1">Revenue Driven</div>
+          <div className="hidden sm:block w-px h-10 bg-white/20" />
+          <div className="text-center sm:text-left border-x sm:border-x-0 border-white/15 sm:border-0 px-2 sm:px-0">
+            <div className="font-serif text-2xl sm:text-3xl text-white normal-case tracking-normal">$2.4M</div>
+            <div className="mt-1 leading-tight">Revenue Driven</div>
           </div>
-          <div className="w-px h-10 bg-white/20" />
-          <div>
-            <div className="font-serif text-3xl text-white normal-case tracking-normal">312</div>
-            <div className="mt-1">Elite Brands</div>
+          <div className="hidden sm:block w-px h-10 bg-white/20" />
+          <div className="text-center sm:text-left">
+            <div className="font-serif text-2xl sm:text-3xl text-white normal-case tracking-normal">312</div>
+            <div className="mt-1 leading-tight">Elite Brands</div>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ export const Hero = () => (
       </div>
     </div>
 
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-luxe text-white/60 animate-float">
+    <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-luxe text-white/60 animate-float">
       Scroll
     </div>
   </section>
