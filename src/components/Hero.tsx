@@ -1,17 +1,32 @@
 import heroImg from "@/assets/hero-spa.jpg";
 import { LuxeButton } from "./LuxeButton";
+import { Cross, Scale, Dumbbell } from "lucide-react";
 
 export const Hero = () => (
   <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
     <div className="absolute inset-0">
       <img
         src={heroImg}
-        alt="Serene luxury med spa interior with champagne gold accents"
+        alt="NavAura AI command center with holographic dashboard"
         className="w-full h-full object-cover"
         width={1600}
         height={1200}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/95 via-[#0a0e1a]/80 to-[#0a0e1a]/40 md:to-[#0a0e1a]/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30 md:to-background/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+    </div>
+
+    {/* Floating multi-industry icons */}
+    <div className="absolute inset-0 pointer-events-none hidden md:block">
+      <div className="absolute top-[22%] right-[8%] glass rounded-full p-4 animate-float" style={{ animationDelay: "0s" }}>
+        <Cross className="w-5 h-5 text-gold" strokeWidth={1.5} />
+      </div>
+      <div className="absolute top-[55%] right-[18%] glass rounded-full p-4 animate-float" style={{ animationDelay: "1.5s" }}>
+        <Scale className="w-5 h-5 text-gold" strokeWidth={1.5} />
+      </div>
+      <div className="absolute top-[78%] right-[6%] glass rounded-full p-4 animate-float" style={{ animationDelay: "3s" }}>
+        <Dumbbell className="w-5 h-5 text-gold" strokeWidth={1.5} />
+      </div>
     </div>
 
     <div className="container relative z-10 grid md:grid-cols-12 gap-8 items-center py-24">
@@ -21,7 +36,10 @@ export const Hero = () => (
           <span className="text-xs uppercase tracking-luxe text-gold">Private Beta · By Invitation</span>
         </div>
 
-        <h1 className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-white">
+        <h1
+          className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-white"
+          style={{ textShadow: "0 2px 30px hsl(222 30% 4% / 0.85), 0 1px 4px hsl(222 30% 4% / 0.9)" }}
+        >
           The Unified
           <br />
           Intelligence for
@@ -29,15 +47,16 @@ export const Hero = () => (
           <span className="italic gold-shimmer">Modern Business.</span>
         </h1>
 
-        <p className="reveal reveal-delay-2 max-w-xl text-lg text-white/70 leading-relaxed mb-12 font-light">
+        <p className="reveal reveal-delay-2 max-w-xl text-lg text-white/80 leading-relaxed mb-12 font-light"
+           style={{ textShadow: "0 1px 12px hsl(222 30% 4% / 0.8)" }}>
           NavAura is the discreet AI command center behind ambitious modern brands —
-          capturing leads, qualifying prospects, and orchestrating your operations
-          while you focus on the vision.
+          across med spas, law firms, and fitness studios — capturing leads, qualifying
+          prospects, and orchestrating your operations while you focus on the vision.
         </p>
 
         <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-6">
           <LuxeButton className="animate-gold-pulse">Request Invitation</LuxeButton>
-          <a href="#concierge" className="text-xs uppercase tracking-luxe text-white/70 hover:text-gold transition-colors border-b border-white/20 hover:border-gold pb-1">
+          <a href="#concierge" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1">
             Witness the Experience
           </a>
         </div>
@@ -69,20 +88,20 @@ export const Hero = () => (
             <span className="absolute inline-flex h-full w-full rounded-full bg-gold opacity-75 animate-ping" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
           </span>
-          <span className="text-[10px] uppercase tracking-luxe text-gold">Aura · Live Booking</span>
+          <span className="text-[10px] uppercase tracking-luxe text-gold">NavAura · Live Lead</span>
           <span className="ml-auto text-[10px] text-muted-foreground">just now</span>
         </div>
         <p className="font-serif text-base text-foreground leading-snug">
-          Madeline R. just booked a <em className="text-gold not-italic">HydraFacial Signature</em> for Friday, 6:30pm.
+          Madeline R. just booked a <em className="text-gold not-italic">Strategy Consultation</em> for Friday, 6:30pm.
         </p>
         <div className="mt-3 pt-3 border-t border-border flex items-center justify-between text-[10px] uppercase tracking-luxe text-muted-foreground">
-          <span>Booked in 2.1s</span>
+          <span>Captured in 2.1s</span>
           <span className="text-gold">◆ Confirmed</span>
         </div>
       </div>
     </div>
 
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-luxe text-muted-foreground animate-float">
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-luxe text-white/60 animate-float">
       Scroll
     </div>
   </section>
