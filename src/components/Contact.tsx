@@ -1,17 +1,23 @@
 import { useState } from "react";
 import { LuxeButton } from "./LuxeButton";
+import { sendLead } from "@/lib/webhook";
 
 export const Contact = () => {
   const [sent, setSent] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const name = fd.get("name") as string;
-    const email = fd.get("email") as string;
+    const name = (fd.get("name") as string)?.trim();
+    const email = (fd.get("email") as string)?.trim();
     const industry = fd.get("industry") as string;
-    const message = fd.get("message") as string;
-    const subject = encodeURIComponent(`NavAura Inquiry — ${name} (${industry})`);
+    const message = (fd.get("message") as string)?.trim();
+
+    // 1) Send structured JSON to Make.com webhook (forwards to aura.usa@gmail.com)
+    await sendLead({ source: "contact", name, email, industry, message });
+
+    // 2) Mailto fallback
+    const subject = encodeURIComponent(`NavAura AI Inquiry — ${name} (${industry})`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nIndustry: ${industry}\n\n${message}`);
     window.location.href = `mailto:aura.usa@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);

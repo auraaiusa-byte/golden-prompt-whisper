@@ -58,7 +58,7 @@ export const Industries = () => (
             <div className="relative aspect-[4/5] overflow-hidden">
               <img
                 src={img}
-                alt={`${label} environment`}
+                alt={`NavAura AI ${label} environment — automated lead capture and booking`}
                 loading="lazy"
                 width={1280}
                 height={1600}

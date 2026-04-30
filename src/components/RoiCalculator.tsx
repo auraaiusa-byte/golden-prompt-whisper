@@ -14,7 +14,7 @@ export const RoiCalculator = () => {
     n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
   return (
-    <section id="roi" className="relative py-32 md:py-48 bg-background overflow-hidden">
+    <section id="roi" className="relative py-24 md:py-48 bg-background overflow-hidden">
       <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at center, hsl(var(--gold) / 0.25), transparent 60%)" }} />
       <div className="container relative max-w-5xl">
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -27,7 +27,7 @@ export const RoiCalculator = () => {
           </p>
         </div>
 
-        <div className="luxe-card rounded-sm p-8 md:p-12 grid md:grid-cols-2 gap-12 items-center">
+        <div className="luxe-card rounded-sm p-6 sm:p-8 md:p-12 grid md:grid-cols-2 gap-10 md:gap-12 items-center">
           <div className="space-y-10">
             <div>
               <div className="flex items-baseline justify-between mb-3">
@@ -60,7 +60,7 @@ export const RoiCalculator = () => {
             </div>
           </div>
 
-          <div className="space-y-6 border-l border-gold/20 md:pl-12">
+          <div className="space-y-6 md:border-l border-gold/20 md:pl-12 pt-8 md:pt-0 border-t md:border-t-0">
             <div>
               <div className="text-[10px] uppercase tracking-luxe text-muted-foreground mb-2">Estimated savings · weekly</div>
               <div className="font-serif text-4xl text-foreground">{fmt(weekly)}</div>

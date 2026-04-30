@@ -7,10 +7,11 @@ export const Hero = () => (
     <div className="absolute inset-0">
       <img
         src={heroImg}
-        alt="NavAura AI command center with holographic dashboard"
+        alt="NavAura AI digital command center — holographic dashboard for med spa, law firm, and gym automation"
         className="w-full h-full object-cover"
         width={1600}
         height={1200}
+        loading="eager"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30 md:to-background/10" />
       <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
