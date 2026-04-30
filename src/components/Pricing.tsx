@@ -1,66 +1,117 @@
 import { LuxeButton } from "./LuxeButton";
 
-const includes = [
-  "Unlimited AI Concierge bookings",
-  "24/7 DM & comment management",
-  "Signature voice training & quarterly refinement",
-  "Priority calendar & EMR integrations",
-  "Dedicated success curator",
-  "White-glove onboarding within 7 days",
-  "No setup fees. No per-message charges.",
+const tiers = [
+  {
+    name: "Basic",
+    tagline: "For emerging studios stepping into automation.",
+    price: "$299",
+    period: "/ month",
+    features: [
+      "AI Lead Capture (1 industry agent)",
+      "24/7 Chatbot — up to 1,000 conversations",
+      "Calendar & EMR integrations",
+      "Monthly performance brief",
+      "Email support",
+    ],
+    cta: "Begin",
+    highlight: false,
+  },
+  {
+    name: "Professional",
+    tagline: "The signature tier for established brands.",
+    price: "$799",
+    period: "/ month",
+    features: [
+      "Everything in Basic",
+      "Unlimited conversations across 2 agents",
+      "Signature voice training & DM management",
+      "Quarterly SEO audits & content briefs",
+      "Lead reactivation workflows",
+      "Dedicated success curator",
+    ],
+    cta: "Request Invitation",
+    highlight: true,
+  },
+  {
+    name: "Enterprise",
+    tagline: "Bespoke intelligence for multi-location operators.",
+    price: "Bespoke",
+    period: "",
+    features: [
+      "Everything in Professional",
+      "Unlimited industry agents",
+      "Custom integrations & private models",
+      "On-call white-glove onboarding",
+      "Quarterly executive strategy sessions",
+      "SLA-backed uptime & priority routing",
+    ],
+    cta: "Speak with Aura",
+    highlight: false,
+  },
 ];
 
 export const Pricing = () => (
-  <section id="invitation" className="relative py-32 md:py-48 bg-foreground text-background overflow-hidden">
-    <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(ellipse at top, hsl(var(--gold) / 0.25), transparent 60%)" }} />
+  <section id="invitation" className="relative py-32 md:py-48 bg-secondary overflow-hidden">
+    <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(ellipse at top, hsl(var(--gold) / 0.2), transparent 60%)" }} />
 
     <div className="container relative">
       <div className="text-center max-w-2xl mx-auto mb-20">
-        <span className="text-xs uppercase tracking-luxe text-gold">03 — The Invitation</span>
+        <span className="text-xs uppercase tracking-luxe text-gold">04 — Membership</span>
         <h2 className="font-serif text-4xl md:text-6xl mt-6 mb-6">
-          One tier. <span className="italic">All-inclusive.</span>
+          Three tiers. <span className="italic">One standard.</span>
         </h2>
-        <p className="text-background/60 font-light text-lg">
-          We do not believe in feature gates or hidden ledgers. One graceful price for
-          everything Aura offers — and everything she will become.
+        <p className="text-muted-foreground font-light text-lg">
+          Every membership is all-inclusive within its tier — no feature gates, no hidden ledgers.
         </p>
       </div>
 
-      <div className="max-w-md mx-auto">
-        <div className="relative">
-          <div className="absolute -inset-px rounded-sm" style={{ background: "var(--gradient-gold)" }} />
-          <div className="relative bg-foreground p-12 rounded-sm">
-            <div className="text-center mb-8">
-              <div className="text-xs uppercase tracking-luxe text-gold mb-6">The Aura Membership</div>
-              <div className="hairline mx-auto w-24 mb-8" />
-              <div className="flex items-baseline justify-center gap-2">
-                <span className="font-serif text-7xl text-background">$299</span>
-                <span className="text-background/50 text-sm">/ month</span>
+      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {tiers.map((t) => (
+          <div
+            key={t.name}
+            className={`relative p-10 rounded-sm transition-all duration-500 ${
+              t.highlight
+                ? "luxe-card -translate-y-4 border-gold/80"
+                : "bg-background border border-gold/20 hover:border-gold/50"
+            }`}
+          >
+            {t.highlight && (
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gold text-background text-[10px] uppercase tracking-luxe rounded-sm">
+                Most Distinguished
               </div>
-              <div className="text-xs uppercase tracking-luxe text-background/40 mt-3">All-Inclusive · No Hidden Fees</div>
+            )}
+            <div className="text-center mb-8">
+              <div className="text-xs uppercase tracking-luxe text-gold mb-3">{t.name}</div>
+              <p className="text-xs text-muted-foreground font-light italic mb-6">{t.tagline}</p>
+              <div className="hairline mx-auto w-20 mb-6" />
+              <div className="flex items-baseline justify-center gap-1">
+                <span className="font-serif text-5xl text-foreground">{t.price}</span>
+                {t.period && <span className="text-muted-foreground text-sm">{t.period}</span>}
+              </div>
             </div>
 
-            <div className="hairline my-8" />
-
-            <ul className="space-y-4 mb-10">
-              {includes.map((line) => (
-                <li key={line} className="flex items-start gap-3 text-sm text-background/80 font-light">
+            <ul className="space-y-3 mb-10 min-h-[260px]">
+              {t.features.map((line) => (
+                <li key={line} className="flex items-start gap-3 text-sm text-foreground/80 font-light">
                   <span className="text-gold mt-0.5">◆</span>
                   <span>{line}</span>
                 </li>
               ))}
             </ul>
 
-            <LuxeButton className="w-full !bg-gold !text-foreground hover:!bg-gold-soft">
-              Request Invitation
+            <LuxeButton
+              className={`w-full ${t.highlight ? "animate-gold-pulse !bg-gold !text-background hover:!bg-gold-soft" : ""}`}
+              variant={t.highlight ? "primary" : "ghost"}
+            >
+              {t.cta}
             </LuxeButton>
-
-            <p className="text-center text-[10px] uppercase tracking-luxe text-background/40 mt-6">
-              Limited to 12 new clinics this quarter
-            </p>
           </div>
-        </div>
+        ))}
       </div>
+
+      <p className="text-center text-[10px] uppercase tracking-luxe text-muted-foreground mt-12">
+        All inquiries → aura.usa@gmail.com · Limited to 12 new clinics this quarter
+      </p>
     </div>
   </section>
 );

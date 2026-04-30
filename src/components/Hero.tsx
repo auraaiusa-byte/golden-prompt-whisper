@@ -49,15 +49,14 @@ export const Hero = () => (
 
         <p className="reveal reveal-delay-2 max-w-xl text-lg text-white/80 leading-relaxed mb-12 font-light"
            style={{ textShadow: "0 1px 12px hsl(222 30% 4% / 0.8)" }}>
-          NavAura is the discreet AI command center behind ambitious modern brands —
-          across med spas, law firms, and fitness studios — capturing leads, qualifying
-          prospects, and orchestrating your operations while you focus on the vision.
+          NavAura deploys specialized AI agents to manage leads, appointments,
+          and client relations — across med spas, law firms, and fitness studios.
         </p>
 
         <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-6">
-          <LuxeButton className="animate-gold-pulse">Request Invitation</LuxeButton>
-          <a href="#concierge" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1">
-            Witness the Experience
+          <a href="#contact"><LuxeButton className="animate-gold-pulse">Request Private Access</LuxeButton></a>
+          <a href="#industries" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1">
+            Explore Industries
           </a>
         </div>
 
