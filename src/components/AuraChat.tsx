@@ -4,20 +4,22 @@ import auraAvatar from "@/assets/aura-avatar.jpg";
 
 interface Msg { role: "aura" | "user"; text: string; }
 
-const initial: Msg[] = [
-  { role: "aura", text: "Hi! I am NavAura AI. How can I automate your business today?" },
-];
+interface AuraChatProps {
+  greeting?: string;
+  suggestions?: string[];
+}
 
-const suggestions = [
+const defaultGreeting = "Hi! I am NavAura AI. How can I automate your business today?";
+const defaultSuggestions = [
   "🤖 How does AI help Med Spas?",
   "⚖️ AI for Law Firms?",
   "⚡ Scale my Gym business.",
 ];
 
-export const AuraChat = () => {
+export const AuraChat = ({ greeting = defaultGreeting, suggestions = defaultSuggestions }: AuraChatProps = {}) => {
   const [open, setOpen] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>(initial);
+  const [messages, setMessages] = useState<Msg[]>([{ role: "aura", text: greeting }]);
   const [input, setInput] = useState("");
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export const AuraChat = () => {
             className="relative glass rounded-2xl px-4 py-3 text-left text-sm text-foreground/90 shadow-luxe border border-gold/30 hover:border-gold transition-colors block"
           >
             <span className="block font-serif text-gold text-xs mb-1">NavAura AI</span>
-            Hi! I am NavAura AI. How can I automate your business today?
+            {greeting}
             <span className="absolute -bottom-1.5 right-6 w-3 h-3 rotate-45 bg-background border-r border-b border-gold/30" />
             <button
               onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
