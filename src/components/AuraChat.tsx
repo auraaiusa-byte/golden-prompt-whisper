@@ -1,53 +1,99 @@
-import { useState } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { useState, useEffect } from "react";
+import { X, Send } from "lucide-react";
+import auraAvatar from "@/assets/aura-avatar.jpg";
 
 interface Msg { role: "aura" | "user"; text: string; }
 
 const initial: Msg[] = [
-  { role: "aura", text: "Welcome — I'm Aura, NavAura's AI concierge. How may I help automate your business today?" },
+  { role: "aura", text: "Hi! I am Aura. How can I help automate your business today?" },
 ];
 
 const suggestions = [
-  "Tell me about Med Spa automation",
-  "How does pricing work?",
-  "Book a strategy call",
+  "🤖 How does AI help Med Spas?",
+  "⚖️ AI for Law Firms?",
+  "⚡ Scale my Gym business.",
 ];
 
 export const AuraChat = () => {
   const [open, setOpen] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
   const [messages, setMessages] = useState<Msg[]>(initial);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowBubble(true), 1500);
+    return () => clearTimeout(t);
+  }, []);
 
   const send = (text: string) => {
     if (!text.trim()) return;
     const userMsg: Msg = { role: "user", text };
     const reply: Msg = {
       role: "aura",
-      text: "Lovely — I've noted that. Our team will reach you at aura.usa@gmail.com within a few hours. In the meantime, may I share more about our membership tiers?",
+      text: "Wonderful — I've noted your interest. Our team will reach you at aura.usa@gmail.com shortly. May I share more about our membership tiers?",
     };
     setMessages((m) => [...m, userMsg, reply]);
     setInput("");
   };
 
+  const openChat = () => {
+    setOpen(true);
+    setShowBubble(false);
+  };
+
   return (
     <>
-      {/* Floating button */}
+      {/* Greeting bubble */}
+      {!open && showBubble && (
+        <div className="fixed bottom-24 right-6 z-50 max-w-[260px] animate-fade-in">
+          <button
+            onClick={openChat}
+            className="relative glass rounded-2xl px-4 py-3 text-left text-sm text-foreground/90 shadow-luxe border border-gold/30 hover:border-gold transition-colors block"
+          >
+            <span className="block font-serif text-gold text-xs mb-1">Aura</span>
+            Hi! I am Aura. How can I help automate your business today?
+            <span className="absolute -bottom-1.5 right-6 w-3 h-3 rotate-45 bg-background border-r border-b border-gold/30" />
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
+              aria-label="Dismiss"
+              className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-background border border-gold/40 flex items-center justify-center text-foreground/60 hover:text-gold"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          </button>
+        </div>
+      )}
+
+      {/* Floating avatar button */}
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label="Open Aura Assistant"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gold text-background shadow-luxe flex items-center justify-center hover:scale-105 transition-transform animate-gold-pulse"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full overflow-hidden shadow-luxe ring-2 ring-gold/60 hover:ring-gold hover:scale-105 transition-all animate-gold-pulse bg-background"
       >
-        {open ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
+        {open ? (
+          <span className="flex w-full h-full items-center justify-center bg-gold text-background">
+            <X className="w-5 h-5" />
+          </span>
+        ) : (
+          <img
+            src={auraAvatar}
+            alt="Aura — NavAura AI assistant"
+            width={128}
+            height={128}
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
+        )}
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 w-[340px] max-w-[calc(100vw-2rem)] glass rounded-2xl overflow-hidden flex flex-col" style={{ height: 480 }}>
-          <div className="px-5 py-4 border-b border-gold/20 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-gold/20 flex items-center justify-center">
-              <span className="font-serif text-gold">A</span>
+        <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] glass rounded-2xl overflow-hidden flex flex-col animate-scale-in border border-gold/30 shadow-luxe" style={{ height: 520 }}>
+          <div className="px-5 py-4 border-b border-gold/20 flex items-center gap-3 bg-background/60">
+            <div className="w-10 h-10 rounded-full overflow-hidden ring-1 ring-gold/50 shrink-0">
+              <img src={auraAvatar} alt="Aura" width={80} height={80} className="w-full h-full object-cover" />
             </div>
-            <div className="flex-1">
-              <div className="font-serif text-sm">Aura Assistant</div>
+            <div className="flex-1 min-w-0">
+              <div className="font-serif text-sm truncate">Aura Assistant <span className="text-foreground/40">|</span> <span className="text-gold">NavAura AI</span></div>
               <div className="text-[10px] uppercase tracking-luxe text-gold flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" /> Online
               </div>
@@ -73,7 +119,7 @@ export const AuraChat = () => {
                   <button
                     key={s}
                     onClick={() => send(s)}
-                    className="block w-full text-left text-xs px-3 py-2 rounded-full border border-gold/30 text-foreground/80 hover:border-gold hover:text-gold transition-colors"
+                    className="block w-full text-left text-xs px-3 py-2.5 rounded-full border border-gold/30 text-foreground/80 hover:border-gold hover:text-gold hover:bg-gold/5 transition-colors"
                   >
                     {s}
                   </button>
@@ -84,7 +130,7 @@ export const AuraChat = () => {
 
           <form
             onSubmit={(e) => { e.preventDefault(); send(input); }}
-            className="p-3 border-t border-gold/20 flex items-center gap-2"
+            className="p-3 border-t border-gold/20 flex items-center gap-2 bg-background/60"
           >
             <input
               value={input}
