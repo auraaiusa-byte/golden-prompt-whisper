@@ -6,48 +6,47 @@
 
 @layer base {
   :root {
-    /* Absolute White base */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 13%;
+    /* Deep luxury dark base */
+    --background: 222 30% 6%;
+    --foreground: 40 30% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    --card: 222 28% 9%;
+    --card-foreground: 40 30% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
+    --popover: 222 28% 9%;
+    --popover-foreground: 40 30% 96%;
 
-    /* Deep Charcoal */
-    --primary: 0 0% 13%;
-    --primary-foreground: 0 0% 100%;
+    /* Champagne Gold as primary in dark mode */
+    --primary: 39 50% 56%;
+    --primary-foreground: 222 30% 6%;
 
-    --secondary: 40 20% 97%;
-    --secondary-foreground: 0 0% 13%;
+    --secondary: 222 25% 11%;
+    --secondary-foreground: 40 30% 96%;
 
-    --muted: 40 15% 95%;
-    --muted-foreground: 0 0% 35%;
+    --muted: 222 20% 14%;
+    --muted-foreground: 40 15% 70%;
 
-    /* Champagne Gold #C5A059 */
     --accent: 39 50% 56%;
-    --accent-foreground: 0 0% 13%;
+    --accent-foreground: 222 30% 6%;
 
-    --gold: 39 50% 56%;
-    --gold-soft: 39 55% 72%;
-    --gold-deep: 35 45% 42%;
+    --gold: 39 65% 60%;
+    --gold-soft: 39 70% 75%;
+    --gold-deep: 35 55% 45%;
 
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 40 33% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 40 30% 96%;
 
-    --border: 40 15% 88%;
-    --input: 40 15% 88%;
-    --ring: 39 45% 58%;
+    --border: 222 20% 18%;
+    --input: 222 20% 18%;
+    --ring: 39 65% 60%;
 
     --radius: 0.25rem;
 
-    --gradient-gold: linear-gradient(135deg, hsl(39 50% 75%), hsl(39 45% 58%), hsl(35 40% 45%));
-    --gradient-veil: linear-gradient(180deg, hsl(40 33% 98% / 0), hsl(40 33% 98% / 0.85));
-    --shadow-luxe: 0 30px 80px -20px hsl(0 0% 7% / 0.12), 0 8px 30px -10px hsl(39 45% 58% / 0.15);
-    --shadow-soft: 0 10px 40px -10px hsl(0 0% 7% / 0.08);
-    --shadow-glass: 0 20px 60px -15px hsl(0 0% 7% / 0.15);
+    --gradient-gold: linear-gradient(135deg, hsl(39 70% 75%), hsl(39 65% 60%), hsl(35 50% 42%));
+    --gradient-veil: linear-gradient(180deg, hsl(222 30% 6% / 0), hsl(222 30% 6% / 0.85));
+    --shadow-luxe: 0 30px 80px -20px hsl(0 0% 0% / 0.6), 0 8px 30px -10px hsl(39 65% 60% / 0.2);
+    --shadow-soft: 0 10px 40px -10px hsl(0 0% 0% / 0.5);
+    --shadow-glass: 0 20px 60px -15px hsl(0 0% 0% / 0.5);
 
     --transition-luxe: cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -78,10 +77,10 @@
     color: transparent;
   }
   .glass {
-    background: hsl(40 33% 99% / 0.55);
+    background: hsl(222 30% 8% / 0.55);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid hsl(40 33% 100% / 0.6);
+    border: 1px solid hsl(39 65% 60% / 0.15);
     box-shadow: var(--shadow-glass);
   }
   .glass-dark {
