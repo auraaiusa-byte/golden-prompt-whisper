@@ -136,4 +136,19 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     color: transparent;
     animation: shimmer 6s linear infinite;
   }
+  /* Soft text shadow for hero titles over imagery */
+  .text-shadow-luxe {
+    text-shadow: 0 2px 12px hsl(0 0% 0% / 0.65), 0 1px 3px hsl(0 0% 0% / 0.45);
+  }
+  .text-shadow-soft {
+    text-shadow: 0 1px 8px hsl(0 0% 0% / 0.55);
+  }
+  /* Cinematic linear gradient overlay for hero images */
+  .hero-overlay {
+    background: linear-gradient(180deg,
+      hsl(222 30% 6% / 0.55) 0%,
+      hsl(222 30% 6% / 0.65) 45%,
+      hsl(222 30% 6% / 0.92) 90%,
+      hsl(var(--background)) 100%);
+  }
 }
