@@ -13,7 +13,7 @@ const tiers = [
       "Monthly performance brief",
       "Email support",
     ],
-    cta: "Begin",
+    cta: "Request Private Access",
     highlight: false,
   },
   {
@@ -29,7 +29,7 @@ const tiers = [
       "Lead reactivation workflows",
       "Dedicated success curator",
     ],
-    cta: "Request Invitation",
+    cta: "Request Private Access",
     highlight: true,
   },
   {
@@ -45,7 +45,7 @@ const tiers = [
       "Quarterly executive strategy sessions",
       "SLA-backed uptime & priority routing",
     ],
-    cta: "Speak with Aura",
+    cta: "Request Private Access",
     highlight: false,
   },
 ];

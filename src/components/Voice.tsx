@@ -5,28 +5,28 @@ export const Voice = () => (
     <div className="container grid md:grid-cols-12 gap-16 items-center">
       <div className="md:col-span-6">
         <div className="relative aspect-[4/5] overflow-hidden luxe-card rounded-sm">
-          <img src={voiceImg} alt="Champagne silk symbolizing the signature voice" loading="lazy" width={1200} height={1400} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-secondary/40 via-transparent to-transparent" />
+          <img src={voiceImg} alt="NavAura AI 24/7 virtual voice assistant — futuristic sound waves" loading="lazy" width={1280} height={1600} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
         </div>
       </div>
 
       <div className="md:col-span-6">
-        <span className="text-xs uppercase tracking-luxe text-gold">02 — Aesthetic Intelligence · 24/7</span>
+        <span className="text-xs uppercase tracking-luxe text-gold">02 — 24/7 Virtual Voice · NavAura AI</span>
         <h2 className="font-serif text-4xl md:text-6xl leading-tight mt-6 mb-8">
-          Your signature voice,
-          <br /><span className="italic">never asleep.</span>
+          A voice that
+          <br /><span className="italic">never sleeps.</span>
         </h2>
         <p className="text-muted-foreground leading-relaxed text-lg font-light mb-12">
-          Aura studies the cadence of your brand — the warmth, the discretion, the
-          quiet confidence — then replies to every Instagram DM, every comment, every
-          inquiry, with prose indistinguishable from your own.
+          NavAura AI studies the cadence of your brand — the warmth, the discretion, the
+          quiet confidence — then answers every call, every DM, every inquiry,
+          with prose indistinguishable from your own. At 3am. On holidays. Always.
         </p>
 
         <div className="grid sm:grid-cols-2 gap-6">
           {[
             { k: "Sophisticated", v: "Trained on luxury hospitality lexicon." },
             { k: "Warm", v: "Recognizes regulars by name and history." },
-            { k: "Compliant", v: "HIPAA-aware. Always discreet." },
+            { k: "Compliant", v: "HIPAA & GDPR aware. Always discreet." },
             { k: "Unsleeping", v: "3am inquiries become 9am bookings." },
           ].map((f) => (
             <div key={f.k} className="border-l border-gold pl-5 py-2">

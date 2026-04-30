@@ -41,7 +41,7 @@ export const Contact = () => {
             <option>Other</option>
           </select>
           <textarea required name="message" rows={5} placeholder="Tell us about your business…" className="w-full bg-secondary/60 border border-gold/30 rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-gold" />
-          <LuxeButton className="w-full animate-gold-pulse">Send Private Inquiry</LuxeButton>
+          <LuxeButton className="w-full animate-gold-pulse">Request Private Access</LuxeButton>
           {sent && <p className="text-xs text-gold text-center">Opening your email client to deliver this inquiry to aura.usa@gmail.com…</p>}
         </form>
       </div>
