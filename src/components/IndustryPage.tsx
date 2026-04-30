@@ -35,11 +35,13 @@ export const IndustryPage = (p: IndustryPageProps) => (
       <div className="absolute inset-0">
         <img
           src={p.heroImg}
-          alt={`NavAura AI automation for ${p.industry}`}
-          className="w-full h-full object-cover opacity-25"
+          alt={`Premium ${p.industrySingular.toLowerCase()} interior — NavAura AI automation for ${p.industry.toLowerCase()}`}
+          className="w-full h-full object-cover opacity-70"
+          width={1920}
+          height={1080}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background" />
+        <div className="absolute inset-0 hero-overlay" />
       </div>
       <div className="container relative">
         <div className="max-w-3xl">
@@ -47,13 +49,13 @@ export const IndustryPage = (p: IndustryPageProps) => (
             <p.Icon className="w-5 h-5 text-gold" strokeWidth={1.5} />
             <span className="text-xs uppercase tracking-luxe text-gold">{p.industry}</span>
           </div>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] mb-6">
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 text-white text-shadow-luxe">
             AI Automation for <span className="gradient-gold-text italic">{p.industry}</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground font-light max-w-2xl mb-4">
+          <p className="text-lg md:text-xl text-white/90 font-light max-w-2xl mb-4 text-shadow-soft">
             {p.tagline}
           </p>
-          <p className="text-base text-foreground/70 font-light max-w-2xl mb-10">
+          <p className="text-base text-white/80 font-light max-w-2xl mb-10 text-shadow-soft">
             {p.intro}
           </p>
           <div className="flex flex-wrap gap-4">
