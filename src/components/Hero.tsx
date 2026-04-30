@@ -11,7 +11,7 @@ export const Hero = () => (
         width={1600}
         height={1200}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20 md:from-background md:via-background/75 md:to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a]/95 via-[#0a0e1a]/80 to-[#0a0e1a]/40 md:to-[#0a0e1a]/20" />
     </div>
 
     <div className="container relative z-10 grid md:grid-cols-12 gap-8 items-center py-24">
@@ -21,41 +21,41 @@ export const Hero = () => (
           <span className="text-xs uppercase tracking-luxe text-gold">Private Beta · By Invitation</span>
         </div>
 
-        <h1 className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-[#0a0a0a]">
-          Elevate Your
+        <h1 className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-white">
+          The Unified
           <br />
-          Clinic's Digital
+          Intelligence for
           <br />
-          <span className="italic gold-shimmer">Presence.</span>
+          <span className="italic gold-shimmer">Modern Business.</span>
         </h1>
 
-        <p className="reveal reveal-delay-2 max-w-xl text-lg text-muted-foreground leading-relaxed mb-12 font-light">
-          From manual chaos to AI-driven serenity. Aura is the discreet intelligence
-          behind America's most distinguished aesthetic practices — answering, booking, and
-          delighting your patients while you focus on the artistry.
+        <p className="reveal reveal-delay-2 max-w-xl text-lg text-white/70 leading-relaxed mb-12 font-light">
+          NavAura is the discreet AI command center behind ambitious modern brands —
+          capturing leads, qualifying prospects, and orchestrating your operations
+          while you focus on the vision.
         </p>
 
         <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-6">
           <LuxeButton className="animate-gold-pulse">Request Invitation</LuxeButton>
-          <a href="#concierge" className="text-xs uppercase tracking-luxe text-foreground/70 hover:text-gold transition-colors border-b border-foreground/20 hover:border-gold pb-1">
+          <a href="#concierge" className="text-xs uppercase tracking-luxe text-white/70 hover:text-gold transition-colors border-b border-white/20 hover:border-gold pb-1">
             Witness the Experience
           </a>
         </div>
 
-        <div className="reveal reveal-delay-4 mt-20 flex items-center gap-10 text-xs uppercase tracking-luxe text-muted-foreground">
+        <div className="reveal reveal-delay-4 mt-20 flex items-center gap-10 text-xs uppercase tracking-luxe text-white/60">
           <div>
-            <div className="font-serif text-3xl text-foreground normal-case tracking-normal">2.1s</div>
-            <div className="mt-1">Avg. Booking</div>
+            <div className="font-serif text-3xl text-white normal-case tracking-normal">2.1s</div>
+            <div className="mt-1">Avg. Response</div>
           </div>
-          <div className="w-px h-10 bg-border" />
+          <div className="w-px h-10 bg-white/20" />
           <div>
-            <div className="font-serif text-3xl text-foreground normal-case tracking-normal">$2.4M</div>
-            <div className="mt-1">Revenue Recovered</div>
+            <div className="font-serif text-3xl text-white normal-case tracking-normal">$2.4M</div>
+            <div className="mt-1">Revenue Driven</div>
           </div>
-          <div className="w-px h-10 bg-border" />
+          <div className="w-px h-10 bg-white/20" />
           <div>
-            <div className="font-serif text-3xl text-foreground normal-case tracking-normal">312</div>
-            <div className="mt-1">Elite Clinics</div>
+            <div className="font-serif text-3xl text-white normal-case tracking-normal">312</div>
+            <div className="mt-1">Elite Brands</div>
           </div>
         </div>
       </div>
