@@ -37,8 +37,8 @@ const Dashboard = () => {
   return (
     <>
       <Seo
-        title="NavAura AI · Live Demo Dashboard"
-        description="Experience the NavAura AI client dashboard — lead pipeline, revenue saved, and 24/7 AI performance metrics in one premium SaaS interface."
+        title="NavAura AI · Live Client Dashboard Demo Preview"
+        description="Experience the NavAura AI client dashboard — lead pipeline, revenue saved, and 24/7 AI performance metrics in one premium interface. Request access."
         path="/demo-dashboard"
         keywords="NavAura AI dashboard, AI lead pipeline, AI performance metrics, SaaS demo, business automation dashboard"
       />
