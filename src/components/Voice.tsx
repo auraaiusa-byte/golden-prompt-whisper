@@ -1,17 +1,18 @@
 import voiceImg from "@/assets/voice.jpg";
+import { CallMe } from "./CallMe";
 
 export const Voice = () => (
-  <section id="voice" className="relative py-32 md:py-48 bg-secondary overflow-hidden">
-    <div className="container grid md:grid-cols-12 gap-16 items-center">
+  <section id="voice" className="relative py-24 md:py-48 bg-secondary overflow-hidden">
+    <div className="container grid md:grid-cols-12 gap-12 md:gap-16 items-center">
       <div className="md:col-span-6">
         <div className="relative aspect-[4/5] overflow-hidden luxe-card rounded-sm">
-          <img src={voiceImg} alt="NavAura AI 24/7 virtual voice assistant — futuristic sound waves" loading="lazy" width={1280} height={1600} className="w-full h-full object-cover" />
+          <img src={voiceImg} alt="NavAura AI 24/7 virtual voice assistant for med spas, law firms, and gyms — futuristic gold sound waves" loading="lazy" width={1280} height={1600} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
         </div>
       </div>
 
       <div className="md:col-span-6">
-        <span className="text-xs uppercase tracking-luxe text-gold">02 — 24/7 Virtual Voice · NavAura AI</span>
+        <span className="text-xs uppercase tracking-luxe text-gold">02 — Experience Live AI Voice · NavAura AI</span>
         <h2 className="font-serif text-4xl md:text-6xl leading-tight mt-6 mb-8">
           A voice that
           <br /><span className="italic">never sleeps.</span>
