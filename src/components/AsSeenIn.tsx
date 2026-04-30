@@ -1,10 +1,10 @@
-const brands = ["VOGUE", "HARPER'S BAZAAR", "ROBB REPORT", "TATLER", "FORBES", "ARCHITECTURAL DIGEST"];
+const brands = ["FORBES", "BLOOMBERG", "WSJ", "TECHCRUNCH", "FAST COMPANY", "WIRED"];
 
 export const AsSeenIn = () => (
   <section aria-label="Press features" className="border-y border-border py-12 bg-background">
     <div className="container">
       <p className="text-center text-[10px] uppercase tracking-luxe text-muted-foreground mb-8">
-        As Seen In
+        Trusted Across Industries · As Seen In
       </p>
       <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-60">
         {brands.map((b) => (
