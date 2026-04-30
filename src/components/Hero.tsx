@@ -38,7 +38,7 @@ export const Hero = () => (
         </div>
 
         <h1
-          className="reveal reveal-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-white"
+          className="reveal reveal-delay-1 font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] mb-6 md:mb-8 text-white break-words"
           style={{ textShadow: "0 2px 30px hsl(222 30% 4% / 0.85), 0 1px 4px hsl(222 30% 4% / 0.9)" }}
         >
           The Unified
