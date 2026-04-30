@@ -36,7 +36,10 @@ export const Voice = () => (
             </div>
           ))}
         </div>
+
+        <CallMe />
       </div>
     </div>
   </section>
 );
+

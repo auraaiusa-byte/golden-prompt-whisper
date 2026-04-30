@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { LuxeButton } from "./LuxeButton";
+import { sendLead } from "@/lib/webhook";
 
 export const ExitIntent = () => {
   const [open, setOpen] = useState(false);
@@ -22,12 +23,13 @@ export const ExitIntent = () => {
 
   if (!open) return null;
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const email = fd.get("email") as string;
-    const subject = encodeURIComponent("NavAura — Wait! 20+ hours request");
-    const body = encodeURIComponent(`Email: ${email}\n\nI'd like to see how NavAura saves 20+ hours a week.`);
+    const email = (fd.get("email") as string)?.trim();
+    await sendLead({ source: "exit-intent", email, message: "20+ hours/week walkthrough request" });
+    const subject = encodeURIComponent("NavAura AI — Wait! 20+ hours request");
+    const body = encodeURIComponent(`Email: ${email}\n\nI'd like to see how NavAura AI saves 20+ hours a week.`);
     window.location.href = `mailto:aura.usa@gmail.com?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
