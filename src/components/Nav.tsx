@@ -13,7 +13,7 @@ export const Nav = () => (
         <a href="#gym" className="hover:text-gold transition-colors">Gym</a>
         <a href="#invitation" className="hover:text-gold transition-colors">Membership</a>
       </div>
-      <a href="#contact"><LuxeButton variant="ghost" className="hidden md:inline-flex !py-3 !px-6">Request Access</LuxeButton></a>
+      <a href="#contact"><LuxeButton variant="ghost" className="hidden md:inline-flex !py-3 !px-6">Request Private Access</LuxeButton></a>
     </div>
   </nav>
 );

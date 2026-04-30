@@ -17,7 +17,7 @@ export const Footer = () => (
       </a>
 
       <p className="text-xs text-muted-foreground text-center md:text-right">
-        © {new Date().getFullYear()} NavAura AI · Unified Intelligence
+        © 2026 NavAura AI · Unified Intelligence
       </p>
     </div>
   </footer>

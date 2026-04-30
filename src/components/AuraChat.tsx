@@ -5,7 +5,7 @@ import auraAvatar from "@/assets/aura-avatar.jpg";
 interface Msg { role: "aura" | "user"; text: string; }
 
 const initial: Msg[] = [
-  { role: "aura", text: "Hi! I am Aura. How can I help automate your business today?" },
+  { role: "aura", text: "Hi! I am NavAura AI. How can I automate your business today?" },
 ];
 
 const suggestions = [
@@ -30,7 +30,7 @@ export const AuraChat = () => {
     const userMsg: Msg = { role: "user", text };
     const reply: Msg = {
       role: "aura",
-      text: "Wonderful — I've noted your interest. Our team will reach you at aura.usa@gmail.com shortly. May I share more about our membership tiers?",
+      text: "Wonderful — NavAura AI has noted your interest. Our team will reach you at aura.usa@gmail.com shortly. May I share more about our membership tiers?",
     };
     setMessages((m) => [...m, userMsg, reply]);
     setInput("");
@@ -50,8 +50,8 @@ export const AuraChat = () => {
             onClick={openChat}
             className="relative glass rounded-2xl px-4 py-3 text-left text-sm text-foreground/90 shadow-luxe border border-gold/30 hover:border-gold transition-colors block"
           >
-            <span className="block font-serif text-gold text-xs mb-1">Aura</span>
-            Hi! I am Aura. How can I help automate your business today?
+            <span className="block font-serif text-gold text-xs mb-1">NavAura AI</span>
+            Hi! I am NavAura AI. How can I automate your business today?
             <span className="absolute -bottom-1.5 right-6 w-3 h-3 rotate-45 bg-background border-r border-b border-gold/30" />
             <button
               onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
@@ -67,7 +67,7 @@ export const AuraChat = () => {
       {/* Floating avatar button */}
       <button
         onClick={() => setOpen((o) => !o)}
-        aria-label="Open Aura Assistant"
+        aria-label="Open NavAura AI Assistant"
         className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full overflow-hidden shadow-luxe ring-2 ring-gold/60 hover:ring-gold hover:scale-105 transition-all animate-gold-pulse bg-background"
       >
         {open ? (
@@ -77,7 +77,7 @@ export const AuraChat = () => {
         ) : (
           <img
             src={auraAvatar}
-            alt="Aura — NavAura AI assistant"
+            alt="NavAura AI assistant"
             width={128}
             height={128}
             loading="lazy"
@@ -90,10 +90,10 @@ export const AuraChat = () => {
         <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] glass rounded-2xl overflow-hidden flex flex-col animate-scale-in border border-gold/30 shadow-luxe" style={{ height: 520 }}>
           <div className="px-5 py-4 border-b border-gold/20 flex items-center gap-3 bg-background/60">
             <div className="w-10 h-10 rounded-full overflow-hidden ring-1 ring-gold/50 shrink-0">
-              <img src={auraAvatar} alt="Aura" width={80} height={80} className="w-full h-full object-cover" />
+              <img src={auraAvatar} alt="NavAura AI" width={80} height={80} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-serif text-sm truncate">Aura Assistant <span className="text-foreground/40">|</span> <span className="text-gold">NavAura AI</span></div>
+              <div className="font-serif text-sm truncate"><span className="text-gold">NavAura AI</span> <span className="text-foreground/40">|</span> Assistant</div>
               <div className="text-[10px] uppercase tracking-luxe text-gold flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" /> Online
               </div>
@@ -135,7 +135,7 @@ export const AuraChat = () => {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Aura anything…"
+              placeholder="Ask NavAura AI anything…"
               className="flex-1 bg-transparent text-sm focus:outline-none placeholder:text-muted-foreground px-3 py-2"
             />
             <button type="submit" aria-label="Send" className="w-9 h-9 rounded-full bg-gold text-background flex items-center justify-center hover:bg-gold-soft transition-colors">

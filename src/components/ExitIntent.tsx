@@ -60,7 +60,7 @@ export const ExitIntent = () => {
               placeholder="your@email.com"
               className="w-full bg-secondary/60 border border-gold/30 rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-gold placeholder:text-muted-foreground"
             />
-            <LuxeButton className="w-full animate-gold-pulse">Send Me the Walkthrough</LuxeButton>
+            <LuxeButton className="w-full animate-gold-pulse">Request Private Access</LuxeButton>
           </form>
         )}
       </div>
