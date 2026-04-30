@@ -23,8 +23,8 @@ const MedSpa = () => (
     ]}
     cities={["Beverly Hills, CA", "Miami, FL", "Scottsdale, AZ", "Manhattan, NY", "Dallas, TX", "Austin, TX"]}
     localCopy="We engineer city-specific landing pages, automated Google review flows, and geo-targeted ad funnels — so when someone searches 'best med spa near me,' your clinic is the only answer that appears."
-    seoTitle="Med Spa AI Automation · NavAura AI"
-    seoDescription="NavAura AI deploys 24/7 booking agents, automated patient intake, and VIP retention flows for medical spas. Stop missing calls. Stop losing DMs. Start scaling."
+    seoTitle="Med Spa AI Automation & 24/7 Booking · NavAura AI"
+    seoDescription="NavAura AI deploys 24/7 booking agents, automated patient intake, and VIP retention for medical spas. Stop losing DMs — request private access today."
     seoKeywords="Med Spa AI Automation, automated patient intake, med spa booking AI, aesthetic clinic AI, HydraFacial booking, Botox lead capture, NavAura AI"
     chatGreeting="Hi! I am NavAura AI. Curious how we automate Med Spa bookings 24/7?"
     chatSuggestions={[

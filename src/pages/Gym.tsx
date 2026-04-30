@@ -23,8 +23,8 @@ const Gym = () => (
     ]}
     cities={["Los Angeles, CA", "Miami, FL", "Austin, TX", "Denver, CO", "Brooklyn, NY", "Nashville, TN"]}
     localCopy="We deploy hyper-local landing pages for every studio location, automate Google review collection from every PR, and run geo-targeted nurture funnels — so 'best gym near me' searches in your area always lead to your door."
-    seoTitle="Gym Lead Management AI · Fitness Growth · NavAura AI"
-    seoDescription="NavAura AI converts trials to members, reactivates lapsed lists, and fills every class with AI growth agents engineered for boutique gyms, CrossFit, and luxury fitness studios."
+    seoTitle="Gym Lead Management & Member AI Growth · NavAura AI"
+    seoDescription="NavAura AI converts trial leads to members, reactivates lapsed lists, and fills every class for boutique gyms and luxury studios. Request access today."
     seoKeywords="Gym Lead Management, fitness AI, trial to member conversion, gym CRM automation, boutique fitness AI, class booking AI, NavAura AI"
     chatGreeting="Hi! I am NavAura AI. Ready to 2x your gym's lead conversion?"
     chatSuggestions={[
