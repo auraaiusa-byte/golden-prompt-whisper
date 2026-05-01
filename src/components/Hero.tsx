@@ -129,9 +129,9 @@ export const Hero = () => (
           and client relations — across med spas, law firms, and fitness studios.
         </p>
 
-        <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-6">
-          <a href="#contact"><LuxeButton className="animate-gold-pulse">Request Private Access</LuxeButton></a>
-          <a href="#industries" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1">
+        <div className="reveal reveal-delay-3 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-5 sm:gap-6">
+          <HeroEmailCapture />
+          <a href="#industries" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1 self-start sm:self-auto">
             Explore Industries
           </a>
         </div>
