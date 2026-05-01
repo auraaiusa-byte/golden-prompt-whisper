@@ -36,46 +36,11 @@ export const AuraChat = ({ greeting = defaultGreeting, suggestions = defaultSugg
     setInput("");
   };
 
-  const openChat = () => {
-    setOpen(true);
-    setShowBubble(false);
-  };
-
   return (
     <>
-      {/* Welcome speech bubble */}
-      <AnimatePresence>
-        {!open && showBubble && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-28 right-4 sm:bottom-32 sm:right-6 z-50 max-w-[240px]"
-          >
-            <button
-              onClick={openChat}
-              className="relative glass rounded-2xl px-4 py-3 text-left text-sm text-foreground/90 shadow-luxe border border-gold/30 hover:border-gold transition-colors block"
-            >
-              <span className="block font-serif text-gold text-xs mb-1">NavAura AI</span>
-              {greeting}
-              <span className="absolute -bottom-1.5 right-6 w-3 h-3 rotate-45 bg-background border-r border-b border-gold/30" />
-              <span
-                onClick={(e) => { e.stopPropagation(); setShowBubble(false); }}
-                role="button"
-                aria-label="Dismiss"
-                className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-background border border-gold/40 flex items-center justify-center text-foreground/60 hover:text-gold cursor-pointer"
-              >
-                <X className="w-3 h-3" />
-              </span>
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Floating robot mascot */}
       <motion.button
-        onClick={() => { setOpen((o) => !o); setShowBubble(false); }}
+        onClick={() => setOpen((o) => !o)}
         onHoverStart={() => setHovering(true)}
         onHoverEnd={() => setHovering(false)}
         aria-label="Open NavAura AI Assistant"
