@@ -49,24 +49,6 @@ export const AuraChat = ({ greeting = defaultGreeting, suggestions = defaultSugg
 
   return (
     <>
-      {/* Hover greeting bubble */}
-      <AnimatePresence>
-        {!open && hovering && (
-          <motion.div
-            initial={{ opacity: 0, x: 8, scale: 0.9 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 8, scale: 0.9 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-12 right-24 sm:bottom-16 sm:right-32 z-50"
-          >
-            <div className="relative glass rounded-2xl px-4 py-2.5 text-sm text-white border border-gold/40 shadow-luxe whitespace-nowrap">
-              <span className="text-gold">Hi there!</span> 👋
-              <span className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 rotate-45 bg-background border-r border-t border-gold/40" />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Welcome speech bubble */}
       <AnimatePresence>
         {!open && showBubble && (
@@ -137,15 +119,20 @@ export const AuraChat = ({ greeting = defaultGreeting, suggestions = defaultSugg
             height={256}
             loading="lazy"
             className="relative w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--gold)/0.35)] select-none pointer-events-none"
-            style={{ transformOrigin: "50% 90%" }}
+            style={{ transformOrigin: "30% 95%", transformPerspective: 600 }}
             animate={
               hovering
-                ? { rotate: [0, -10, 6, -10, 6, 0], scale: 1.04 }
-                : { rotate: 0, scale: 1 }
+                ? {
+                    rotate: [0, -22, -10, -22, -10, -22, 0],
+                    rotateY: [0, -15, 10, -15, 10, -15, 0],
+                    y: [0, -6, -3, -6, -3, -6, 0],
+                    scale: 1.06,
+                  }
+                : { rotate: 0, rotateY: 0, y: 0, scale: 1 }
             }
             transition={
               hovering
-                ? { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
+                ? { duration: 1.2, repeat: Infinity, ease: "easeInOut" }
                 : { duration: 0.4, ease: "easeOut" }
             }
             draggable={false}
