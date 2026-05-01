@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero-spa.jpg";
-import { Cross, Scale, Dumbbell, Check, Loader2, Sparkles } from "lucide-react";
+import { Cross, Scale, Dumbbell, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
