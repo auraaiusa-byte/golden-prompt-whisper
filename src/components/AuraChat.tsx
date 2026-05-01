@@ -19,17 +19,11 @@ const defaultSuggestions = [
 
 export const AuraChat = ({ greeting = defaultGreeting, suggestions = defaultSuggestions }: AuraChatProps = {}) => {
   const [open, setOpen] = useState(false);
-  const [showBubble, setShowBubble] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
     { role: "aura", text: "Hi, I'm Nav — your NavAura AI assistant. How can I automate your business today?" },
   ]);
   const [input, setInput] = useState("");
-
-  useEffect(() => {
-    const t = setTimeout(() => setShowBubble(true), 1500);
-    return () => clearTimeout(t);
-  }, []);
 
   const send = (text: string) => {
     if (!text.trim()) return;
