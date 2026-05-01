@@ -1,6 +1,81 @@
+import { useState } from "react";
 import heroImg from "@/assets/hero-spa.jpg";
-import { LuxeButton } from "./LuxeButton";
-import { Cross, Scale, Dumbbell } from "lucide-react";
+import { Cross, Scale, Dumbbell, Check, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { z } from "zod";
+
+const emailSchema = z.string().trim().email({ message: "Please enter a valid email" }).max(255);
+
+const HeroEmailCapture = () => {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (status !== "idle") return;
+
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0].message);
+      return;
+    }
+
+    setStatus("loading");
+    const { error } = await supabase
+      .from("leads")
+      .insert({ email: parsed.data, source: "Hero", lead_status: "new" });
+
+    if (error) {
+      setStatus("idle");
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
+
+    setStatus("success");
+    toast.success("You're on the list. We'll be in touch shortly.");
+    setTimeout(() => {
+      setEmail("");
+      setStatus("idle");
+    }, 3500);
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="glass rounded-full border border-gold/40 p-1.5 sm:p-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0 w-full max-w-xl shadow-[0_8px_40px_-12px_hsl(45_55%_52%/0.35)]"
+      style={{ backdropFilter: "blur(14px)" }}
+    >
+      <input
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        disabled={status !== "idle"}
+        placeholder="Enter your business email"
+        aria-label="Business email"
+        className="flex-1 bg-transparent border-0 outline-none px-5 py-3 text-sm text-white placeholder:text-white/50 rounded-full sm:rounded-l-full disabled:opacity-60"
+      />
+      <button
+        type="submit"
+        disabled={status !== "idle"}
+        className="relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs uppercase tracking-luxe font-medium text-white transition-all duration-300 disabled:cursor-not-allowed whitespace-nowrap"
+        style={{
+          background: status === "success"
+            ? "linear-gradient(135deg, #16a34a, #22c55e)"
+            : "linear-gradient(135deg, #D4AF37, #B8941F)",
+          boxShadow: "0 4px 20px -4px hsl(45 55% 52% / 0.5)",
+        }}
+      >
+        {status === "loading" && <Loader2 className="w-4 h-4 animate-spin" />}
+        {status === "success" && <Check className="w-4 h-4" />}
+        {status === "idle" && "Get Started"}
+        {status === "loading" && "Sending"}
+        {status === "success" && "Success"}
+      </button>
+    </form>
+  );
+};
 
 export const Hero = () => (
   <section className="relative min-h-screen flex items-center overflow-x-hidden pt-20 pb-32 md:pb-24">
@@ -54,9 +129,9 @@ export const Hero = () => (
           and client relations — across med spas, law firms, and fitness studios.
         </p>
 
-        <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-6">
-          <a href="#contact"><LuxeButton className="animate-gold-pulse">Request Private Access</LuxeButton></a>
-          <a href="#industries" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1">
+        <div className="reveal reveal-delay-3 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-5 sm:gap-6">
+          <HeroEmailCapture />
+          <a href="#industries" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1 self-start sm:self-auto">
             Explore Industries
           </a>
         </div>
