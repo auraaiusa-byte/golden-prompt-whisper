@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero-spa.jpg";
-import { Cross, Scale, Dumbbell, Check, Loader2, Sparkles } from "lucide-react";
+import { Cross, Scale, Dumbbell, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -113,65 +113,48 @@ const HeroEmailCapture = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="group relative rounded-2xl p-[1px] w-full max-w-xl transition-all duration-500"
+      className="group relative rounded-2xl p-[1px] w-full max-w-2xl transition-all duration-500"
       style={{
         background:
-          "linear-gradient(135deg, rgba(212,175,55,0.7), rgba(212,175,55,0.15) 40%, rgba(212,175,55,0.05) 60%, rgba(212,175,55,0.6))",
-        boxShadow: "0 0 20px rgba(212,175,55,0.3), 0 0 60px rgba(212,175,55,0.12)",
+          "linear-gradient(135deg, rgba(212,175,55,0.55), rgba(212,175,55,0.1) 45%, rgba(212,175,55,0.04) 60%, rgba(212,175,55,0.45))",
+        boxShadow: "0 0 14px rgba(212,175,55,0.18), 0 0 40px rgba(212,175,55,0.08)",
       }}
     >
-      {/* breathing glow */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-2 rounded-3xl opacity-60 animate-pulse"
+        className="relative rounded-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 p-2 sm:p-2.5"
         style={{
-          background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(212,175,55,0.25), transparent 70%)",
-          filter: "blur(12px)",
-        }}
-      />
-      <div
-        className="relative rounded-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 p-1.5 sm:p-2"
-        style={{
-          background: "rgba(10, 10, 12, 0.55)",
+          background: "rgba(10, 10, 12, 0.6)",
           backdropFilter: "blur(14px)",
           WebkitBackdropFilter: "blur(14px)",
         }}
       >
-        <div className="flex-1 flex items-center gap-2 px-3 sm:px-4">
-          <Sparkles
-            className="w-4 h-4 text-gold shrink-0"
-            strokeWidth={1.75}
-            style={{ filter: "drop-shadow(0 0 6px rgba(212,175,55,0.6))" }}
-          />
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            disabled={status !== "idle"}
-            placeholder={focused || email ? "Enter your business email" : animatedPlaceholder + "▌"}
-            aria-label="Business email"
-            className="flex-1 min-w-0 bg-transparent border-0 outline-none py-3 text-sm sm:text-base font-sans text-white placeholder:text-white/50 disabled:opacity-60"
-          />
-        </div>
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          disabled={status !== "idle"}
+          placeholder={focused || email ? "Enter your business email" : animatedPlaceholder + "▌"}
+          aria-label="Business email"
+          className="flex-1 min-w-0 w-full bg-transparent border-0 outline-none px-5 sm:px-6 py-4 text-sm sm:text-base font-sans text-white placeholder:text-white/55 disabled:opacity-60"
+        />
         <button
           type="submit"
           disabled={status !== "idle"}
-          className="relative inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-xs sm:text-sm uppercase tracking-luxe font-bold text-black transition-all duration-300 hover:scale-105 disabled:cursor-not-allowed disabled:hover:scale-100 whitespace-nowrap"
+          className="sm:ml-auto shrink-0 relative inline-flex items-center justify-center gap-2 rounded-lg px-7 sm:px-8 py-3.5 text-xs sm:text-sm uppercase tracking-luxe font-bold text-black transition-all duration-300 hover:scale-105 disabled:cursor-not-allowed disabled:hover:scale-100 whitespace-nowrap w-full sm:w-auto"
           style={{
             background: "linear-gradient(135deg, #D4AF37, #C9A227)",
-            boxShadow: "0 0 18px rgba(212,175,55,0.45)",
+            boxShadow: "0 0 14px rgba(212,175,55,0.35)",
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLButtonElement).style.boxShadow =
-              "0 0 32px rgba(212,175,55,0.85), 0 0 60px rgba(212,175,55,0.35)";
+              "0 0 24px rgba(212,175,55,0.7), 0 0 48px rgba(212,175,55,0.25)";
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLButtonElement).style.boxShadow =
-              "0 0 18px rgba(212,175,55,0.45)";
+              "0 0 14px rgba(212,175,55,0.35)";
           }}
         >
           {status === "loading" ? (
