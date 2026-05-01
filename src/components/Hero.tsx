@@ -1,15 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero-spa.jpg";
-import { Cross, Scale, Dumbbell, Check, Loader2 } from "lucide-react";
+import { Cross, Scale, Dumbbell, Check, Loader2, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
 
 const emailSchema = z.string().trim().email({ message: "Please enter a valid email" }).max(255);
 
+const PLACEHOLDER_FULL = "Enter your business email to activate Nav...";
+
+const useTypewriter = (text: string, speed = 55, pauseAtEnd = 2200, active = true) => {
+  const [display, setDisplay] = useState("");
+
+  useEffect(() => {
+    if (!active) return;
+    let i = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+    let cancelled = false;
+
+    const tick = () => {
+      if (cancelled) return;
+      if (i <= text.length) {
+        setDisplay(text.slice(0, i));
+        i++;
+        timeout = setTimeout(tick, speed);
+      } else {
+        timeout = setTimeout(() => {
+          i = 0;
+          tick();
+        }, pauseAtEnd);
+      }
+    };
+    tick();
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+    };
+  }, [text, speed, pauseAtEnd, active]);
+
+  return display;
+};
+
 const HeroEmailCapture = () => {
   const [email, setEmail] = useState("");
+  const [focused, setFocused] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const animatedPlaceholder = useTypewriter(
+    PLACEHOLDER_FULL,
+    55,
+    2200,
+    status === "idle" && !focused && email.length === 0,
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,46 +74,116 @@ const HeroEmailCapture = () => {
     }
 
     setStatus("success");
-    toast.success("You're on the list. We'll be in touch shortly.");
     setTimeout(() => {
       setEmail("");
       setStatus("idle");
-    }, 3500);
+    }, 4500);
   };
+
+  if (status === "success") {
+    return (
+      <div
+        className="w-full max-w-xl animate-scale-in inline-flex items-center justify-center gap-3 rounded-full px-6 py-4 border border-gold/60"
+        style={{
+          background:
+            "linear-gradient(135deg, hsl(45 55% 52% / 0.18), hsl(45 55% 52% / 0.06))",
+          backdropFilter: "blur(14px)",
+          boxShadow:
+            "0 0 40px rgba(212,175,55,0.45), inset 0 1px 0 rgba(255,255,255,0.08)",
+        }}
+        role="status"
+        aria-live="polite"
+      >
+        <span
+          className="flex items-center justify-center w-8 h-8 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, #D4AF37, #B8941F)",
+            boxShadow: "0 0 18px rgba(212,175,55,0.7)",
+          }}
+        >
+          <Check className="w-4 h-4 text-black" strokeWidth={3} />
+        </span>
+        <span className="text-sm sm:text-base font-medium text-white tracking-wide">
+          Access Granted. <span className="text-gold">Welcome to NavAura.</span>
+        </span>
+      </div>
+    );
+  }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="glass rounded-full border border-gold/40 p-1.5 sm:p-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-0 w-full max-w-xl shadow-[0_8px_40px_-12px_hsl(45_55%_52%/0.35)]"
-      style={{ backdropFilter: "blur(14px)" }}
+      className="group relative rounded-2xl p-[1px] w-full max-w-xl transition-all duration-500"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(212,175,55,0.7), rgba(212,175,55,0.15) 40%, rgba(212,175,55,0.05) 60%, rgba(212,175,55,0.6))",
+        boxShadow: "0 0 20px rgba(212,175,55,0.3), 0 0 60px rgba(212,175,55,0.12)",
+      }}
     >
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        disabled={status !== "idle"}
-        placeholder="Enter your business email"
-        aria-label="Business email"
-        className="flex-1 bg-transparent border-0 outline-none px-5 py-3 text-sm text-white placeholder:text-white/50 rounded-full sm:rounded-l-full disabled:opacity-60"
-      />
-      <button
-        type="submit"
-        disabled={status !== "idle"}
-        className="relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs uppercase tracking-luxe font-medium text-white transition-all duration-300 disabled:cursor-not-allowed whitespace-nowrap"
+      {/* breathing glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-2 rounded-3xl opacity-60 animate-pulse"
         style={{
-          background: status === "success"
-            ? "linear-gradient(135deg, #16a34a, #22c55e)"
-            : "linear-gradient(135deg, #D4AF37, #B8941F)",
-          boxShadow: "0 4px 20px -4px hsl(45 55% 52% / 0.5)",
+          background:
+            "radial-gradient(60% 60% at 50% 50%, rgba(212,175,55,0.25), transparent 70%)",
+          filter: "blur(12px)",
+        }}
+      />
+      <div
+        className="relative rounded-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 p-1.5 sm:p-2"
+        style={{
+          background: "rgba(10, 10, 12, 0.55)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
         }}
       >
-        {status === "loading" && <Loader2 className="w-4 h-4 animate-spin" />}
-        {status === "success" && <Check className="w-4 h-4" />}
-        {status === "idle" && "Get Started"}
-        {status === "loading" && "Sending"}
-        {status === "success" && "Success"}
-      </button>
+        <div className="flex-1 flex items-center gap-2 px-3 sm:px-4">
+          <Sparkles
+            className="w-4 h-4 text-gold shrink-0"
+            strokeWidth={1.75}
+            style={{ filter: "drop-shadow(0 0 6px rgba(212,175,55,0.6))" }}
+          />
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            disabled={status !== "idle"}
+            placeholder={focused || email ? "Enter your business email" : animatedPlaceholder + "▌"}
+            aria-label="Business email"
+            className="flex-1 min-w-0 bg-transparent border-0 outline-none py-3 text-sm sm:text-base font-sans text-white placeholder:text-white/50 disabled:opacity-60"
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={status !== "idle"}
+          className="relative inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-xs sm:text-sm uppercase tracking-luxe font-bold text-black transition-all duration-300 hover:scale-105 disabled:cursor-not-allowed disabled:hover:scale-100 whitespace-nowrap"
+          style={{
+            background: "linear-gradient(135deg, #D4AF37, #C9A227)",
+            boxShadow: "0 0 18px rgba(212,175,55,0.45)",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.boxShadow =
+              "0 0 32px rgba(212,175,55,0.85), 0 0 60px rgba(212,175,55,0.35)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.boxShadow =
+              "0 0 18px rgba(212,175,55,0.45)";
+          }}
+        >
+          {status === "loading" ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Sending
+            </>
+          ) : (
+            "Get Started"
+          )}
+        </button>
+      </div>
     </form>
   );
 };
