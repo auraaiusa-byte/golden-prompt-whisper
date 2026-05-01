@@ -49,6 +49,24 @@ export const AuraChat = ({ greeting = defaultGreeting, suggestions = defaultSugg
 
   return (
     <>
+      {/* Hover greeting bubble */}
+      <AnimatePresence>
+        {!open && hovering && (
+          <motion.div
+            initial={{ opacity: 0, x: 8, scale: 0.9 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 8, scale: 0.9 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-12 right-24 sm:bottom-16 sm:right-32 z-50"
+          >
+            <div className="relative glass rounded-2xl px-4 py-2.5 text-sm text-white border border-gold/40 shadow-luxe whitespace-nowrap">
+              <span className="text-gold">Hi there!</span> 👋
+              <span className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 rotate-45 bg-background border-r border-t border-gold/40" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Welcome speech bubble */}
       <AnimatePresence>
         {!open && showBubble && (
@@ -112,25 +130,48 @@ export const AuraChat = ({ greeting = defaultGreeting, suggestions = defaultSugg
             <X className="w-6 h-6" />
           </motion.span>
         ) : (
-          <motion.img
-            src={navRobot}
-            alt="Nav — NavAura AI robot assistant"
-            width={256}
-            height={256}
-            loading="lazy"
-            className="relative w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--gold)/0.35)] select-none pointer-events-none"
-            animate={
-              hovering
-                ? { rotate: [0, -8, 8, -6, 6, 0], scale: 1.06 }
-                : { rotate: [0, -2, 2, 0], scale: 1 }
-            }
-            transition={
-              hovering
-                ? { duration: 0.9, ease: "easeInOut" }
-                : { duration: 5, repeat: Infinity, ease: "easeInOut" }
-            }
-            draggable={false}
-          />
+          <motion.div
+            className="relative w-full h-full"
+            animate={hovering ? { scale: 1.05 } : { scale: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <img
+              src={navRobot}
+              alt="Nav — NavAura AI robot assistant"
+              width={256}
+              height={256}
+              loading="lazy"
+              className="w-full h-full object-contain drop-shadow-[0_10px_25px_hsl(var(--gold)/0.35)] select-none pointer-events-none"
+              draggable={false}
+            />
+            {/* Waving right hand overlay (mirrors the robot's right arm area) */}
+            <motion.span
+              aria-hidden
+              className="absolute pointer-events-none"
+              style={{
+                right: "6%",
+                top: "42%",
+                width: "26%",
+                height: "26%",
+                background: `url(${navRobot}) no-repeat`,
+                backgroundSize: "400% 400%",
+                backgroundPosition: "100% 60%",
+                filter: "drop-shadow(0 4px 10px hsl(var(--gold) / 0.35))",
+                transformOrigin: "30% 80%",
+                opacity: 0,
+              }}
+              animate={
+                hovering
+                  ? { opacity: [0, 1, 1, 1, 0], rotate: [0, -18, 8, -18, 0] }
+                  : { opacity: 0, rotate: 0 }
+              }
+              transition={
+                hovering
+                  ? { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
+                  : { duration: 0.3 }
+              }
+            />
+          </motion.div>
         )}
       </motion.button>
 

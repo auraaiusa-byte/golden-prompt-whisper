@@ -1,6 +1,6 @@
 import heroImg from "@/assets/hero-spa.jpg";
-import { LuxeButton } from "./LuxeButton";
 import { Cross, Scale, Dumbbell } from "lucide-react";
+import { HeroEmailCapture } from "./HeroEmailCapture";
 
 export const Hero = () => (
   <section className="relative min-h-screen flex items-center overflow-x-hidden pt-20 pb-32 md:pb-24">
@@ -54,9 +54,9 @@ export const Hero = () => (
           and client relations — across med spas, law firms, and fitness studios.
         </p>
 
-        <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-6">
-          <a href="#contact"><LuxeButton className="animate-gold-pulse">Request Private Access</LuxeButton></a>
-          <a href="#industries" className="text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1">
+        <div className="reveal reveal-delay-3 space-y-5">
+          <HeroEmailCapture />
+          <a href="#industries" className="inline-block text-xs uppercase tracking-luxe text-white/80 hover:text-gold transition-colors border-b border-white/30 hover:border-gold pb-1">
             Explore Industries
           </a>
         </div>
