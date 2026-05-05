@@ -249,10 +249,10 @@ export const Hero = () => (
           <div className="text-center sm:text-left">
             <div className="font-serif text-2xl sm:text-3xl text-white normal-case tracking-normal">312</div>
             <div className="mt-1 leading-tight">Elite Brands</div>
+          </div>
+        </div>
       </div>
       <HeroAssistant />
-    </div>
-      </div>
     </div>
 
     {/* Glassmorphism live booking notification */}
