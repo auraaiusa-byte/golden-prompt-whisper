@@ -172,39 +172,55 @@ const Dashboard = () => {
             <h2 className="font-serif text-lg">Lead Pipeline</h2>
             <p className="text-xs text-muted-foreground mt-0.5">Real-time leads captured by your NavAura AI agents</p>
           </div>
-          <span className="text-xs text-gold uppercase tracking-luxe">Live</span>
+          <span className="text-xs text-gold uppercase tracking-luxe flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" /> Live
+          </span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border text-left text-[10px] uppercase tracking-luxe text-muted-foreground">
-                <th className="px-6 py-4 font-normal">Lead</th>
+                <th className="px-6 py-4 font-normal">Email</th>
                 <th className="px-6 py-4 font-normal">Source</th>
-                <th className="px-6 py-4 font-normal hidden md:table-cell">Industry</th>
-                <th className="px-6 py-4 font-normal">Stage</th>
-                <th className="px-6 py-4 font-normal text-right">Value</th>
+                <th className="px-6 py-4 font-normal">Status</th>
                 <th className="px-6 py-4 font-normal text-right hidden sm:table-cell">When</th>
               </tr>
             </thead>
             <tbody>
-              {leads.map((l) => (
-                <tr key={l.name} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
-                  <td className="px-6 py-4 font-medium">{l.name}</td>
-                  <td className="px-6 py-4 text-muted-foreground">{l.source}</td>
-                  <td className="px-6 py-4 text-muted-foreground hidden md:table-cell">{l.industry}</td>
-                  <td className="px-6 py-4">
-                    <span className={`text-xs px-2.5 py-1 rounded-full border ${
-                      l.status === "won"
-                        ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
-                        : "border-gold/40 text-gold bg-gold/10"
-                    }`}>
-                      {l.stage}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-right font-medium text-foreground/90">{l.value}</td>
-                  <td className="px-6 py-4 text-right text-xs text-muted-foreground hidden sm:table-cell">{l.time}</td>
-                </tr>
-              ))}
+              {loading && (
+                <tr><td colSpan={4} className="px-6 py-10 text-center text-muted-foreground text-xs">Loading leads…</td></tr>
+              )}
+              {!loading && leads.length === 0 && (
+                <tr><td colSpan={4} className="px-6 py-10 text-center text-muted-foreground text-xs">No leads yet — your next capture appears here in real time.</td></tr>
+              )}
+              {leads.map((l) => {
+                const isNew = newLeadIds.has(l.id);
+                const won = l.lead_status === "converted" || l.lead_status === "qualified";
+                return (
+                  <tr
+                    key={l.id}
+                    className={`border-b border-border/50 transition-colors ${
+                      isNew ? "bg-gold/10 animate-fade-in" : "hover:bg-secondary/30"
+                    }`}
+                  >
+                    <td className="px-6 py-4 font-medium">
+                      {l.email}
+                      {isNew && <span className="ml-2 text-[9px] uppercase tracking-luxe text-gold">New</span>}
+                    </td>
+                    <td className="px-6 py-4 text-muted-foreground">{l.source}</td>
+                    <td className="px-6 py-4">
+                      <span className={`text-xs px-2.5 py-1 rounded-full border capitalize ${
+                        won
+                          ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
+                          : "border-gold/40 text-gold bg-gold/10"
+                      }`}>
+                        {l.lead_status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-right text-xs text-muted-foreground hidden sm:table-cell">{timeAgo(l.created_at)}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
