@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { sendLead } from "@/lib/webhook";
 import { toast } from "sonner";
 import { z } from "zod";
+import { HeroAssistant } from "@/components/HeroAssistant";
 
 const emailSchema = z.string().trim().email({ message: "Please enter a valid email" }).max(255);
 
