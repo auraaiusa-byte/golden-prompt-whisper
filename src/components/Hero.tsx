@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { sendLead } from "@/lib/webhook";
 import { toast } from "sonner";
 import { z } from "zod";
+import { HeroAssistant } from "@/components/HeroAssistant";
 
 const emailSchema = z.string().trim().email({ message: "Please enter a valid email" }).max(255);
 
@@ -191,7 +192,7 @@ export const Hero = () => (
     </div>
 
     {/* Floating multi-industry icons */}
-    <div className="absolute inset-0 pointer-events-none hidden md:block">
+    <div className="absolute inset-0 pointer-events-none hidden md:block lg:hidden">
       <div className="absolute top-[22%] right-[8%] glass rounded-full p-4 animate-float" style={{ animationDelay: "0s" }}>
         <Cross className="w-5 h-5 text-gold" strokeWidth={1.5} />
       </div>
@@ -251,6 +252,7 @@ export const Hero = () => (
           </div>
         </div>
       </div>
+      <HeroAssistant />
     </div>
 
     {/* Glassmorphism live booking notification */}
