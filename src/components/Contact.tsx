@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LuxeButton } from "./LuxeButton";
 import { sendLead } from "@/lib/webhook";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Contact = () => {
   const [sent, setSent] = useState(false);
@@ -13,10 +14,17 @@ export const Contact = () => {
     const industry = fd.get("industry") as string;
     const message = (fd.get("message") as string)?.trim();
 
-    // 1) Send structured JSON to Make.com webhook (forwards to aura.usa@gmail.com)
+    // 1) Save to Supabase leads
+    await supabase.from("leads").insert({
+      email,
+      source: `Contact · ${industry}`,
+      lead_status: "new",
+    });
+
+    // 2) Send structured JSON to Make.com webhook
     await sendLead({ source: "contact", name, email, industry, message });
 
-    // 2) Mailto fallback
+    // 3) Mailto fallback
     const subject = encodeURIComponent(`NavAura AI Inquiry — ${name} (${industry})`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nIndustry: ${industry}\n\n${message}`);
     window.location.href = `mailto:aura.usa@gmail.com?subject=${subject}&body=${body}`;
