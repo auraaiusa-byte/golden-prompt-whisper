@@ -1,27 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Activity, Users, BarChart3, Settings as SettingsIcon, ArrowUpRight,
   TrendingUp, Phone, Calendar, DollarSign, CheckCircle2, Clock,
 } from "lucide-react";
 import { Seo } from "@/components/Seo";
+import { supabase } from "@/integrations/supabase/client";
 
 type View = "leads" | "analytics" | "settings";
+
+interface LeadRow {
+  id: string;
+  email: string;
+  source: string;
+  lead_status: string;
+  created_at: string;
+}
 
 const navItems: { id: View; label: string; icon: typeof Users }[] = [
   { id: "leads", label: "Leads", icon: Users },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: SettingsIcon },
-];
-
-const leads = [
-  { name: "Sarah Mitchell", source: "Instagram DM", industry: "Med Spa", stage: "Booked", value: "$1,240", time: "2m ago", status: "won" },
-  { name: "James O'Connor", source: "Google Ads", industry: "Law Firm", stage: "Qualified", value: "$8,500", time: "12m ago", status: "active" },
-  { name: "Priya Patel", source: "Website Form", industry: "Gym", stage: "Trial Booked", value: "$199", time: "34m ago", status: "active" },
-  { name: "Marcus Lee", source: "Voice Call", industry: "Med Spa", stage: "Consultation", value: "$3,400", time: "1h ago", status: "active" },
-  { name: "Elena Rodriguez", source: "Instagram DM", industry: "Gym", stage: "Member", value: "$1,788", time: "2h ago", status: "won" },
-  { name: "David Chen", source: "Referral", industry: "Law Firm", stage: "Intake", value: "$12,000", time: "3h ago", status: "active" },
-  { name: "Olivia Brooks", source: "Facebook", industry: "Med Spa", stage: "Booked", value: "$890", time: "5h ago", status: "won" },
 ];
 
 const revenueChart = [
@@ -30,9 +29,60 @@ const revenueChart = [
   { week: "W7", value: 84 }, { week: "W8", value: 96 },
 ];
 
+const timeAgo = (iso: string) => {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
+};
+
 const Dashboard = () => {
   const [view, setView] = useState<View>("leads");
+  const [leads, setLeads] = useState<LeadRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [newLeadIds, setNewLeadIds] = useState<Set<string>>(new Set());
   const max = Math.max(...revenueChart.map((d) => d.value));
+
+  useEffect(() => {
+    let mounted = true;
+    supabase
+      .from("leads")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(50)
+      .then(({ data }) => {
+        if (mounted && data) setLeads(data as LeadRow[]);
+        if (mounted) setLoading(false);
+      });
+
+    const channel = supabase
+      .channel("leads-realtime")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "leads" },
+        (payload) => {
+          const row = payload.new as LeadRow;
+          setLeads((prev) => [row, ...prev].slice(0, 50));
+          setNewLeadIds((prev) => new Set(prev).add(row.id));
+          setTimeout(() => {
+            setNewLeadIds((prev) => {
+              const next = new Set(prev);
+              next.delete(row.id);
+              return next;
+            });
+          }, 4000);
+        },
+      )
+      .subscribe();
+
+    return () => {
+      mounted = false;
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   return (
     <>
@@ -122,39 +172,55 @@ const Dashboard = () => {
             <h2 className="font-serif text-lg">Lead Pipeline</h2>
             <p className="text-xs text-muted-foreground mt-0.5">Real-time leads captured by your NavAura AI agents</p>
           </div>
-          <span className="text-xs text-gold uppercase tracking-luxe">Live</span>
+          <span className="text-xs text-gold uppercase tracking-luxe flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" /> Live
+          </span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border text-left text-[10px] uppercase tracking-luxe text-muted-foreground">
-                <th className="px-6 py-4 font-normal">Lead</th>
+                <th className="px-6 py-4 font-normal">Email</th>
                 <th className="px-6 py-4 font-normal">Source</th>
-                <th className="px-6 py-4 font-normal hidden md:table-cell">Industry</th>
-                <th className="px-6 py-4 font-normal">Stage</th>
-                <th className="px-6 py-4 font-normal text-right">Value</th>
+                <th className="px-6 py-4 font-normal">Status</th>
                 <th className="px-6 py-4 font-normal text-right hidden sm:table-cell">When</th>
               </tr>
             </thead>
             <tbody>
-              {leads.map((l) => (
-                <tr key={l.name} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
-                  <td className="px-6 py-4 font-medium">{l.name}</td>
-                  <td className="px-6 py-4 text-muted-foreground">{l.source}</td>
-                  <td className="px-6 py-4 text-muted-foreground hidden md:table-cell">{l.industry}</td>
-                  <td className="px-6 py-4">
-                    <span className={`text-xs px-2.5 py-1 rounded-full border ${
-                      l.status === "won"
-                        ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
-                        : "border-gold/40 text-gold bg-gold/10"
-                    }`}>
-                      {l.stage}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-right font-medium text-foreground/90">{l.value}</td>
-                  <td className="px-6 py-4 text-right text-xs text-muted-foreground hidden sm:table-cell">{l.time}</td>
-                </tr>
-              ))}
+              {loading && (
+                <tr><td colSpan={4} className="px-6 py-10 text-center text-muted-foreground text-xs">Loading leads…</td></tr>
+              )}
+              {!loading && leads.length === 0 && (
+                <tr><td colSpan={4} className="px-6 py-10 text-center text-muted-foreground text-xs">No leads yet — your next capture appears here in real time.</td></tr>
+              )}
+              {leads.map((l) => {
+                const isNew = newLeadIds.has(l.id);
+                const won = l.lead_status === "converted" || l.lead_status === "qualified";
+                return (
+                  <tr
+                    key={l.id}
+                    className={`border-b border-border/50 transition-colors ${
+                      isNew ? "bg-gold/10 animate-fade-in" : "hover:bg-secondary/30"
+                    }`}
+                  >
+                    <td className="px-6 py-4 font-medium">
+                      {l.email}
+                      {isNew && <span className="ml-2 text-[9px] uppercase tracking-luxe text-gold">New</span>}
+                    </td>
+                    <td className="px-6 py-4 text-muted-foreground">{l.source}</td>
+                    <td className="px-6 py-4">
+                      <span className={`text-xs px-2.5 py-1 rounded-full border capitalize ${
+                        won
+                          ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10"
+                          : "border-gold/40 text-gold bg-gold/10"
+                      }`}>
+                        {l.lead_status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-right text-xs text-muted-foreground hidden sm:table-cell">{timeAgo(l.created_at)}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
