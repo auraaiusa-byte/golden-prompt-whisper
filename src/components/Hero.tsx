@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero-spa.jpg";
 import { Cross, Scale, Dumbbell, Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { sendLead } from "@/lib/webhook";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -66,6 +67,9 @@ const HeroEmailCapture = () => {
     const { error } = await supabase
       .from("leads")
       .insert({ email: parsed.data, source: "Hero", lead_status: "new" });
+
+    // Mirror to Make.com webhook (non-blocking)
+    sendLead({ source: "contact", email: parsed.data, meta: { origin: "Hero" } }).catch(() => {});
 
     if (error) {
       setStatus("idle");
