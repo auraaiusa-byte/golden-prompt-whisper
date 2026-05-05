@@ -1,27 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Activity, Users, BarChart3, Settings as SettingsIcon, ArrowUpRight,
   TrendingUp, Phone, Calendar, DollarSign, CheckCircle2, Clock,
 } from "lucide-react";
 import { Seo } from "@/components/Seo";
+import { supabase } from "@/integrations/supabase/client";
 
 type View = "leads" | "analytics" | "settings";
+
+interface LeadRow {
+  id: string;
+  email: string;
+  source: string;
+  lead_status: string;
+  created_at: string;
+}
 
 const navItems: { id: View; label: string; icon: typeof Users }[] = [
   { id: "leads", label: "Leads", icon: Users },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: SettingsIcon },
-];
-
-const leads = [
-  { name: "Sarah Mitchell", source: "Instagram DM", industry: "Med Spa", stage: "Booked", value: "$1,240", time: "2m ago", status: "won" },
-  { name: "James O'Connor", source: "Google Ads", industry: "Law Firm", stage: "Qualified", value: "$8,500", time: "12m ago", status: "active" },
-  { name: "Priya Patel", source: "Website Form", industry: "Gym", stage: "Trial Booked", value: "$199", time: "34m ago", status: "active" },
-  { name: "Marcus Lee", source: "Voice Call", industry: "Med Spa", stage: "Consultation", value: "$3,400", time: "1h ago", status: "active" },
-  { name: "Elena Rodriguez", source: "Instagram DM", industry: "Gym", stage: "Member", value: "$1,788", time: "2h ago", status: "won" },
-  { name: "David Chen", source: "Referral", industry: "Law Firm", stage: "Intake", value: "$12,000", time: "3h ago", status: "active" },
-  { name: "Olivia Brooks", source: "Facebook", industry: "Med Spa", stage: "Booked", value: "$890", time: "5h ago", status: "won" },
 ];
 
 const revenueChart = [
@@ -30,9 +29,60 @@ const revenueChart = [
   { week: "W7", value: 84 }, { week: "W8", value: 96 },
 ];
 
+const timeAgo = (iso: string) => {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
+};
+
 const Dashboard = () => {
   const [view, setView] = useState<View>("leads");
+  const [leads, setLeads] = useState<LeadRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [newLeadIds, setNewLeadIds] = useState<Set<string>>(new Set());
   const max = Math.max(...revenueChart.map((d) => d.value));
+
+  useEffect(() => {
+    let mounted = true;
+    supabase
+      .from("leads")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(50)
+      .then(({ data }) => {
+        if (mounted && data) setLeads(data as LeadRow[]);
+        if (mounted) setLoading(false);
+      });
+
+    const channel = supabase
+      .channel("leads-realtime")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "leads" },
+        (payload) => {
+          const row = payload.new as LeadRow;
+          setLeads((prev) => [row, ...prev].slice(0, 50));
+          setNewLeadIds((prev) => new Set(prev).add(row.id));
+          setTimeout(() => {
+            setNewLeadIds((prev) => {
+              const next = new Set(prev);
+              next.delete(row.id);
+              return next;
+            });
+          }, 4000);
+        },
+      )
+      .subscribe();
+
+    return () => {
+      mounted = false;
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   return (
     <>
