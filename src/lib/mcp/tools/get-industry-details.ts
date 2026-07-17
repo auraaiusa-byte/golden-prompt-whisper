@@ -1,4 +1,5 @@
 import { defineTool } from "@lovable.dev/mcp-js";
+import { z } from "zod";
 
 export default defineTool({
   name: "get_industry_details",
@@ -6,7 +7,7 @@ export default defineTool({
   description:
     "Return NavAura AI's pain points and AI solutions for a specific industry (med_spa, law_firm, or gym).",
   inputSchema: {
-    industry: (await import("zod")).z
+    industry: z
       .enum(["med_spa", "law_firm", "gym"])
       .describe("Industry key: med_spa, law_firm, or gym."),
   },
