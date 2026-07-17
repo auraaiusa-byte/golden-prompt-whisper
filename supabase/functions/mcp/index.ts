@@ -116,16 +116,13 @@ import { z as z2 } from "npm:zod@^4.4.3";
 var submit_lead_default = defineTool3({
   name: "submit_lead",
   title: "Submit a lead",
-  description: "Submit a new prospect lead to NavAura AI. Captures email (required), optional name, phone, industry, and a message.",
+  description: "Submit a new prospect lead to NavAura AI. Requires an email; optionally include the industry the prospect is asking about.",
   inputSchema: {
     email: z2.string().email().max(255).describe("Prospect's email address."),
-    name: z2.string().trim().max(120).optional().describe("Prospect's full name."),
-    phone: z2.string().trim().max(40).optional().describe("Prospect's phone number."),
-    industry: z2.enum(["med_spa", "law_firm", "gym", "other"]).optional().describe("Industry of the prospect."),
-    message: z2.string().trim().max(2e3).optional().describe("Free-form message or context.")
+    industry: z2.enum(["med_spa", "law_firm", "gym", "other"]).optional().describe("Industry the prospect is asking about.")
   },
   annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
-  handler: async ({ email, name, phone, industry, message }) => {
+  handler: async ({ email, industry }) => {
     const supabaseUrl = process.env.SUPABASE_URL;
     const anonKey = process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY;
     if (!supabaseUrl || !anonKey) {
@@ -137,15 +134,8 @@ var submit_lead_default = defineTool3({
     const supabase = createClient(supabaseUrl, anonKey, {
       auth: { persistSession: false, autoRefreshToken: false }
     });
-    const { data, error } = await supabase.from("leads").insert({
-      email,
-      name: name ?? null,
-      phone: phone ?? null,
-      industry: industry ?? null,
-      message: message ?? null,
-      source: "MCP",
-      lead_status: "new"
-    }).select("id, email, created_at").single();
+    const source = industry ? `MCP:${industry}` : "MCP";
+    const { data, error } = await supabase.from("leads").insert({ email, source, lead_status: "new" }).select("id, email, created_at").single();
     if (error) {
       return {
         content: [{ type: "text", text: `Failed to submit lead: ${error.message}` }],
@@ -156,7 +146,7 @@ var submit_lead_default = defineTool3({
       content: [
         {
           type: "text",
-          text: `Lead submitted. NavAura AI will follow up at ${email}. Book instantly: https://calendly.com/auraai-usa/30min`
+          text: `Lead submitted for ${email}. NavAura AI will follow up shortly. Book instantly: https://calendly.com/auraai-usa/30min`
         }
       ],
       structuredContent: { lead: data }

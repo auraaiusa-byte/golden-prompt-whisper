@@ -60,7 +60,7 @@
       {
         "name": "submit_lead",
         "title": "Submit a lead",
-        "description": "Submit a new prospect lead to NavAura AI. Captures email (required), optional name, phone, industry, and a message.",
+        "description": "Submit a new prospect lead to NavAura AI. Requires an email; optionally include the industry the prospect is asking about.",
         "annotations": {
           "readOnlyHint": false,
           "destructiveHint": false,
@@ -77,18 +77,8 @@
               "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
               "description": "Prospect's email address."
             },
-            "name": {
-              "description": "Prospect's full name.",
-              "type": "string",
-              "maxLength": 120
-            },
-            "phone": {
-              "description": "Prospect's phone number.",
-              "type": "string",
-              "maxLength": 40
-            },
             "industry": {
-              "description": "Industry of the prospect.",
+              "description": "Industry the prospect is asking about.",
               "type": "string",
               "enum": [
                 "med_spa",
@@ -96,11 +86,6 @@
                 "gym",
                 "other"
               ]
-            },
-            "message": {
-              "description": "Free-form message or context.",
-              "type": "string",
-              "maxLength": 2000
             }
           },
           "required": [
