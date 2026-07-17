@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "sdk_version": "0.23.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "navaura-ai-mcp",
+      "version": "0.1.0",
+      "title": "NavAura AI"
+    },
+    "tools": [
+      {
+        "name": "get_services",
+        "title": "Get NavAura services",
+        "description": "Return NavAura AI's public service offerings, pricing tiers, and industry specializations.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_industry_details",
+        "title": "Get industry details",
+        "description": "Return NavAura AI's pain points and AI solutions for a specific industry (med_spa, law_firm, or gym).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "industry": {
+              "type": "string",
+              "enum": [
+                "med_spa",
+                "law_firm",
+                "gym"
+              ],
+              "description": "Industry key: med_spa, law_firm, or gym."
+            }
+          },
+          "required": [
+            "industry"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_lead",
+        "title": "Submit a lead",
+        "description": "Submit a new prospect lead to NavAura AI. Requires an email; optionally include the industry the prospect is asking about.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "maxLength": 255,
+              "format": "email",
+              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
+              "description": "Prospect's email address."
+            },
+            "industry": {
+              "description": "Industry the prospect is asking about.",
+              "type": "string",
+              "enum": [
+                "med_spa",
+                "law_firm",
+                "gym",
+                "other"
+              ]
+            }
+          },
+          "required": [
+            "email"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
