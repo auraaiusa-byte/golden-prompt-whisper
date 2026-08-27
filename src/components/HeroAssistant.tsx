@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import navRobot from "@/assets/nav-robot.png";
+import navRobot from "@/assets/nav-influencer.png";
 
 /**
  * Premium desktop-only Hero Assistant.
