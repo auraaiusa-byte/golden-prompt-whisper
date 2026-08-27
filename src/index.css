@@ -81,18 +81,19 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     color: transparent;
   }
   .glass {
-    background: hsl(222 30% 8% / 0.55);
+    background: hsl(315 28% 9% / 0.55);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid hsl(39 65% 60% / 0.15);
+    border: 1px solid hsl(8 62% 72% / 0.18);
     box-shadow: var(--shadow-glass);
   }
   .glass-dark {
-    background: hsl(0 0% 7% / 0.7);
+    background: hsl(320 25% 8% / 0.7);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid hsl(39 45% 58% / 0.2);
+    border: 1px solid hsl(8 55% 70% / 0.22);
   }
+
   .hairline {
     height: 1px;
     background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.5), transparent);
