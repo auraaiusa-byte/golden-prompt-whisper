@@ -149,9 +149,10 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
   /* Cinematic linear gradient overlay for hero images */
   .hero-overlay {
     background: linear-gradient(180deg,
-      hsl(222 30% 6% / 0.55) 0%,
-      hsl(222 30% 6% / 0.65) 45%,
-      hsl(222 30% 6% / 0.92) 90%,
+      hsl(315 28% 7% / 0.55) 0%,
+      hsl(315 28% 7% / 0.65) 45%,
+      hsl(315 28% 7% / 0.92) 90%,
       hsl(var(--background)) 100%);
   }
+
 }
