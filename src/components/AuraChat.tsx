@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { X, Send, Sparkles, Calendar, Zap, Check, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import navRobot from "@/assets/nav-robot.png";
+import navRobot from "@/assets/nav-influencer.png";
 import { supabase } from "@/integrations/supabase/client";
 import { sendLead } from "@/lib/webhook";
 
