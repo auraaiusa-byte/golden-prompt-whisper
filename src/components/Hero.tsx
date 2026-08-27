@@ -213,7 +213,7 @@ export const Hero = () => (
 
         <h1
           className="reveal reveal-delay-1 font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] mb-6 md:mb-8 text-white break-words"
-          style={{ textShadow: "0 2px 30px hsl(222 30% 4% / 0.85), 0 1px 4px hsl(222 30% 4% / 0.9)" }}
+          style={{ textShadow: "0 2px 30px hsl(315 30% 4% / 0.85), 0 1px 4px hsl(315 30% 4% / 0.9)" }}
         >
           The Unified
           <br />
@@ -223,7 +223,7 @@ export const Hero = () => (
         </h1>
 
         <p className="reveal reveal-delay-2 max-w-xl text-lg text-white/80 leading-relaxed mb-12 font-light"
-           style={{ textShadow: "0 1px 12px hsl(222 30% 4% / 0.8)" }}>
+           style={{ textShadow: "0 1px 12px hsl(315 30% 4% / 0.8)" }}>
           NavAura deploys specialized AI agents to manage leads, appointments,
           and client relations — across med spas, law firms, and fitness studios.
         </p>
