@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import navRobot from "@/assets/nav-influencer.png";
+import navRobot from "@/assets/nav-robot.png";
 
 /**
  * Premium desktop-only Hero Assistant.
@@ -57,7 +57,7 @@ export const HeroAssistant = () => {
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
       >
         <div
-          className="w-[840px] h-[840px] rounded-full"
+          className="w-[420px] h-[420px] rounded-full"
           style={{
             background:
               "radial-gradient(circle at 50% 50%, hsla(220,100%,65%,0.35) 0%, hsla(270,80%,60%,0.22) 35%, transparent 70%)",
@@ -80,7 +80,7 @@ export const HeroAssistant = () => {
       >
         {/* Glass capsule behind robot */}
         <div
-          className="absolute inset-0 -m-16 rounded-[80px]"
+          className="absolute inset-0 -m-8 rounded-[40px]"
           style={{
             background:
               "linear-gradient(135deg, hsla(220,100%,65%,0.12), hsla(270,80%,60%,0.10))",
@@ -95,9 +95,9 @@ export const HeroAssistant = () => {
         <motion.img
           src={navRobot}
           alt="Nav, NavAura AI 3D assistant"
-          width={840}
-          height={840}
-          className="relative w-[680px] h-[680px] xl:w-[800px] xl:h-[800px] object-contain drop-shadow-[0_25px_45px_hsla(220,100%,50%,0.45)] pointer-events-none"
+          width={420}
+          height={420}
+          className="relative w-[340px] h-[340px] xl:w-[400px] xl:h-[400px] object-contain drop-shadow-[0_25px_45px_hsla(220,100%,50%,0.45)] pointer-events-none"
           style={{ filter: blink ? "brightness(0.85) saturate(1.1)" : "none" }}
           animate={
             hovering
@@ -113,7 +113,7 @@ export const HeroAssistant = () => {
         />
 
         {/* Status chip */}
-        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border"
+        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border"
           style={{
             background: "hsla(222,30%,8%,0.65)",
             backdropFilter: "blur(14px)",
