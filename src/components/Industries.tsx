@@ -1,35 +1,42 @@
-import medspaImg from "@/assets/industry-medspa.jpg";
-import lawImg from "@/assets/industry-law.jpg";
-import gymImg from "@/assets/industry-gym.jpg";
+import { Link } from "react-router-dom";
+import medspaImg from "@/assets/medspa-hero-luxe.jpg";
 import { Cross, Scale, Dumbbell } from "lucide-react";
+
+const lawImg =
+  "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1280&q=80";
+const gymImg =
+  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1280&q=80";
 
 const industries = [
   {
     id: "medspa",
+    to: "/med-spa",
     img: medspaImg,
     Icon: Cross,
     label: "Medical Spas",
-    title: "Effortless bookings. Lifelong clients.",
-    desc: "AI lead capture and retention engineered for aesthetic clinics — from HydraFacial inquiries to VIP rebooking flows.",
-    features: ["Instant DM-to-booking", "Pre/post-care automation", "Loyalty re-engagement"],
+    title: "Med-Spa AI Receptionist",
+    desc: "24/7 lead intake, treatment FAQ qualification (Botox/Laser/Skin), and instant calendar booking — from $1,997/mo.",
+    features: ["Instant DM-to-booking", "Treatment FAQ qualification", "Calendar booking"],
   },
   {
     id: "law",
+    to: "/law",
     img: lawImg,
     Icon: Scale,
     label: "Law Firms",
-    title: "Discerning intake. Discreet intelligence.",
-    desc: "Automated client intake, conflict checks, and document categorization — confidential, compliant, and always on.",
-    features: ["24/7 case intake triage", "Document classification", "Secure client routing"],
+    title: "Law Firm Intake Agent",
+    desc: "24/7 confidential case triage, practice-area qualification, and consultation scheduling — from $2,497/mo.",
+    features: ["Confidential case triage", "Practice-area qualification", "Attorney scheduling"],
   },
   {
     id: "gym",
+    to: "/gym",
     img: gymImg,
     Icon: Dumbbell,
     label: "Gyms & Studios",
-    title: "Lead follow-up that closes.",
-    desc: "Boutique fitness leads converted into members — and lapsed members reactivated through personalized AI outreach.",
-    features: ["Trial-to-member nurture", "Member reactivation", "Class booking automation"],
+    title: "Gym Membership Closer",
+    desc: "Automated trial pass booking, membership qualification, and cold lead reactivation — from $1,497/mo.",
+    features: ["VIP trial pass booking", "Membership qualification", "Lapsed-member win-back"],
   },
 ];
 
@@ -37,9 +44,9 @@ export const Industries = () => (
   <section id="industries" className="relative py-32 md:py-48 bg-background">
     <div className="container">
       <div className="text-center max-w-2xl mx-auto mb-20">
-        <span className="text-xs uppercase tracking-luxe text-gold">Multi-Industry Intelligence</span>
+        <span className="text-xs uppercase tracking-luxe text-gold">Core Services</span>
         <h2 className="font-serif text-4xl md:text-6xl mt-6 mb-6">
-          Specialized AI agents, <span className="italic">tailored</span> to your craft.
+          Three autonomous packages, <span className="italic">tailored</span> to your craft.
         </h2>
         <p className="text-muted-foreground font-light text-lg">
           NavAura deploys industry-trained agents that understand the language, nuance,
@@ -48,11 +55,11 @@ export const Industries = () => (
       </div>
 
       <div className="grid md:grid-cols-3 gap-8">
-        {industries.map(({ id, img, Icon, label, title, desc, features }) => (
-          <a
+        {industries.map(({ id, to, img, Icon, label, title, desc, features }) => (
+          <Link
             key={id}
             id={id}
-            href="#invitation"
+            to={to}
             className="group relative overflow-hidden rounded-sm luxe-card transition-all duration-700 hover:-translate-y-2"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
@@ -85,7 +92,7 @@ export const Industries = () => (
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

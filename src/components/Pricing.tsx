@@ -25,7 +25,7 @@ const tiers = [
       "Everything in Basic",
       "Unlimited conversations across 2 agents",
       "Signature voice training & DM management",
-      "Quarterly SEO audits & content briefs",
+      "Lead reactivation workflows for med spa, gym, and law",
       "Lead reactivation workflows",
       "Dedicated success curator",
     ],

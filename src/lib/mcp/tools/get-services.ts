@@ -15,22 +15,22 @@ export default defineTool({
       calendly: "https://calendly.com/auraai-usa/30min",
       services: [
         {
-          name: "AI Automation",
+          name: "Med-Spa AI Receptionist",
           startingPrice: "$1,997/mo",
           description:
-            "SOPs, lead generation, voice agents, and 24/7 follow-up sequences. Replaces a full sales team.",
+            "24/7 lead intake, treatment FAQ qualification (Botox/Laser/Skin), and instant calendar booking.",
         },
         {
-          name: "Technical SEO",
+          name: "Gym Membership Closer",
           startingPrice: "$1,497/mo",
           description:
-            "Audits, schema, Core Web Vitals, backlinking, and content engine for page-1 rankings.",
+            "Automated trial pass booking, membership qualification, and cold lead reactivation.",
         },
         {
-          name: "Full-Stack Development",
-          startingPrice: "Custom quote",
+          name: "Law Firm Intake Agent",
+          startingPrice: "$2,497/mo",
           description:
-            "Next.js + Supabase conversion-optimized sites, dashboards, and custom AI integrations.",
+            "24/7 confidential case triage, practice-area qualification, and consultation scheduling.",
         },
       ],
       industries: ["Med Spas", "Law Firms", "Fitness Studios"],

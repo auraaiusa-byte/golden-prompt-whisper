@@ -1,4 +1,5 @@
 import { Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => (
   <footer className="border-t border-border py-12 bg-background">
@@ -8,8 +9,14 @@ export const Footer = () => (
         <span className="text-gold text-[10px] tracking-luxe uppercase pt-1">AI</span>
       </div>
 
-      <p className="text-xs md:text-sm text-muted-foreground text-center flex flex-wrap items-center justify-center gap-2">
+      <p className="text-xs md:text-sm text-muted-foreground text-center flex flex-wrap items-center justify-between gap-2">
         <span>© 2026 NavAura AI. All rights reserved.</span>
+        <span className="text-gold/40 hidden md:inline">|</span>
+        <Link to="/med-spa" className="hover:text-gold transition-colors">Med-Spa</Link>
+        <span className="text-gold/40">·</span>
+        <Link to="/gym" className="hover:text-gold transition-colors">Gym</Link>
+        <span className="text-gold/40">·</span>
+        <Link to="/law" className="hover:text-gold transition-colors">Law</Link>
         <span className="text-gold/40 hidden md:inline">|</span>
         <span className="flex items-center gap-2">
           Contact:

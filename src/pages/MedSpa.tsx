@@ -397,7 +397,7 @@ const MedSpa = () => (
     </section>
 
     <Footer />
-    <AuraChat greeting="Hi! I am NavAura AI. Curious how we automate Med Spa bookings 24/7?" />
+    <AuraChat />
   </main>
 );
 

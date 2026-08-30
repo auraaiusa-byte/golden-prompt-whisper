@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { LuxeButton } from "./LuxeButton";
-import { sendLead } from "@/lib/webhook";
+import { supabase } from "@/integrations/supabase/client";
 
 export const ExitIntent = () => {
   const [open, setOpen] = useState(false);
@@ -27,10 +27,23 @@ export const ExitIntent = () => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const email = (fd.get("email") as string)?.trim();
-    await sendLead({ source: "exit-intent", email, message: "20+ hours/week walkthrough request" });
-    const subject = encodeURIComponent("NavAura AI — Wait! 20+ hours request");
-    const body = encodeURIComponent(`Email: ${email}\n\nI'd like to see how NavAura AI saves 20+ hours a week.`);
-    window.location.href = `mailto:aura.usa@gmail.com?subject=${subject}&body=${body}`;
+
+    if (!email) {
+      console.log("Error", new Error("Missing email"));
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("leads")
+      .insert({ email, customer_name: null, source: "popup" })
+      .select();
+
+    if (error) {
+      console.log("Error", error);
+      return;
+    }
+
+    console.log("Success", data);
     setSubmitted(true);
   };
 

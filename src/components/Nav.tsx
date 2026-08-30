@@ -5,8 +5,8 @@ import { LuxeButton } from "./LuxeButton";
 
 const links = [
   { to: "/med-spa", label: "Med Spa" },
-  { to: "/legal-automation", label: "Law" },
-  { to: "/gym-growth", label: "Gym" },
+  { to: "/law", label: "Law" },
+  { to: "/gym", label: "Gym" },
   { to: "/demo-dashboard", label: "Demo" },
 ];
 
@@ -28,7 +28,13 @@ export const Nav = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`transition-colors ${pathname === l.to ? "text-gold" : "hover:text-gold"}`}
+                className={`transition-colors ${
+                  (l.to === "/law" && (pathname.startsWith("/law") || pathname.startsWith("/legal"))) ||
+                  (l.to === "/gym" && pathname.startsWith("/gym")) ||
+                  pathname === l.to
+                    ? "text-gold"
+                    : "hover:text-gold"
+                }`}
             >
               {l.label}
             </Link>
@@ -56,7 +62,13 @@ export const Nav = () => {
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className={`py-2 ${pathname === l.to ? "text-gold" : "text-muted-foreground hover:text-gold"}`}
+                className={`py-2 ${
+                  (l.to === "/law" && (pathname.startsWith("/law") || pathname.startsWith("/legal"))) ||
+                  (l.to === "/gym" && pathname.startsWith("/gym")) ||
+                  pathname === l.to
+                    ? "text-gold"
+                    : "text-muted-foreground hover:text-gold"
+                }`}
               >
                 {l.label}
               </Link>

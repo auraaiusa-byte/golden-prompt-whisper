@@ -6,7 +6,7 @@ import navRobot from "@/assets/nav-robot.png";
  * Premium desktop-only Hero Assistant.
  * - Idle breathing + blinking
  * - Looks toward cursor, waves on hover
- * - Glassmorphism halo with electric blue + purple
+ * - Glassmorphism halo with metallic gold
  * - Click opens AuraChat (window event)
  */
 export const HeroAssistant = () => {
@@ -60,7 +60,7 @@ export const HeroAssistant = () => {
           className="w-[420px] h-[420px] rounded-full"
           style={{
             background:
-              "radial-gradient(circle at 50% 50%, hsla(220,100%,65%,0.35) 0%, hsla(270,80%,60%,0.22) 35%, transparent 70%)",
+              "radial-gradient(circle at 50% 50%, hsla(39,65%,55%,0.38) 0%, hsla(35,50%,42%,0.18) 35%, transparent 70%)",
             filter: "blur(40px)",
           }}
         />
@@ -83,12 +83,12 @@ export const HeroAssistant = () => {
           className="absolute inset-0 -m-8 rounded-[40px]"
           style={{
             background:
-              "linear-gradient(135deg, hsla(220,100%,65%,0.12), hsla(270,80%,60%,0.10))",
+              "linear-gradient(135deg, hsla(39,65%,52%,0.14), hsla(222,30%,8%,0.35))",
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
-            border: "1px solid hsla(220,90%,75%,0.25)",
+            border: "1px solid hsla(39,65%,52%,0.28)",
             boxShadow:
-              "0 30px 80px -20px hsla(220,100%,55%,0.45), inset 0 1px 0 hsla(255,100%,100%,0.12)",
+              "0 30px 80px -20px hsla(39,65%,40%,0.35), inset 0 1px 0 hsla(40,30%,96%,0.12)",
           }}
         />
 
@@ -97,7 +97,7 @@ export const HeroAssistant = () => {
           alt="Nav, NavAura AI 3D assistant"
           width={420}
           height={420}
-          className="relative w-[340px] h-[340px] xl:w-[400px] xl:h-[400px] object-contain drop-shadow-[0_25px_45px_hsla(220,100%,50%,0.45)] pointer-events-none"
+          className="relative w-[340px] h-[340px] xl:w-[400px] xl:h-[400px] object-contain drop-shadow-[0_25px_45px_hsla(39,65%,45%,0.45)] pointer-events-none"
           style={{ filter: blink ? "brightness(0.85) saturate(1.1)" : "none" }}
           animate={
             hovering
@@ -115,17 +115,17 @@ export const HeroAssistant = () => {
         {/* Status chip */}
         <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border"
           style={{
-            background: "hsla(222,30%,8%,0.65)",
+            background: "hsla(222,30%,6%,0.72)",
             backdropFilter: "blur(14px)",
-            borderColor: "hsla(220,90%,70%,0.4)",
-            boxShadow: "0 0 24px hsla(220,100%,60%,0.35)",
+            borderColor: "hsla(39,65%,52%,0.35)",
+            boxShadow: "0 0 24px hsla(39,65%,50%,0.28)",
           }}
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
-              style={{ background: "hsl(220,100%,65%)" }} />
+              style={{ background: "hsl(39,65%,60%)" }} />
             <span className="relative inline-flex rounded-full h-2 w-2"
-              style={{ background: "hsl(220,100%,65%)" }} />
+              style={{ background: "hsl(39,65%,60%)" }} />
           </span>
           <span className="text-[10px] uppercase tracking-luxe text-white/85">Nav · Online · Tap to chat</span>
         </div>
