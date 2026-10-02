@@ -78,7 +78,7 @@ export function IndustryChallengeSection({
 }
 
 type MetricInput = {
-  key: "volume" | "conversion" | "value";
+  key: "volume" | "conversion" | "value" | "hours";
   label: string;
   min: number;
   max: number;
@@ -104,6 +104,7 @@ const calculatorInputs: Record<Industry, MetricInput[]> = {
     { key: "volume", label: "Unanswered suitable-case inquiries each month", min: 1, max: 80, step: 1, initial: 16, format: (value) => `${value} inquiries` },
     { key: "conversion", label: "Qualified inquiry-to-client conversion", min: 5, max: 80, step: 1, initial: 28, format: (value) => `${value}%` },
     { key: "value", label: "Average initial retainer", min: 1000, max: 50000, step: 500, initial: 8500, format: money },
+    { key: "hours", label: "Intake hours returned to billable work per new matter", min: 0.5, max: 12, step: 0.5, initial: 3, format: (value) => `${value} hours` },
   ],
 };
 
@@ -112,6 +113,7 @@ export function IndustryROICalculator({ industry }: { industry: Industry }) {
   const [inputs, setInputs] = useState(() => Object.fromEntries(calculatorInputs[industry].map((input) => [input.key, input.initial])) as Record<MetricInput["key"], number>);
   const estimatedCustomers = inputs.volume * inputs.conversion / 100;
   const estimatedValue = estimatedCustomers * inputs.value;
+  const billableHoursReturned = estimatedCustomers * (inputs.hours ?? 0);
 
   return (
     <section className="py-24 md:py-32">
@@ -149,7 +151,8 @@ export function IndustryROICalculator({ industry }: { industry: Industry }) {
             <div>
               <div className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-muted-foreground"><Zap className={`h-4 w-4 ${accent.text}`} /> Potential monthly impact</div>
               <div className={`mt-5 font-serif text-5xl md:text-6xl ${accent.text}`}>{money(estimatedValue)}</div>
-              <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">Estimated {industry === "gym" ? "recurring dues from" : "value from"} about {estimatedCustomers.toFixed(1)} recovered {industry === "gym" ? "members" : industry === "law" ? "new matters" : "visits"} per month.</p>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">Estimated {industry === "gym" ? "recurring dues from" : industry === "law" ? "initial retainer potential from" : "value from"} about {estimatedCustomers.toFixed(1)} recovered {industry === "gym" ? "members" : industry === "law" ? "new matters" : "visits"} per month.</p>
+              {industry === "law" && <div className={`mt-6 border-t border-border/70 pt-5 ${accent.text}`}><div className="font-serif text-2xl">{billableHoursReturned.toFixed(1)} hours</div><p className="mt-1 text-xs leading-relaxed text-muted-foreground">of intake capacity returned to billable work each month.</p></div>}
             </div>
             <p className="mt-8 border-t border-border/70 pt-4 text-xs leading-relaxed text-muted-foreground">Illustrative estimate based only on the inputs shown. Actual results vary; this is not a revenue guarantee.</p>
           </div>
