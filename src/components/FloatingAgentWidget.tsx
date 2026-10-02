@@ -98,7 +98,7 @@ export function FloatingAgentWidget({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.97 }}
             transition={{ duration: 0.18 }}
-            className={`w-[min(360px,calc(100vw-2rem))] overflow-hidden border bg-card/95 shadow-luxe backdrop-blur-xl ${theme.border}`}
+            className={`w-[min(360px,calc(100vw-2rem))] overflow-hidden border bg-card shadow-luxe backdrop-blur-xl ${theme.border}`}
           >
             <div className={`flex items-center gap-3 border-b px-4 py-4 ${theme.border} ${theme.surface}`}>
               <img src={resolved.avatarUrl} alt={`${resolved.agentName} avatar`} width={816} height={816} loading="lazy" className={`h-12 w-12 rounded-full border object-cover ${theme.border}`} />
