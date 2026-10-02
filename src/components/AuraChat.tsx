@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { BriefcaseBusiness, Calendar, Check, Loader2, X, Zap } from "lucide-react";
@@ -75,7 +75,7 @@ const SERVICES = [
 
 const CALENDLY_URL = (import.meta.env.VITE_CALENDLY_URL as string) || "https://calendly.com/auraai-usa/30min";
 
-export const AuraChat = () => {
+export const AuraChat = ({ hideLauncher = false }: { hideLauncher?: boolean }) => {
   const { pathname } = useLocation();
   const persona = useMemo(() => personaForPath(pathname), [pathname]);
   const [open, setOpen] = useState(false);
@@ -89,6 +89,7 @@ export const AuraChat = () => {
   const [aiTurns, setAiTurns] = useState(0);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Msg[]>([{ role: "aura", text: persona.greeting }]);
+  const externalActions = useRef<{ prompt: (text: string) => void; book: () => void }>({ prompt: () => undefined, book: () => undefined });
 
   useEffect(() => {
     setMessages([{ role: "aura", text: persona.greeting }]);
@@ -97,11 +98,17 @@ export const AuraChat = () => {
   }, [persona.greeting]);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowBubble(true), 1500);
-    const handler = () => { setOpen(true); setShowBubble(false); };
+    const timer = hideLauncher ? undefined : window.setTimeout(() => setShowBubble(true), 1500);
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<{ prompt?: string; book?: boolean }>).detail;
+      setOpen(true);
+      setShowBubble(false);
+      if (detail?.book) externalActions.current.book();
+      else if (detail?.prompt) externalActions.current.prompt(detail.prompt);
+    };
     window.addEventListener("aura:open", handler);
-    return () => { window.clearTimeout(timer); window.removeEventListener("aura:open", handler); };
-  }, []);
+    return () => { if (timer !== undefined) window.clearTimeout(timer); window.removeEventListener("aura:open", handler); };
+  }, [hideLauncher]);
 
   const pushAura = (text: string, opts?: { showCalendlyCta?: boolean }) => setMessages((items) => [...items, { role: "aura", text, ...opts }]);
   const pushUser = (text: string) => setMessages((items) => [...items, { role: "user", text }]);
@@ -168,10 +175,11 @@ export const AuraChat = () => {
     if (mode === "lead-email") return submitEmail();
     return askAI(text);
   };
+  externalActions.current = { prompt: (text) => { void askAI(text); }, book: handleBook };
 
   return <>
     <AnimatePresence>
-      {!open && showBubble && <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} className="fixed bottom-28 right-4 z-50 max-w-[270px] lg:hidden">
+      {!hideLauncher && !open && showBubble && <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} className="fixed bottom-28 right-4 z-50 max-w-[270px] lg:hidden">
         <button onClick={() => { setOpen(true); setShowBubble(false); }} className="relative block rounded-2xl border border-primary/40 bg-background/95 px-4 py-3 text-left text-sm text-foreground shadow-luxe backdrop-blur-xl">
           <span className="mb-1 block text-xs text-primary">{persona.firstName}</span>{persona.greeting}
           <span onClick={(event) => { event.stopPropagation(); setShowBubble(false); }} role="button" aria-label="Dismiss" className="absolute -right-2 -top-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-primary/30 bg-background text-muted-foreground"><X className="h-3 w-3" /></span>
@@ -179,10 +187,10 @@ export const AuraChat = () => {
       </motion.div>}
     </AnimatePresence>
 
-    <motion.button onClick={() => { setOpen((value) => !value); setShowBubble(false); }} onHoverStart={() => setHovering(true)} onHoverEnd={() => setHovering(false)} aria-label={`Open ${persona.name}`} className="fixed bottom-4 right-4 z-50 flex h-20 w-20 items-center justify-center bg-transparent outline-none lg:hidden" animate={{ y: [0, -10, 0] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }} whileTap={{ scale: 0.92 }}>
+    {!hideLauncher && <motion.button onClick={() => { setOpen((value) => !value); setShowBubble(false); }} onHoverStart={() => setHovering(true)} onHoverEnd={() => setHovering(false)} aria-label={`Open ${persona.name}`} className="fixed bottom-4 right-4 z-50 flex h-20 w-20 items-center justify-center bg-transparent outline-none lg:hidden" animate={{ y: [0, -10, 0] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }} whileTap={{ scale: 0.92 }}>
       <span aria-hidden className="absolute inset-0 rounded-full bg-primary/30 blur-xl" />
       {open ? <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-luxe"><X className="h-6 w-6" /></span> : <motion.span className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-primary/50 bg-card shadow-luxe" animate={hovering ? { rotate: [0, -8, 8, 0], scale: 1.06 } : { rotate: [0, -2, 2, 0] }} transition={hovering ? { duration: 0.9 } : { duration: 5, repeat: Infinity, ease: "easeInOut" }}><img src={persona.avatar} alt={`${persona.firstName} avatar`} width={816} height={816} loading="lazy" className={`h-full w-full ${persona.id === "home" ? "object-contain" : "object-cover"}`} /></motion.span>}
-    </motion.button>
+    </motion.button>}
 
     <AnimatePresence>{open && <motion.div initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.95 }} className="fixed inset-0 z-50 flex flex-col overflow-hidden border border-primary/40 bg-background/95 shadow-luxe backdrop-blur-xl sm:inset-auto sm:bottom-32 sm:right-6 sm:h-[600px] sm:max-h-[calc(100vh-10rem)] sm:w-[400px] sm:max-w-[calc(100vw-2rem)] sm:rounded-2xl">
       <div className="flex items-center gap-3 border-b border-primary/20 bg-background/80 px-5 py-4">

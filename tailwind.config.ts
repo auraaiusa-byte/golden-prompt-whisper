@@ -18,6 +18,12 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
+        agent: {
+          medspa: { DEFAULT: "hsl(var(--agent-medspa))", foreground: "hsl(var(--agent-medspa-foreground))" },
+          gym: { DEFAULT: "hsl(var(--agent-gym))", foreground: "hsl(var(--agent-gym-foreground))" },
+          law: { DEFAULT: "hsl(var(--agent-law))", foreground: "hsl(var(--agent-law-foreground))" },
+          online: "hsl(var(--agent-online))",
+        },
         gold: {
           DEFAULT: "hsl(var(--gold))",
           soft: "hsl(var(--gold-soft))",

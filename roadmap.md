@@ -1,0 +1,3 @@
+- [ ] Add industry-tailored challenge comparisons, interactive ROI calculators, and booking-to-CRM flow showcases to Law and Gym pages.
+- [ ] Add a reusable route-specific floating assistant on Med Spa, Law, and Gym; connect its prompts and booking action to the existing assistant.
+- [ ] Verify successful build and check the three industry experiences on desktop and mobile.

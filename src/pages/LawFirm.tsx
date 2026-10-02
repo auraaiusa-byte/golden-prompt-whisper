@@ -17,6 +17,8 @@ import { Footer } from "@/components/Footer";
 import { AuraChat } from "@/components/AuraChat";
 import { Seo } from "@/components/Seo";
 import { LuxeButton } from "@/components/LuxeButton";
+import { FloatingAgentWidget } from "@/components/FloatingAgentWidget";
+import { IndustryChallengeSection, IndustryROICalculator, IntakeJourneyShowcase } from "@/components/IndustryExperience";
 import lawHero from "@/assets/industry-law.jpg";
 import arthurAvatar from "@/assets/arthur-avatar.jpg";
 
@@ -93,6 +95,19 @@ const faqs = [
 
 const cities = ["Manhattan, NY", "Washington, DC", "Chicago, IL", "Houston, TX", "Atlanta, GA", "San Francisco, CA"];
 
+const lawChallenges = [
+  { pain: "Retainer calls arrive after hours", detail: "A prospective client reaches voicemail at the exact moment they are ready to ask for counsel.", solution: "Always-on confidential intake", outcome: "Captures preliminary case details promptly and routes an organized summary to the right team." },
+  { pain: "Suitable matters wait for screening", detail: "Staff must repeat basic questions before an attorney can assess fit, venue, and urgency.", solution: "Structured case pre-qualification", outcome: "Collects practice area, jurisdiction, timing, and contact preferences before a handoff." },
+  { pain: "Consultations take too long to arrange", detail: "Back-and-forth scheduling gives a motivated prospect time to contact another firm.", solution: "Calendar-ready consultation handoff", outcome: "Offers the next approved scheduling step and carries intake context into the existing workflow." },
+];
+
+const lawJourney = [
+  { label: "Receive", title: "A potential client reaches out", detail: "An after-hours phone, web, or chat inquiry receives a timely acknowledgement." },
+  { label: "Screen", title: "Matter details are collected", detail: "The intake path gathers practice area, jurisdiction, timing, and the caller’s requested next step." },
+  { label: "Route", title: "The right team is notified", detail: "A structured intake summary is sent to the appropriate firm contact for review." },
+  { label: "Schedule", title: "A consultation is coordinated", detail: "The prospect is directed to an available consultation time through the firm’s booking workflow." },
+];
+
 const LawFirm = () => (
   <main className="min-h-screen" style={{ background: NAVY, color: IVORY }}>
     <Seo
@@ -111,7 +126,8 @@ const LawFirm = () => (
       <div className="pointer-events-none absolute top-0 left-1/3 w-[520px] h-[520px] rounded-full blur-3xl opacity-20" style={{ background: BRASS }} />
 
       <div className="container relative">
-        <div className="max-w-3xl">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-7">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8" style={{ background: `${SLATE}CC`, border: `1px solid ${LINE}` }}>
             <Landmark className="w-3.5 h-3.5" style={{ color: BRASS }} />
             <span className="text-[10px] uppercase tracking-[0.3em]" style={{ color: MUTE }}>White-Shoe Practice · Confidential Intake</span>
@@ -143,6 +159,23 @@ const LawFirm = () => (
             </div>
           </div>
         </div>
+        <div className="relative lg:col-span-5">
+          <div className="relative overflow-hidden rounded-sm border" style={{ borderColor: LINE }}>
+            <img src={lawHero} alt="Law library prepared for a confidential client consultation" className="h-[380px] w-full object-cover md:h-[470px]" width={1920} height={1080} />
+            <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, transparent 42%, ${NAVY}E6 100%)` }} />
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <div className="flex items-center gap-3 border-b pb-4" style={{ borderColor: LINE }}>
+                <img src={arthurAvatar} alt="Arthur, Legal Intake Associate" width={816} height={816} className="h-12 w-12 rounded-full object-cover" />
+                <div><p className="font-serif text-lg">Arthur is standing by</p><p className="text-[10px] uppercase tracking-[0.2em]" style={{ color: BRASS }}>Secure intake · 24/7</p></div>
+              </div>
+              <p className="mt-4 text-[10px] uppercase tracking-[0.25em]" style={{ color: BRASS }}>New consultation request</p>
+              <p className="mt-1 font-serif text-xl">Corporate counsel · Thursday, 9:15 AM</p>
+              <p className="mt-2 text-xs" style={{ color: MUTE }}>Intake summary ready for firm review</p>
+            </div>
+          </div>
+          <div className="absolute -right-3 -top-4 rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.2em]" style={{ background: SLATE, border: `1px solid ${LINE}`, color: IVORY }}>Confidential evaluation</div>
+        </div>
+        </div>
       </div>
     </section>
 
@@ -156,6 +189,14 @@ const LawFirm = () => (
         ))}
       </div>
     </section>
+
+    <IndustryChallengeSection
+      industry="law"
+      eyebrow="The intake gap"
+      title="A qualified inquiry should never wait for morning."
+      description="Convert slow, repetitive intake into a measured path from first contact to attorney review—without changing the firm’s existing workflow."
+      items={lawChallenges}
+    />
 
     <section className="py-24 md:py-32">
       <div className="container">
@@ -181,6 +222,8 @@ const LawFirm = () => (
         </div>
       </div>
     </section>
+
+    <IndustryROICalculator industry="law" />
 
     <section className="py-24 md:py-32" style={{ background: SLATE }}>
       <div className="container">
@@ -215,6 +258,14 @@ const LawFirm = () => (
         </div>
       </div>
     </section>
+
+    <IntakeJourneyShowcase
+      industry="law"
+      eyebrow="Matter intake · Live flow"
+      title="A more composed first conversation."
+      description="Make each first response useful: understand the request, collect only the details needed for review, and hand the next step to the firm."
+      steps={lawJourney}
+    />
 
     <section className="py-24 md:py-32">
       <div className="container">
@@ -333,7 +384,8 @@ const LawFirm = () => (
     </section>
 
     <Footer />
-    <AuraChat />
+    <AuraChat hideLauncher />
+    <FloatingAgentWidget industry="law" />
   </main>
 );
 
