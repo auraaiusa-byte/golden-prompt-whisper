@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero-spa.jpg";
-import { Cross, Scale, Dumbbell, Check, Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { sendLead } from "@/lib/webhook";
 import { toast } from "sonner";
 import { z } from "zod";
 import { HeroAssistant } from "@/components/HeroAssistant";
+import type { PipelineIndustryConfig } from "@/components/HeroAssistant";
+import { Button } from "@/components/ui/button";
 
 const emailSchema = z.string().trim().email({ message: "Please enter a valid email" }).max(255);
 
@@ -176,8 +178,67 @@ const HeroEmailCapture = () => {
   );
 };
 
-export const Hero = () => (
-  <section className="relative min-h-screen flex items-center overflow-x-hidden pt-20 pb-32 md:pb-24">
+type IndustryKey = "medspa" | "law" | "gym";
+
+const industryContent: Record<IndustryKey, PipelineIndustryConfig & {
+  headline: string;
+  accent: string;
+  description: string;
+  metrics: { value: string; label: string }[];
+}> = {
+  medspa: {
+    label: "Medical Spa",
+    headline: "Turn every inquiry into",
+    accent: "a booked treatment.",
+    description: "Aura qualifies treatment interest, answers patient questions, and books consultations while your team stays focused on care.",
+    triggerTitle: "New treatment inquiry captured",
+    channels: ["Website", "SMS", "Instagram"],
+    intent: "Analyzing treatment goals, timeline, and readiness",
+    qualification: "High intent verified",
+    actionTitle: "Consultation booked & CRM synced",
+    actionDetail: "Patient receives confirmation, reminders, and pre-visit instructions automatically.",
+    integrations: ["Mindbody", "Zenoti", "Zapier"],
+    activity: "Aesthetic consultation secured",
+    metrics: [{ value: "2.1s", label: "Avg. Response" }, { value: "+31%", label: "Consultations" }, { value: "24/7", label: "Patient Intake" }],
+  },
+  law: {
+    label: "Law Firm",
+    headline: "Convert urgent inquiries into",
+    accent: "qualified consultations.",
+    description: "Aura conducts confidential intake, identifies case fit, and schedules consultations before high-value prospects call another firm.",
+    triggerTitle: "Inbound case inquiry captured",
+    channels: ["Website", "SMS", "WhatsApp"],
+    intent: "Analyzing matter type, urgency, and jurisdiction",
+    qualification: "Case criteria verified",
+    actionTitle: "Consultation booked & matter synced",
+    actionDetail: "Qualified intake is routed with a complete summary and conflict-check details.",
+    integrations: ["Clio", "MyCase", "Zapier"],
+    activity: "Qualified case evaluation secured",
+    metrics: [{ value: "98%", label: "Intake Accuracy" }, { value: "3.2×", label: "More Retainers" }, { value: "24/7", label: "Case Capture" }],
+  },
+  gym: {
+    label: "Fitness & Gym",
+    headline: "Transform every trial lead into",
+    accent: "recurring membership.",
+    description: "Aura follows up instantly, matches prospects to the right membership, and books tours and trial sessions around the clock.",
+    triggerTitle: "New membership lead captured",
+    channels: ["Website", "SMS", "WhatsApp"],
+    intent: "Analyzing goals, preferred classes, and start date",
+    qualification: "Membership intent verified",
+    actionTitle: "Free pass booked & CRM synced",
+    actionDetail: "The prospect receives a pass, class recommendations, and automated follow-up.",
+    integrations: ["Mindbody", "HubSpot", "Zapier"],
+    activity: "High-intent trial visit secured",
+    metrics: [{ value: "43%", label: "More Tours" }, { value: "2.8×", label: "Lead Conversion" }, { value: "24/7", label: "Member Sales" }],
+  },
+};
+
+export const Hero = () => {
+  const [industry, setIndustry] = useState<IndustryKey>("medspa");
+  const selected = industryContent[industry];
+
+  return (
+  <section className="relative min-h-screen flex items-center overflow-x-hidden pt-20 pb-24">
     <div className="absolute inset-0">
       <img
         src={heroImg}
@@ -191,41 +252,33 @@ export const Hero = () => (
       <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
     </div>
 
-    {/* Floating multi-industry icons */}
-    <div className="absolute inset-0 pointer-events-none hidden md:block lg:hidden">
-      <div className="absolute top-[22%] right-[8%] glass rounded-full p-4 animate-float" style={{ animationDelay: "0s" }}>
-        <Cross className="w-5 h-5 text-gold" strokeWidth={1.5} />
-      </div>
-      <div className="absolute top-[55%] right-[18%] glass rounded-full p-4 animate-float" style={{ animationDelay: "1.5s" }}>
-        <Scale className="w-5 h-5 text-gold" strokeWidth={1.5} />
-      </div>
-      <div className="absolute top-[78%] right-[6%] glass rounded-full p-4 animate-float" style={{ animationDelay: "3s" }}>
-        <Dumbbell className="w-5 h-5 text-gold" strokeWidth={1.5} />
-      </div>
-    </div>
-
-    <div className="container relative z-10 grid md:grid-cols-12 gap-8 items-center py-16 md:py-24 px-4 sm:px-6">
-      <div className="md:col-span-7 w-full">
-        <div className="reveal flex items-center gap-4 mb-10">
+    <div className="container relative z-10 grid md:grid-cols-12 gap-10 lg:gap-12 items-center py-12 md:py-20 px-4 sm:px-6">
+      <div className="md:col-span-6 w-full min-w-0">
+        <div className="reveal flex items-center gap-4 mb-6">
           <div className="w-16 h-px bg-gold" />
           <span className="text-xs uppercase tracking-luxe text-gold">Private Beta · By Invitation</span>
         </div>
 
+        <div className="reveal reveal-delay-1 mb-7 flex w-full max-w-xl rounded-lg border border-border bg-background/70 p-1 backdrop-blur-lg" role="group" aria-label="Select industry workflow">
+          {(Object.keys(industryContent) as IndustryKey[]).map((key) => (
+            <Button key={key} type="button" variant="ghost" onClick={() => setIndustry(key)} aria-pressed={industry === key} className={`h-auto min-w-0 flex-1 whitespace-normal rounded-md px-2 py-2.5 text-[10px] font-semibold uppercase tracking-[0.08em] sm:px-3 sm:text-xs ${industry === key ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"}`}>
+              {industryContent[key].label}
+            </Button>
+          ))}
+        </div>
+
         <h1
-          className="reveal reveal-delay-1 font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] mb-6 md:mb-8 text-white break-words"
+          className="reveal reveal-delay-1 font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.02] mb-6 text-foreground break-words"
           style={{ textShadow: "0 2px 30px hsl(222 30% 4% / 0.85), 0 1px 4px hsl(222 30% 4% / 0.9)" }}
         >
-          The Unified
+          {selected.headline}
           <br />
-          Intelligence for
-          <br />
-          <span className="italic gold-shimmer">Modern Business.</span>
+          <span className="italic gold-shimmer">{selected.accent}</span>
         </h1>
 
         <p className="reveal reveal-delay-2 max-w-xl text-lg text-white/80 leading-relaxed mb-12 font-light"
            style={{ textShadow: "0 1px 12px hsl(222 30% 4% / 0.8)" }}>
-          NavAura deploys specialized AI agents to manage leads, appointments,
-          and client relations — across med spas, law firms, and fitness studios.
+          {selected.description}
         </p>
 
         <div className="reveal reveal-delay-3 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-5 sm:gap-6">
@@ -235,49 +288,16 @@ export const Hero = () => (
           </a>
         </div>
 
-        <div className="reveal reveal-delay-4 mt-12 md:mt-20 grid grid-cols-3 sm:flex sm:items-center gap-3 sm:gap-10 text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-luxe text-white/60">
-          <div className="text-center sm:text-left">
-            <div className="font-serif text-2xl sm:text-3xl text-white normal-case tracking-normal">2.1s</div>
-            <div className="mt-1 leading-tight">Avg. Response</div>
-          </div>
-          <div className="hidden sm:block w-px h-10 bg-white/20" />
-          <div className="text-center sm:text-left border-x sm:border-x-0 border-white/15 sm:border-0 px-2 sm:px-0">
-            <div className="font-serif text-2xl sm:text-3xl text-white normal-case tracking-normal">$2.4M</div>
-            <div className="mt-1 leading-tight">Revenue Driven</div>
-          </div>
-          <div className="hidden sm:block w-px h-10 bg-white/20" />
-          <div className="text-center sm:text-left">
-            <div className="font-serif text-2xl sm:text-3xl text-white normal-case tracking-normal">312</div>
-            <div className="mt-1 leading-tight">Elite Brands</div>
-          </div>
+        <div className="reveal reveal-delay-4 mt-10 grid grid-cols-3 gap-3 text-[9px] uppercase tracking-[0.1em] text-muted-foreground sm:text-[10px]">
+          {selected.metrics.map((metric, index) => <div key={metric.label} className={`text-center sm:text-left ${index === 1 ? "border-x border-border px-2" : ""}`}><div className="font-sans text-xl font-semibold text-foreground normal-case tracking-normal sm:text-2xl">{metric.value}</div><div className="mt-1 leading-tight">{metric.label}</div></div>)}
         </div>
       </div>
-      <HeroAssistant />
-    </div>
-
-    {/* Glassmorphism live booking notification */}
-    <div className="hidden lg:block absolute bottom-16 right-10 z-20 reveal reveal-delay-4">
-      <div className="glass rounded-2xl p-5 w-[320px] border border-gold/40">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-gold opacity-75 animate-ping" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
-          </span>
-          <span className="text-[10px] uppercase tracking-luxe text-gold">NavAura · Live Lead</span>
-          <span className="ml-auto text-[10px] text-muted-foreground">just now</span>
-        </div>
-        <p className="font-serif text-base text-foreground leading-snug">
-          Madeline R. just booked a <em className="text-gold not-italic">Strategy Consultation</em> for Friday, 6:30pm.
-        </p>
-        <div className="mt-3 pt-3 border-t border-border flex items-center justify-between text-[10px] uppercase tracking-luxe text-muted-foreground">
-          <span>Captured in 2.1s</span>
-          <span className="text-gold">◆ Confirmed</span>
-        </div>
-      </div>
+      <HeroAssistant config={selected} />
     </div>
 
     <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-luxe text-white/60 animate-float">
       Scroll
     </div>
   </section>
-);
+  );
+};
