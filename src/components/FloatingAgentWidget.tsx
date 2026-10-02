@@ -31,7 +31,7 @@ const agentDefaults: Record<Industry, AgentConfig> = {
   },
   gym: {
     avatarUrl: marcusAvatar,
-    agentName: "Aura Fitness Coach",
+    agentName: "Aura Fitness Coach / Membership Bot",
     role: "Membership specialist · Online",
     greetingMessage: "Ready to get started? I can help with a free pass, class times, or membership options.",
     themeColor: "electric",
@@ -56,14 +56,14 @@ const themeClasses: Record<ThemeColor, { text: string; border: string; surface: 
 };
 
 export function FloatingAgentWidget({
-  industry,
+  industry = "medspa",
   avatarUrl,
   agentName,
   role,
   greetingMessage,
   themeColor,
 }: {
-  industry: Industry;
+  industry?: Industry;
   avatarUrl?: string;
   agentName?: string;
   role?: string;
