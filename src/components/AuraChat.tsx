@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { BriefcaseBusiness, Calendar, Check, Dumbbell, Loader2, Scale, X, Zap } from "lucide-react";
+import { BriefcaseBusiness, Calendar, Check, Loader2, X, Zap } from "lucide-react";
 import navRobot from "@/assets/nav-robot.png";
 import elenaAvatar from "@/assets/elena-avatar.jpg";
 import marcusAvatar from "@/assets/marcus-avatar.jpg";
