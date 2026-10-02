@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import Vapi from "@vapi-ai/web";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -9,6 +10,9 @@ import {
   ChevronRight,
   Maximize2,
   Minimize2,
+  Phone,
+  PhoneOff,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +21,13 @@ import {
   RouteKey,
   ThemeColor,
 } from "@/lib/agent-knowledge";
+
+/* ─── Vapi Voice Configuration (Module-level Singleton) ─── */
+const vapiClient = new Vapi("865f4ef0-24f7-4904-b574-7f809a198a44");
+const MARCUS_ASSISTANT_ID = "465ead87-a2d2-409d-88bc-84bdc9c869ce";
+const AURA_ASSISTANT_ID = "82ba69d0-8a82-4847-a8a2-737914f6df72";
+const ELENA_ASSISTANT_ID = "1cfdc646-3127-4914-9bc1-2de102e238d8";
+const ARTHUR_ASSISTANT_ID = "554b5972-ed76-4a5e-a561-636974e28201";
 
 /* ─── Constants ─────────────────────────────────────────── */
 const MIN_WIDTH = 380;
@@ -84,7 +95,8 @@ export function FloatingAgentWidget({
   greetingMessage?: string;
   themeColor?: ThemeColor;
 }) {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
   const baseConfig = industry
     ? getAgentConfigById(industry)
     : getAgentConfigForPath(pathname);
@@ -100,6 +112,116 @@ export function FloatingAgentWidget({
 
   const theme = themeClasses[resolved.themeColor];
   const [open, setOpen] = useState(false);
+
+  /* ── Route Check & Dynamic Assistant Selection ─────────── */
+  const getAssistantId = () => {
+    if (location.pathname === "/gym" || location.pathname.includes("gym")) {
+      return MARCUS_ASSISTANT_ID;
+    }
+    if (
+      location.pathname.includes("med_spa") ||
+      location.pathname.includes("medspa") ||
+      location.pathname.includes("spa") ||
+      baseConfig.id === "medspa" ||
+      industry === "med_spa"
+    ) {
+      return ELENA_ASSISTANT_ID;
+    }
+    if (
+      location.pathname.includes("law") ||
+      baseConfig.id === "law" ||
+      industry === "law_firm"
+    ) {
+      return ARTHUR_ASSISTANT_ID;
+    }
+    // Default to Aura for home page /
+    return AURA_ASSISTANT_ID;
+  };
+
+  const currentAgent = {
+    name:
+      location.pathname === "/gym" || location.pathname.includes("gym")
+        ? "Marcus"
+        : location.pathname.includes("med_spa") ||
+          location.pathname.includes("medspa") ||
+          location.pathname.includes("spa") ||
+          baseConfig.id === "medspa" ||
+          industry === "med_spa"
+        ? "Elena"
+        : location.pathname.includes("law") ||
+          baseConfig.id === "law" ||
+          industry === "law_firm"
+        ? "Arthur"
+        : "Aura",
+    id: getAssistantId(),
+  };
+
+  const isGymRoute =
+    pathname === "/gym" || baseConfig.id === "gym" || industry === "gym";
+  const assistantName = currentAgent.name;
+  const [callStatus, setCallStatus] = useState<"idle" | "connecting" | "active">("idle");
+  const [isSpeechActive, setIsSpeechActive] = useState(false);
+
+  useEffect(() => {
+    const handleCallStart = () => {
+      setCallStatus("active");
+    };
+
+    const handleCallEnd = () => {
+      setCallStatus("idle");
+      setIsSpeechActive(false);
+    };
+
+    const handleSpeechStart = () => {
+      setIsSpeechActive(true);
+    };
+
+    const handleSpeechEnd = () => {
+      setIsSpeechActive(false);
+    };
+
+    const handleError = (error: unknown) => {
+      console.error("Vapi voice call error:", error);
+      setCallStatus("idle");
+      setIsSpeechActive(false);
+    };
+
+    vapiClient.on("call-start", handleCallStart);
+    vapiClient.on("call-end", handleCallEnd);
+    vapiClient.on("speech-start", handleSpeechStart);
+    vapiClient.on("speech-end", handleSpeechEnd);
+    vapiClient.on("error", handleError);
+
+    return () => {
+      vapiClient.off("call-start", handleCallStart);
+      vapiClient.off("call-end", handleCallEnd);
+      vapiClient.off("speech-start", handleSpeechStart);
+      vapiClient.off("speech-end", handleSpeechEnd);
+      vapiClient.off("error", handleError);
+    };
+  }, []);
+
+  const handleVoiceCallToggle = async () => {
+    if (callStatus === "active" || callStatus === "connecting") {
+      try {
+        setCallStatus("idle");
+        setIsSpeechActive(false);
+        await vapiClient.stop();
+      } catch (err) {
+        console.error("Error stopping Vapi call:", err);
+        setCallStatus("idle");
+      }
+    } else {
+      try {
+        setCallStatus("connecting");
+        const assistantId = getAssistantId();
+        await vapiClient.start(assistantId);
+      } catch (err) {
+        console.error("Error starting Vapi call:", err);
+        setCallStatus("idle");
+      }
+    }
+  };
 
   /* ── Resize state ────────────────────────────────────── */
   const [widgetWidth, setWidgetWidth] = useState(COMPACT_WIDTH);
@@ -220,6 +342,50 @@ export function FloatingAgentWidget({
                 </p>
               </div>
 
+              {/* Voice Call Assistant Button */}
+              <div className="flex items-center shrink-0">
+                {callStatus === "idle" ? (
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={handleVoiceCallToggle}
+                    className={`h-8 gap-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider px-3 transition-all hover:scale-105 ${
+                      location.pathname === "/gym" || location.pathname.includes("gym")
+                        ? "bg-agent-gym text-agent-gym-foreground shadow-[0_0_15px_rgba(150,225,50,0.35)] hover:bg-agent-gym/90"
+                        : theme.button
+                    }`}
+                  >
+                    <Phone className="h-3.5 w-3.5 shrink-0" />
+                    <span>Voice Call {currentAgent.name}</span>
+                  </Button>
+                ) : callStatus === "connecting" ? (
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={handleVoiceCallToggle}
+                    className={`h-8 gap-1.5 rounded-full border text-[11px] font-semibold px-3 animate-pulse ${
+                      location.pathname === "/gym" || location.pathname.includes("gym")
+                        ? "border-agent-gym/50 bg-agent-gym/20 text-agent-gym"
+                        : `${theme.border} ${theme.surface} ${theme.text}`
+                    }`}
+                  >
+                    <Loader2 className="h-3.5 w-3.5 animate-spin shrink-0" />
+                    <span>Connecting...</span>
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={handleVoiceCallToggle}
+                    className="relative h-8 gap-1.5 rounded-full bg-destructive text-destructive-foreground text-[11px] font-bold uppercase tracking-wider px-3 shadow-[0_0_20px_rgba(239,68,68,0.5)] hover:bg-destructive/90 transition-all animate-pulse"
+                  >
+                    <span className="absolute -inset-1 rounded-full bg-destructive/30 animate-ping -z-10" />
+                    <PhoneOff className="h-3.5 w-3.5 shrink-0" />
+                    <span>End Call</span>
+                  </Button>
+                )}
+              </div>
+
               {/* Expand / Collapse toggle */}
               <Button
                 type="button"
@@ -248,6 +414,48 @@ export function FloatingAgentWidget({
                 <X className="h-4 w-4" />
               </Button>
             </div>
+
+            {/* Active Voice Call Status Strip */}
+            {callStatus === "active" && (
+              <div
+                className={`flex items-center justify-between border-b px-4 py-2 text-xs ${
+                  location.pathname === "/gym"
+                    ? "border-agent-gym/30 bg-agent-gym/15"
+                    : "border-primary/30 bg-primary/15"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span
+                      className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${
+                        location.pathname === "/gym" ? "bg-agent-gym" : "bg-primary"
+                      }`}
+                    />
+                    <span
+                      className={`relative inline-flex h-2.5 w-2.5 rounded-full ${
+                        location.pathname === "/gym" ? "bg-agent-gym" : "bg-primary"
+                      }`}
+                    />
+                  </span>
+                  <span
+                    className={`font-semibold ${
+                      location.pathname === "/gym" ? "text-agent-gym" : "text-primary"
+                    }`}
+                  >
+                    {isSpeechActive
+                      ? `${assistantName} is speaking…`
+                      : "Live Call Active • Listening…"}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleVoiceCallToggle}
+                  className="text-[10px] font-bold uppercase tracking-wider text-destructive hover:underline"
+                >
+                  End Call
+                </button>
+              </div>
+            )}
 
             {/* ── Scrollable Content ──────────────────────── */}
             <div className="flex-1 overflow-y-auto overscroll-contain scroll-smooth p-4 space-y-4 text-left">
