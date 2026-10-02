@@ -17,6 +17,7 @@ import { Footer } from "@/components/Footer";
 import { AuraChat } from "@/components/AuraChat";
 import { Seo } from "@/components/Seo";
 import { LuxeButton } from "@/components/LuxeButton";
+import { FloatingAgentWidget } from "@/components/FloatingAgentWidget";
 import heroImg from "@/assets/medspa-hero-luxe.jpg";
 import treatmentsImg from "@/assets/medspa-treatments.jpg";
 import portraitImg from "@/assets/medspa-portrait.jpg";
@@ -397,7 +398,8 @@ const MedSpa = () => (
     </section>
 
     <Footer />
-    <AuraChat />
+    <AuraChat hideLauncher />
+    <FloatingAgentWidget industry="medspa" />
   </main>
 );
 

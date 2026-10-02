@@ -14,6 +14,8 @@ import {
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { AuraChat } from "@/components/AuraChat";
+import { FloatingAgentWidget } from "@/components/FloatingAgentWidget";
+import { IndustryChallengeSection, IndustryROICalculator, IntakeJourneyShowcase } from "@/components/IndustryExperience";
 import { Seo } from "@/components/Seo";
 import { LuxeButton } from "@/components/LuxeButton";
 import gymHero from "@/assets/industry-gym.jpg";
@@ -92,6 +94,19 @@ const faqs = [
 ];
 
 const cities = ["Los Angeles, CA", "Miami, FL", "Austin, TX", "Denver, CO", "Brooklyn, NY", "Nashville, TN"];
+
+const gymChallenges = [
+  { pain: "Trial inquiries go quiet", detail: "Prospects ask for a pass, then wait hours for a reply while their motivation fades.", solution: "Instant trial qualification", outcome: "Responds with the next available intro, gathers goals, and confirms a pass while interest is high." },
+  { pain: "Former members slip away", detail: "Past members and stalled trials sit in the CRM without a timely, personal follow-up.", solution: "Personalized win-back", outcome: "Reopens conversations with relevant return offers and routes interested members into a next step." },
+  { pain: "Classes leave open spots", detail: "Late cancellations and half-filled sessions cost coaches time and the club recurring revenue.", solution: "Class and waitlist follow-through", outcome: "Prompts members about open sessions and keeps booking details moving into the studio calendar." },
+];
+
+const gymJourney = [
+  { label: "Connect", title: "A trial lead messages", detail: "A web, social, or text inquiry receives an immediate, on-brand first response." },
+  { label: "Qualify", title: "Goals and availability captured", detail: "The agent learns training goals, preferred times, and which pass fits." },
+  { label: "Book", title: "Intro session confirmed", detail: "The trial is matched to an available class or coach and placed on the calendar." },
+  { label: "Retain", title: "Membership follow-up queued", detail: "Attendance and next steps are handed into the club’s existing CRM workflow." },
+];
 
 const Gym = () => (
   <main className="min-h-screen" style={{ background: CARBON, color: IVORY }}>
@@ -220,6 +235,14 @@ const Gym = () => (
       </div>
     </section>
 
+    <IndustryChallengeSection
+      industry="gym"
+      eyebrow="The floor leaks"
+      title="Every quiet lead is a chance to fill the floor."
+      description="Open conversations at the right moment—before a trial, a class spot, or a returning member is lost to slow follow-up."
+      items={gymChallenges}
+    />
+
     <section className="py-24 md:py-32" style={{ background: GRAPHITE }}>
       <div className="container">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
@@ -246,6 +269,16 @@ const Gym = () => (
         </div>
       </div>
     </section>
+
+    <IndustryROICalculator industry="gym" />
+
+    <IntakeJourneyShowcase
+      industry="gym"
+      eyebrow="Trial pass · Live flow"
+      title="From first message to the first rep."
+      description="See how a prospect moves from a quick question to a booked visit, then into the follow-up that helps a good first session become a membership."
+      steps={gymJourney}
+    />
 
     <section className="py-24 md:py-32">
       <div className="container">
@@ -379,7 +412,8 @@ const Gym = () => (
     </section>
 
     <Footer />
-    <AuraChat />
+    <AuraChat hideLauncher />
+    <FloatingAgentWidget industry="gym" />
   </main>
 );
 

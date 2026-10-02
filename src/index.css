@@ -34,6 +34,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     --gold: 39 65% 60%;
     --gold-soft: 39 70% 75%;
     --gold-deep: 35 55% 45%;
+    --agent-medspa: 344 46% 76%;
+    --agent-medspa-foreground: 222 30% 8%;
+    --agent-gym: 88 72% 56%;
+    --agent-gym-foreground: 222 30% 8%;
+    --agent-law: 42 55% 64%;
+    --agent-law-foreground: 222 30% 8%;
+    --agent-online: 145 54% 48%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 40 30% 96%;
