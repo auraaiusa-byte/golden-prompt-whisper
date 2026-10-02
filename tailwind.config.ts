@@ -24,6 +24,10 @@ export default {
           law: { DEFAULT: "hsl(var(--agent-law))", foreground: "hsl(var(--agent-law-foreground))" },
           online: "hsl(var(--agent-online))",
         },
+        pipeline: {
+          cyan: "hsl(var(--pipeline-cyan))",
+          violet: "hsl(var(--pipeline-violet))",
+        },
         gold: {
           DEFAULT: "hsl(var(--gold))",
           soft: "hsl(var(--gold-soft))",

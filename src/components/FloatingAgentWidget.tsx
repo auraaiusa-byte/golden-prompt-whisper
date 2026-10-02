@@ -98,7 +98,7 @@ export function FloatingAgentWidget({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.97 }}
             transition={{ duration: 0.18 }}
-            className={`w-[min(360px,calc(100vw-2rem))] overflow-hidden border bg-card shadow-luxe backdrop-blur-xl ${theme.border}`}
+            className={`w-[min(380px,calc(100vw-2rem))] overflow-hidden rounded-xl border bg-card shadow-luxe backdrop-blur-xl ${theme.border}`}
           >
             <div className={`flex items-center gap-3 border-b px-4 py-4 ${theme.border} ${theme.surface}`}>
               <img src={resolved.avatarUrl} alt={`${resolved.agentName} avatar`} width={816} height={816} loading="lazy" className={`h-12 w-12 rounded-full border object-cover ${theme.border}`} />
@@ -109,9 +109,10 @@ export function FloatingAgentWidget({
               <Button type="button" variant="ghost" size="icon" aria-label="Close assistant" onClick={() => setOpen(false)} className="shrink-0 text-muted-foreground hover:text-foreground"><X className="h-4 w-4" /></Button>
             </div>
             <div className="p-4">
-              <p className="text-sm leading-relaxed text-foreground">{resolved.greetingMessage}</p>
+              <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${theme.text}`}>See Aura in Action</p>
+              <p className="mt-2 text-sm leading-relaxed text-foreground">{resolved.greetingMessage}</p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {defaults.prompts.map((prompt) => (
+                {defaults.prompts.slice(0, 2).map((prompt) => (
                   <Button key={prompt} type="button" variant="outline" size="sm" onClick={() => sendAction({ prompt })} className={`h-auto min-h-8 whitespace-normal rounded-full px-3 py-1.5 text-left text-xs leading-snug ${theme.border} ${theme.text} hover:opacity-80`}>
                     {prompt}
                   </Button>
@@ -130,11 +131,12 @@ export function FloatingAgentWidget({
         aria-label={open ? "Close industry assistant" : `Open ${resolved.agentName}`}
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className={`relative h-14 w-14 rounded-full border p-0 shadow-luxe ${theme.border} ${theme.surface} hover:scale-105`}
+        className={`relative h-16 w-16 rounded-full border-2 p-1 shadow-luxe transition-transform duration-300 md:h-20 md:w-20 ${theme.border} ${theme.surface} hover:scale-105`}
       >
-        <span className={`absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-card bg-agent-online`} aria-label="Online" />
-        {open ? <X className={`h-5 w-5 ${theme.text}`} /> : <img src={resolved.avatarUrl} alt="" width={816} height={816} loading="lazy" className="h-full w-full rounded-full object-cover" />}
-        <span className={`pointer-events-none absolute inset-0 -z-10 animate-pulse rounded-full ring-4 ${theme.ring}`} />
+        <span className={`pointer-events-none absolute -inset-1 -z-10 rounded-full border ${theme.border}`} />
+        <span className={`pointer-events-none absolute -inset-2 -z-20 animate-pulse rounded-full ring-4 ${theme.ring}`} />
+        {open ? <X className={`h-6 w-6 ${theme.text}`} /> : <img src={resolved.avatarUrl} alt="" width={816} height={816} loading="lazy" className="h-full w-full rounded-full object-cover" />}
+        <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full border-2 border-card bg-agent-online md:h-5 md:w-5" aria-label="Online 24/7"><span className="h-1.5 w-1.5 animate-ping rounded-full bg-foreground" /></span>
       </Button>
     </div>
   );

@@ -179,17 +179,25 @@ export const AuraChat = ({ hideLauncher = false }: { hideLauncher?: boolean }) =
 
   return <>
     <AnimatePresence>
-      {!hideLauncher && !open && showBubble && <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} className="fixed bottom-28 right-4 z-50 max-w-[270px] lg:hidden">
-        <button onClick={() => { setOpen(true); setShowBubble(false); }} className="relative block rounded-2xl border border-primary/40 bg-background/95 px-4 py-3 text-left text-sm text-foreground shadow-luxe backdrop-blur-xl">
-          <span className="mb-1 block text-xs text-primary">{persona.firstName}</span>{persona.greeting}
-          <span onClick={(event) => { event.stopPropagation(); setShowBubble(false); }} role="button" aria-label="Dismiss" className="absolute -right-2 -top-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border border-primary/30 bg-background text-muted-foreground"><X className="h-3 w-3" /></span>
-        </button>
+      {!hideLauncher && !open && showBubble && <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} className="fixed bottom-32 right-6 z-50 hidden w-[min(320px,calc(100vw-2rem))] sm:block">
+        <div className="relative rounded-xl border border-primary/40 bg-card px-4 py-4 text-left text-sm text-foreground shadow-luxe backdrop-blur-xl">
+          <Button onClick={() => setShowBubble(false)} variant="ghost" size="icon" aria-label="Dismiss assistant preview" className="absolute right-1 top-1 h-7 w-7 rounded-full text-muted-foreground hover:text-foreground"><X className="h-3.5 w-3.5" /></Button>
+          <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">See Aura in Action</span>
+          <p className="mt-2 pr-5 text-sm leading-relaxed">{persona.greeting}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Button onClick={() => { setOpen(true); setShowBubble(false); window.setTimeout(() => externalActions.current.prompt("Show me how Aura handles a new lead"), 0); }} variant="outline" size="sm" className="h-auto rounded-full border-primary/30 bg-primary/5 px-3 py-1.5 text-[10px] text-primary hover:bg-primary/10">See a live workflow</Button>
+            <Button onClick={() => { setOpen(true); setShowBubble(false); window.setTimeout(() => externalActions.current.book(), 0); }} size="sm" className="h-auto rounded-full px-3 py-1.5 text-[10px]">Book a Strategy Call</Button>
+          </div>
+        </div>
       </motion.div>}
     </AnimatePresence>
 
-    {!hideLauncher && <motion.button onClick={() => { setOpen((value) => !value); setShowBubble(false); }} onHoverStart={() => setHovering(true)} onHoverEnd={() => setHovering(false)} aria-label={`Open ${persona.name}`} className="fixed bottom-4 right-4 z-50 flex h-20 w-20 items-center justify-center bg-transparent outline-none lg:hidden" animate={{ y: [0, -10, 0] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }} whileTap={{ scale: 0.92 }}>
-      <span aria-hidden className="absolute inset-0 rounded-full bg-primary/30 blur-xl" />
-      {open ? <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-luxe"><X className="h-6 w-6" /></span> : <motion.span className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-primary/50 bg-card shadow-luxe" animate={hovering ? { rotate: [0, -8, 8, 0], scale: 1.06 } : { rotate: [0, -2, 2, 0] }} transition={hovering ? { duration: 0.9 } : { duration: 5, repeat: Infinity, ease: "easeInOut" }}><img src={persona.avatar} alt={`${persona.firstName} avatar`} width={816} height={816} loading="lazy" className={`h-full w-full ${persona.id === "home" ? "object-contain" : "object-cover"}`} /></motion.span>}
+    {!hideLauncher && <motion.button onClick={() => { setOpen((value) => !value); setShowBubble(false); }} onHoverStart={() => setHovering(true)} onHoverEnd={() => setHovering(false)} aria-label={`Open ${persona.name}`} className="fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-transparent outline-none md:bottom-6 md:right-6 md:h-20 md:w-20" animate={{ y: [0, -6, 0] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }} whileTap={{ scale: 0.92 }}>
+      <span aria-hidden className="absolute -inset-3 rounded-full bg-primary/25 blur-xl" />
+      <span aria-hidden className="absolute -inset-1 rounded-full border border-primary/35" />
+      <span aria-hidden className="absolute -inset-2 animate-pulse rounded-full ring-4 ring-primary/15" />
+      {open ? <span className="relative flex h-full w-full items-center justify-center rounded-full border-2 border-primary/50 bg-primary text-primary-foreground shadow-luxe"><X className="h-6 w-6" /></span> : <motion.span className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-primary/60 bg-card p-1 shadow-luxe" animate={hovering ? { rotate: [0, -8, 8, 0], scale: 1.06 } : { rotate: [0, -2, 2, 0] }} transition={hovering ? { duration: 0.9 } : { duration: 5, repeat: Infinity, ease: "easeInOut" }}><img src={persona.avatar} alt={`${persona.firstName} avatar`} width={816} height={816} loading="lazy" className={`h-full w-full rounded-full ${persona.id === "home" ? "object-contain" : "object-cover"}`} /></motion.span>}
+      <span className="absolute bottom-0 right-0 flex h-4 w-4 items-center justify-center rounded-full border-2 border-card bg-agent-online md:h-5 md:w-5" aria-label="Online 24/7"><span className="h-1.5 w-1.5 animate-ping rounded-full bg-foreground" /></span>
     </motion.button>}
 
     <AnimatePresence>{open && <motion.div initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.95 }} className="fixed inset-0 z-50 flex flex-col overflow-hidden border border-primary/40 bg-background/95 shadow-luxe backdrop-blur-xl sm:inset-auto sm:bottom-32 sm:right-6 sm:h-[600px] sm:max-h-[calc(100vh-10rem)] sm:w-[400px] sm:max-w-[calc(100vw-2rem)] sm:rounded-2xl">
