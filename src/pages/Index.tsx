@@ -13,6 +13,7 @@ import { Pricing } from "@/components/Pricing";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { AuraChat } from "@/components/AuraChat";
+import { FloatingAgentWidget } from "@/components/FloatingAgentWidget";
 import { ExitIntent } from "@/components/ExitIntent";
 import { Seo } from "@/components/Seo";
 
@@ -34,7 +35,8 @@ const Index = () => {
       <Pricing />
       <Contact />
       <Footer />
-      <AuraChat />
+      <AuraChat hideLauncher />
+      <FloatingAgentWidget industry="home" />
       <ExitIntent />
     </main>
   );

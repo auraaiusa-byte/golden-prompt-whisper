@@ -60,7 +60,8 @@ const HeroEmailCapture = () => {
     e.preventDefault();
     if (status !== "idle") return;
 
-    const parsed = emailSchema.safeParse(email);
+    const userEmail = email.trim().toLowerCase();
+    const parsed = emailSchema.safeParse(userEmail);
     if (!parsed.success) {
       toast.error(parsed.error.issues[0].message);
       return;
@@ -69,12 +70,16 @@ const HeroEmailCapture = () => {
     setStatus("loading");
     const { error } = await supabase
       .from("leads")
-      .insert({ email: parsed.data, source: "Hero", lead_status: "new" });
+      .insert({
+        email: userEmail.trim().toLowerCase(),
+        source: "Hero",
+      });
 
     // Mirror to Make.com webhook (non-blocking)
-    sendLead({ source: "contact", email: parsed.data, meta: { origin: "Hero" } }).catch(() => {});
+    sendLead({ source: "contact", email: userEmail.trim().toLowerCase(), meta: { origin: "Hero" } }).catch(() => {});
 
     if (error) {
+      console.error("Supabase insert lead error:", error);
       setStatus("idle");
       toast.error("Something went wrong. Please try again.");
       return;
