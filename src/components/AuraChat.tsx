@@ -179,7 +179,7 @@ export const AuraChat = ({ hideLauncher = false }: { hideLauncher?: boolean }) =
 
   return <>
     <AnimatePresence>
-      {!hideLauncher && !open && showBubble && <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} className="fixed bottom-24 right-4 z-50 w-[min(320px,calc(100vw-2rem))] md:bottom-32 md:right-6">
+      {!hideLauncher && !open && showBubble && <motion.div initial={{ opacity: 0, y: 8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.95 }} className="fixed bottom-32 right-6 z-50 hidden w-[min(320px,calc(100vw-2rem))] sm:block">
         <div className="relative rounded-xl border border-primary/40 bg-card px-4 py-4 text-left text-sm text-foreground shadow-luxe backdrop-blur-xl">
           <Button onClick={() => setShowBubble(false)} variant="ghost" size="icon" aria-label="Dismiss assistant preview" className="absolute right-1 top-1 h-7 w-7 rounded-full text-muted-foreground hover:text-foreground"><X className="h-3.5 w-3.5" /></Button>
           <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">See Aura in Action</span>

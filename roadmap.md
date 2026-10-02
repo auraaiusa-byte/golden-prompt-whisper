@@ -3,4 +3,4 @@
 - [x] Verify successful build and check the three industry experiences on desktop and mobile.
 - [x] Replace the homepage hero robot with a responsive autonomous pipeline visualizer and industry switcher.
 - [x] Enlarge the floating agent launcher with dual glow rings, 24/7 status, and two quick actions.
-- [ ] Verify homepage industry switching, assistant actions, and desktop/mobile viewport containment.
+- [x] Verify homepage industry switching, assistant actions, and desktop/mobile viewport containment.
