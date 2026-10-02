@@ -17,6 +17,8 @@ import { Footer } from "@/components/Footer";
 import { AuraChat } from "@/components/AuraChat";
 import { Seo } from "@/components/Seo";
 import { LuxeButton } from "@/components/LuxeButton";
+import lawHero from "@/assets/industry-law.jpg";
+import arthurAvatar from "@/assets/arthur-avatar.jpg";
 
 const NAVY = "#0C121C";
 const SLATE = "#121A26";
@@ -27,8 +29,7 @@ const IVORY = "#F3EFE6";
 const MUTE = "#9AA3B2";
 const LINE = "rgba(197,160,89,0.28)";
 
-const heroImg =
-  "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1920&q=80";
+const heroImg = lawHero;
 const libraryImg =
   "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1400&q=80";
 const counselImg =
@@ -133,6 +134,13 @@ const LawFirm = () => (
                 View Live Demo <ArrowRight className="w-4 h-4" />
               </button>
             </Link>
+          </div>
+          <div className="mt-10 flex items-center gap-4 border-t pt-6" style={{ borderColor: LINE }}>
+            <img src={arthurAvatar} alt="Arthur, Legal Intake Associate" width={816} height={816} loading="lazy" className="h-12 w-12 rounded-full object-cover" />
+            <div>
+              <p className="font-serif text-base">Arthur is standing by</p>
+              <p className="text-[10px] uppercase tracking-[0.2em]" style={{ color: BRASS }}>Legal Intake Associate · Confidential</p>
+            </div>
           </div>
         </div>
       </div>

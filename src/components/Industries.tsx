@@ -15,8 +15,8 @@ const industries = [
     Icon: Cross,
     label: "Medical Spas",
     title: "Med-Spa AI Receptionist",
-    desc: "24/7 lead intake, treatment FAQ qualification (Botox/Laser/Skin), and instant calendar booking — from $1,997/mo.",
-    features: ["Instant DM-to-booking", "Treatment FAQ qualification", "Calendar booking"],
+    desc: "24/7 patient intake, treatment FAQ management, and instant Calendly booking — from $1,997/mo.",
+    features: ["24/7 patient intake", "Treatment FAQ management", "Instant Calendly booking"],
   },
   {
     id: "law",
@@ -25,8 +25,8 @@ const industries = [
     Icon: Scale,
     label: "Law Firms",
     title: "Law Firm Intake Agent",
-    desc: "24/7 confidential case triage, practice-area qualification, and consultation scheduling — from $2,497/mo.",
-    features: ["Confidential case triage", "Practice-area qualification", "Attorney scheduling"],
+    desc: "24/7 confidential case triage, client pre-qualification, and consultation scheduling — from $2,497/mo.",
+    features: ["Confidential case triage", "Client pre-qualification", "Consultation scheduling"],
   },
   {
     id: "gym",
@@ -35,8 +35,8 @@ const industries = [
     Icon: Dumbbell,
     label: "Gyms & Studios",
     title: "Gym Membership Closer",
-    desc: "Automated trial pass booking, membership qualification, and cold lead reactivation — from $1,497/mo.",
-    features: ["VIP trial pass booking", "Membership qualification", "Lapsed-member win-back"],
+    desc: "Automated trial pass scheduling, membership qualification, and lost-lead reactivation — from $1,497/mo.",
+    features: ["Trial pass scheduling", "Membership qualification", "Lost-lead reactivation"],
   },
 ];
 

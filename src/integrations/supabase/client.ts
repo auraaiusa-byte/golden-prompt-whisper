@@ -1,24 +1,14 @@
-import { createClient } from '@supabase/supabase-js';
-<<<<<<< Updated upstream
-import type { Database } from './types';
-import { brokeredPreviewStorage } from './previewAuthStorage';
-=======
->>>>>>> Stashed changes
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "./types";
+import { brokeredPreviewStorage } from "./previewAuthStorage";
 
-const supabaseUrl = 'https://csjywkhhrsiydhjxtstn.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzanl3a2hocnNpeWRoanh0c3RuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0OTYwMTAsImV4cCI6MjA5MzA3MjAxMH0.EK3lUjNqV9Pi-s1xW0W0Bjh8eAh9soCm_nT8KdaEYMk';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
 
-<<<<<<< Updated upstream
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
-
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     storage: brokeredPreviewStorage(),
     persistSession: true,
     autoRefreshToken: true,
-  }
+  },
 });
-=======
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
->>>>>>> Stashed changes

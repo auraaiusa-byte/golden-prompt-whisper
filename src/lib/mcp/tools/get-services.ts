@@ -18,19 +18,19 @@ export default defineTool({
           name: "Med-Spa AI Receptionist",
           startingPrice: "$1,997/mo",
           description:
-            "24/7 lead intake, treatment FAQ qualification (Botox/Laser/Skin), and instant calendar booking.",
+            "24/7 patient intake, treatment FAQ management, and instant Calendly booking.",
         },
         {
           name: "Gym Membership Closer",
           startingPrice: "$1,497/mo",
           description:
-            "Automated trial pass booking, membership qualification, and cold lead reactivation.",
+            "Automated trial pass scheduling, membership qualification, and lost-lead reactivation.",
         },
         {
           name: "Law Firm Intake Agent",
           startingPrice: "$2,497/mo",
           description:
-            "24/7 confidential case triage, practice-area qualification, and consultation scheduling.",
+            "24/7 confidential case triage, client pre-qualification, and consultation scheduling.",
         },
       ],
       industries: ["Med Spas", "Law Firms", "Fitness Studios"],

@@ -16,6 +16,8 @@ import { Footer } from "@/components/Footer";
 import { AuraChat } from "@/components/AuraChat";
 import { Seo } from "@/components/Seo";
 import { LuxeButton } from "@/components/LuxeButton";
+import gymHero from "@/assets/industry-gym.jpg";
+import marcusAvatar from "@/assets/marcus-avatar.jpg";
 
 const CARBON = "#0A0A0C";
 const GRAPHITE = "#141418";
@@ -26,8 +28,7 @@ const IVORY = "#F4F0E8";
 const MUTE = "#A39B8F";
 const LINE = "rgba(212,175,55,0.22)";
 
-const heroImg =
-  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80";
+const heroImg = gymHero;
 const studioImg =
   "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1400&q=80";
 const athleteImg =
@@ -138,6 +139,13 @@ const Gym = () => (
           </div>
           <div className="lg:col-span-5">
             <div className="rounded-3xl overflow-hidden border p-6" style={{ background: `${GRAPHITE}E6`, borderColor: LINE, backdropFilter: "blur(16px)" }}>
+              <div className="mb-5 flex items-center gap-3 border-b pb-5" style={{ borderColor: LINE }}>
+                <img src={marcusAvatar} alt="Marcus, Fitness Membership Specialist" width={816} height={816} loading="lazy" className="h-12 w-12 rounded-full object-cover" />
+                <div>
+                  <p className="font-serif text-base">Marcus is online</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em]" style={{ color: GOLD }}>Membership Closer</p>
+                </div>
+              </div>
               <p className="text-[10px] uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>Just closed</p>
               <p className="font-serif text-2xl">Elite Performance · 12-month</p>
               <p className="text-sm mt-2" style={{ color: MUTE }}>Trial booked via Instagram DM · converted after class 1</p>
