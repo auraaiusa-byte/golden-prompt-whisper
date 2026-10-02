@@ -101,7 +101,7 @@ export function FloatingAgentWidget({
             className={`w-[min(360px,calc(100vw-2rem))] overflow-hidden border bg-card/95 shadow-luxe backdrop-blur-xl ${theme.border}`}
           >
             <div className={`flex items-center gap-3 border-b px-4 py-4 ${theme.border} ${theme.surface}`}>
-              <img src={resolved.avatarUrl} alt={`${resolved.agentName} avatar`} width={816} height={816} className={`h-12 w-12 rounded-full border object-cover ${theme.border}`} />
+              <img src={resolved.avatarUrl} alt={`${resolved.agentName} avatar`} width={816} height={816} loading="lazy" className={`h-12 w-12 rounded-full border object-cover ${theme.border}`} />
               <div className="min-w-0 flex-1">
                 <h2 id="floating-agent-title" className="font-serif text-sm leading-snug text-foreground">{resolved.agentName}</h2>
                 <p className={`mt-1 text-[10px] uppercase tracking-[0.15em] ${theme.text}`}>{resolved.role}</p>
@@ -112,7 +112,7 @@ export function FloatingAgentWidget({
               <p className="text-sm leading-relaxed text-foreground">{resolved.greetingMessage}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {defaults.prompts.map((prompt) => (
-                  <Button key={prompt} type="button" variant="outline" size="sm" onClick={() => sendAction({ prompt })} className={`h-auto min-h-8 whitespace-normal rounded-full px-3 py-1.5 text-left text-xs leading-snug ${theme.border} ${theme.text} hover:${theme.surface}`}>
+                  <Button key={prompt} type="button" variant="outline" size="sm" onClick={() => sendAction({ prompt })} className={`h-auto min-h-8 whitespace-normal rounded-full px-3 py-1.5 text-left text-xs leading-snug ${theme.border} ${theme.text} hover:opacity-80`}>
                     {prompt}
                   </Button>
                 ))}
@@ -133,7 +133,7 @@ export function FloatingAgentWidget({
         className={`relative h-14 w-14 rounded-full border p-0 shadow-luxe ${theme.border} ${theme.surface} hover:scale-105`}
       >
         <span className={`absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full border-2 border-card bg-agent-online`} aria-label="Online" />
-        {open ? <X className={`h-5 w-5 ${theme.text}`} /> : <img src={resolved.avatarUrl} alt="" width={816} height={816} className="h-full w-full rounded-full object-cover" />}
+        {open ? <X className={`h-5 w-5 ${theme.text}`} /> : <img src={resolved.avatarUrl} alt="" width={816} height={816} loading="lazy" className="h-full w-full rounded-full object-cover" />}
         <span className={`pointer-events-none absolute inset-0 -z-10 animate-pulse rounded-full ring-4 ${theme.ring}`} />
       </Button>
     </div>
