@@ -136,6 +136,6 @@ export const IndustryPage = (p: IndustryPageProps) => (
     </section>
 
     <Footer />
-    <AuraChat greeting={p.chatGreeting} />
+    <AuraChat />
   </main>
 );

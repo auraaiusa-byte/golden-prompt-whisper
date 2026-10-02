@@ -35,7 +35,7 @@ export const ExitIntent = () => {
 
     const { data, error } = await supabase
       .from("leads")
-      .insert({ email, customer_name: null, source: "popup" })
+      .insert({ email, source: "popup" })
       .select();
 
     if (error) {
