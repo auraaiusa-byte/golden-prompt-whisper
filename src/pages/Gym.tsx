@@ -126,7 +126,7 @@ const gymJourney = [
 ];
 
 const Gym = () => (
-  <main className="min-h-screen" style={{ background: OBSIDIAN, color: TITANIUM }}>
+  <main className="min-h-screen bg-transparent" style={{ color: TITANIUM }}>
     <Seo
       title="Gym Membership AI & Trial Conversion · NavAura AI"
       description="NavAura AI converts trial leads to members, reactivates lapsed lists, and fills every class for boutique gyms and luxury studios. Request access today."
@@ -136,29 +136,25 @@ const Gym = () => (
     <Nav />
 
     {/* ============ HERO — video background ============ */}
-    <section className="relative pt-28 md:pt-36 pb-24 overflow-hidden">
-      <div className="absolute inset-0">
+    <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-transparent">
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <video
           autoPlay
           loop
           muted
           playsInline
-          poster={heroImg}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none -z-10 opacity-40"
-          src={
-            typeof document !== "undefined" &&
-            document.createElement("video").canPlayType('video/webm; codecs="vp9"')
-              ? "/gym-hero-bg.webm"
-              : "/gym-hero-bg.mp4"
-          }
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, #09090B 100%)" }} />
-        <div className="absolute inset-0 gym-carbon-grid opacity-60" />
-        <div className="pointer-events-none absolute -top-32 right-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-25" style={{ background: VOLT }} />
-        <div className="pointer-events-none absolute bottom-0 left-1/4 w-[420px] h-[420px] rounded-full blur-3xl opacity-10" style={{ background: "#22C55E" }} />
+          preload="auto"
+          className="w-full h-full object-cover opacity-80"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        >
+          <source src="/gym-hero-bg.webm" type="video/webm" />
+          <source src="/gym-hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Gradient to protect text legibility without covering the background */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-black/40 to-black/60 pointer-events-none" />
       </div>
 
-      <div className="container relative">
+      <div className="container relative z-10">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 backdrop-blur-md" style={{ background: GLASS, border: `1px solid ${VOLT_DIM}` }}>
