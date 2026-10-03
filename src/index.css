@@ -1,8 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Gym page — condensed athletic type + carbon grid + volt glow */
+.font-athletic { font-family: 'Oswald', 'Inter', sans-serif; }
+.gym-carbon-grid {
+  background-image:
+    linear-gradient(rgba(212, 255, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 255, 0, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.gym-volt-glow { box-shadow: 0 0 44px -10px rgba(212, 255, 0, 0.4); }
+.gym-card-hover { transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease; }
+.gym-card-hover:hover {
+  border-color: rgba(212, 255, 0, 0.45);
+  box-shadow: 0 0 40px -12px rgba(212, 255, 0, 0.35);
+}
 
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 

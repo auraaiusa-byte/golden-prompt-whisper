@@ -17,24 +17,41 @@ import { AuraChat } from "@/components/AuraChat";
 import { FloatingAgentWidget } from "@/components/FloatingAgentWidget";
 import { IndustryChallengeSection, IndustryROICalculator, IntakeJourneyShowcase } from "@/components/IndustryExperience";
 import { Seo } from "@/components/Seo";
-import { LuxeButton } from "@/components/LuxeButton";
 import gymHero from "@/assets/industry-gym.jpg";
 import marcusAvatar from "@/assets/marcus-avatar.jpg";
 
-const CARBON = "#0A0A0C";
-const GRAPHITE = "#141418";
-const STEEL = "#1C1C22";
-const GOLD = "#D4AF37";
-const AMBER = "#E8B84A";
-const IVORY = "#F4F0E8";
-const MUTE = "#A39B8F";
-const LINE = "rgba(212,175,55,0.22)";
+// ============ Athletic palette ============
+const OBSIDIAN = "#09090B";
+const OBSIDIAN_LIFT = "#111116";
+const VOLT = "#D4FF00";
+const VOLT_DIM = "rgba(212,255,0,0.45)";
+const TITANIUM = "#E2E8F0";
+const STEEL_MUTED = "#94A3B8";
+const GLASS = "rgba(24,24,27,0.6)";
+const LINE = "rgba(255,255,255,0.1)";
 
-const heroImg = gymHero;
+const heroImg = gymHero; // poster frame while the video loads
 const studioImg =
   "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1400&q=80";
 const athleteImg =
   "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=80";
+
+// Local athletic CTA — visual only; destinations identical to before
+const VoltButton = ({ children }: { children: React.ReactNode }) => (
+  <button className="group relative inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 min-h-[48px] rounded-full text-xs uppercase tracking-[0.2em] font-semibold font-athletic transition-all duration-300 gym-volt-glow" style={{ background: VOLT, color: OBSIDIAN }}>
+    <span className="relative transition-transform duration-500 group-hover:translate-x-1">{children}</span>
+    <span className="relative transition-transform duration-500 group-hover:translate-x-1">→</span>
+  </button>
+);
+
+const GhostButton = ({ children }: { children: React.ReactNode }) => (
+  <button
+    className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-athletic transition-all duration-300 hover:border-[#D4FF00]/60 hover:text-[#D4FF00]"
+    style={{ background: "transparent", color: TITANIUM, border: `1px solid ${LINE}` }}
+  >
+    {children} <ArrowRight className="w-4 h-4" />
+  </button>
+);
 
 const tiers = [
   {
@@ -109,7 +126,7 @@ const gymJourney = [
 ];
 
 const Gym = () => (
-  <main className="min-h-screen" style={{ background: CARBON, color: IVORY }}>
+  <main className="min-h-screen" style={{ background: OBSIDIAN, color: TITANIUM }}>
     <Seo
       title="Gym Membership AI & Trial Conversion · NavAura AI"
       description="NavAura AI converts trial leads to members, reactivates lapsed lists, and fills every class for boutique gyms and luxury studios. Request access today."
@@ -118,55 +135,67 @@ const Gym = () => (
     />
     <Nav />
 
+    {/* ============ HERO — video background ============ */}
     <section className="relative pt-28 md:pt-36 pb-24 overflow-hidden">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="Luxury athletic club training floor" className="w-full h-full object-cover opacity-45" width={1920} height={1080} />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${CARBON}CC 0%, ${CARBON}F2 100%)` }} />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={heroImg}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none -z-10 opacity-40"
+          src={
+            typeof document !== "undefined" &&
+            document.createElement("video").canPlayType('video/webm; codecs="vp9"')
+              ? "/gym-hero-bg.webm"
+              : "/gym-hero-bg.mp4"
+          }
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, #09090B 100%)" }} />
+        <div className="absolute inset-0 gym-carbon-grid opacity-60" />
+        <div className="pointer-events-none absolute -top-32 right-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-25" style={{ background: VOLT }} />
+        <div className="pointer-events-none absolute bottom-0 left-1/4 w-[420px] h-[420px] rounded-full blur-3xl opacity-10" style={{ background: "#22C55E" }} />
       </div>
-      <div className="pointer-events-none absolute -top-24 right-0 w-[480px] h-[480px] rounded-full blur-3xl opacity-30" style={{ background: GOLD }} />
 
       <div className="container relative">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8" style={{ background: `${GRAPHITE}CC`, border: `1px solid ${LINE}` }}>
-              <Dumbbell className="w-3.5 h-3.5" style={{ color: GOLD }} />
-              <span className="text-[10px] uppercase tracking-[0.3em]" style={{ color: MUTE }}>Luxury Athletic Club · Elite Concierge</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 backdrop-blur-md" style={{ background: GLASS, border: `1px solid ${VOLT_DIM}` }}>
+              <Dumbbell className="w-3.5 h-3.5" style={{ color: VOLT }} />
+              <span className="text-[10px] uppercase tracking-[0.3em] font-athletic" style={{ color: STEEL_MUTED }}>Luxury Athletic Club · Elite Concierge</span>
             </div>
-            <h1 className="font-serif leading-[1.02] text-5xl md:text-6xl lg:text-7xl tracking-tight">
+            <h1 className="font-athletic uppercase font-bold leading-[0.98] text-5xl md:text-6xl lg:text-7xl tracking-tight" style={{ color: TITANIUM }}>
               Train like a private club.
               <br />
-              Convert like a <span className="italic" style={{ color: AMBER }}>machine.</span>
+              Convert like a <span style={{ color: VOLT }}>machine.</span>
             </h1>
-            <p className="mt-8 text-lg md:text-xl font-light max-w-xl leading-relaxed" style={{ color: MUTE }}>
+            <p className="mt-8 text-lg md:text-xl font-light max-w-xl leading-relaxed" style={{ color: STEEL_MUTED }}>
               High-performance growth for boutique boxes and luxury studios — VIP trial passes, elite memberships, and class fill, closed 24/7 by Marcus.
             </p>
             <div className="flex flex-wrap gap-4 mt-10">
-              <a href="/#contact"><LuxeButton>Book a Trial Strategy Call</LuxeButton></a>
-              <Link to="/demo-dashboard">
-                <button
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm tracking-wider transition-all hover:gap-3"
-                  style={{ background: "transparent", color: IVORY, border: `1px solid ${LINE}` }}
-                >
-                  View Live Demo <ArrowRight className="w-4 h-4" />
-                </button>
-              </Link>
+              <a href="/#contact"><VoltButton>Book a Trial Strategy Call</VoltButton></a>
+              <Link to="/demo-dashboard"><GhostButton>View Live Demo</GhostButton></Link>
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="rounded-3xl overflow-hidden border p-6" style={{ background: `${GRAPHITE}E6`, borderColor: LINE, backdropFilter: "blur(16px)" }}>
+            <div className="rounded-3xl overflow-hidden border p-6 backdrop-blur-md transition-all duration-300 hover:border-[#D4FF00]/40" style={{ background: GLASS, borderColor: LINE }}>
               <div className="mb-5 flex items-center gap-3 border-b pb-5" style={{ borderColor: LINE }}>
-                <img src={marcusAvatar} alt="Marcus, Fitness Membership Specialist" width={816} height={816} loading="lazy" className="h-12 w-12 rounded-full object-cover" />
+                <div className="relative">
+                  <img src={marcusAvatar} alt="Marcus, Fitness Membership Specialist" width={816} height={816} loading="lazy" className="h-12 w-12 rounded-full object-cover" />
+                  <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2" style={{ background: "#22C55E", borderColor: OBSIDIAN }} />
+                </div>
                 <div>
-                  <p className="font-serif text-base">Marcus is online</p>
-                  <p className="text-[10px] uppercase tracking-[0.2em]" style={{ color: GOLD }}>Membership Closer</p>
+                  <p className="font-athletic uppercase tracking-wide text-base">Marcus is online</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] font-athletic" style={{ color: VOLT }}>Membership Closer</p>
                 </div>
               </div>
-              <p className="text-[10px] uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>Just closed</p>
-              <p className="font-serif text-2xl">Elite Performance · 12-month</p>
-              <p className="text-sm mt-2" style={{ color: MUTE }}>Trial booked via Instagram DM · converted after class 1</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] mb-4 font-athletic" style={{ color: VOLT }}>Just closed</p>
+              <p className="font-athletic uppercase text-2xl tracking-tight">Elite Performance · 12-month</p>
+              <p className="text-sm mt-2" style={{ color: STEEL_MUTED }}>Trial booked via Instagram DM · converted after class 1</p>
               <div className="mt-6 flex items-center justify-between pt-5" style={{ borderTop: `1px solid ${LINE}` }}>
-                <span className="text-xs" style={{ color: MUTE }}>via Membership Closer</span>
-                <span className="text-sm font-medium" style={{ color: AMBER }}>+ $2,988</span>
+                <span className="text-xs" style={{ color: STEEL_MUTED }}>via Membership Closer</span>
+                <span className="text-sm font-semibold font-athletic" style={{ color: VOLT }}>+ $2,988</span>
               </div>
             </div>
           </div>
@@ -174,25 +203,32 @@ const Gym = () => (
       </div>
     </section>
 
-    <section className="py-14" style={{ background: GRAPHITE }}>
-      <div className="container grid grid-cols-2 md:grid-cols-4 gap-8">
+    {/* ============ METRIC PILLS ============ */}
+    <section className="py-14 relative" style={{ background: OBSIDIAN_LIFT }}>
+      <div className="absolute inset-0 gym-carbon-grid opacity-40 pointer-events-none" />
+      <div className="container relative grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {stats.map((s) => (
-          <div key={s.l} className="text-center">
-            <div className="font-serif text-4xl md:text-5xl italic" style={{ color: AMBER }}>{s.n}</div>
-            <div className="text-[10px] uppercase tracking-[0.3em] mt-2" style={{ color: MUTE }}>{s.l}</div>
+          <div
+            key={s.l}
+            className="text-center rounded-full md:rounded-2xl px-4 py-5 backdrop-blur-md transition-all duration-300 hover:border-[#D4FF00]/60 gym-volt-glow"
+            style={{ background: GLASS, border: `1px solid ${VOLT_DIM}` }}
+          >
+            <div className="font-athletic uppercase font-bold text-3xl md:text-4xl tracking-tight" style={{ color: VOLT }}>{s.n}</div>
+            <div className="text-[10px] uppercase tracking-[0.25em] mt-2 font-athletic" style={{ color: STEEL_MUTED }}>{s.l}</div>
           </div>
         ))}
       </div>
     </section>
 
-    <section className="py-24 md:py-32">
+    {/* ============ TIERS ============ */}
+    <section className="py-24 md:py-32" style={{ background: OBSIDIAN }}>
       <div className="container">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: GOLD }}>Membership Architecture</span>
-          <h2 className="font-serif text-4xl md:text-5xl mt-5">
-            Tiers your AI can actually <span className="italic" style={{ color: AMBER }}>close.</span>
+          <span className="text-[10px] uppercase tracking-[0.35em] font-athletic" style={{ color: VOLT }}>Membership Architecture</span>
+          <h2 className="font-athletic uppercase font-bold text-4xl md:text-5xl mt-5 tracking-tight">
+            Tiers your AI can actually <span style={{ color: VOLT }}>close.</span>
           </h2>
-          <p className="mt-5 font-light text-lg" style={{ color: MUTE }}>
+          <p className="mt-5 font-light text-lg" style={{ color: STEEL_MUTED }}>
             Marcus qualifies every lead against your stack — trial, Elite, or Private Club — then books the next session on the calendar.
           </p>
         </div>
@@ -200,31 +236,30 @@ const Gym = () => (
           {tiers.map((t) => (
             <div
               key={t.name}
-              className="relative p-8 rounded-2xl transition-transform hover:-translate-y-1"
+              className={`relative p-8 rounded-2xl backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 gym-card-hover ${t.highlight ? "gym-volt-glow" : ""}`}
               style={{
-                background: t.highlight ? STEEL : GRAPHITE,
-                border: t.highlight ? `1px solid ${GOLD}` : `1px solid ${LINE}`,
-                boxShadow: t.highlight ? `0 24px 60px -24px ${GOLD}66` : "none",
+                background: t.highlight ? "rgba(28,28,32,0.8)" : GLASS,
+                border: t.highlight ? `1px solid ${VOLT}` : `1px solid ${LINE}`,
               }}
             >
               {t.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-[10px] uppercase tracking-[0.2em] rounded-full" style={{ background: GOLD, color: CARBON }}>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-athletic rounded-full" style={{ background: VOLT, color: OBSIDIAN }}>
                   Most closed
                 </div>
               )}
               <div className="flex items-center justify-between mb-6">
-                <Trophy className="w-5 h-5" style={{ color: GOLD }} strokeWidth={1.4} />
-                <span className="text-[9px] uppercase tracking-[0.25em] px-3 py-1 rounded-full" style={{ color: GOLD, border: `1px solid ${LINE}` }}>{t.tag}</span>
+                <Trophy className="w-5 h-5" style={{ color: VOLT }} strokeWidth={1.4} />
+                <span className="text-[9px] uppercase tracking-[0.25em] font-athletic px-3 py-1 rounded-full" style={{ color: VOLT, border: `1px solid ${VOLT_DIM}` }}>{t.tag}</span>
               </div>
-              <h3 className="font-serif text-2xl mb-2">{t.name}</h3>
+              <h3 className="font-athletic uppercase text-2xl tracking-tight mb-2">{t.name}</h3>
               <div className="flex items-baseline gap-1 mb-6">
-                <span className="font-serif text-4xl" style={{ color: AMBER }}>{t.price}</span>
-                <span className="text-sm" style={{ color: MUTE }}>{t.period}</span>
+                <span className="font-athletic font-bold text-4xl" style={{ color: VOLT }}>{t.price}</span>
+                <span className="text-sm" style={{ color: STEEL_MUTED }}>{t.period}</span>
               </div>
               <ul className="space-y-3">
                 {t.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm font-light" style={{ color: MUTE }}>
-                    <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: GOLD }} />
+                  <li key={f} className="flex items-start gap-3 text-sm font-light" style={{ color: STEEL_MUTED }}>
+                    <Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: VOLT }} />
                     {f}
                   </li>
                 ))}
@@ -243,25 +278,28 @@ const Gym = () => (
       items={gymChallenges}
     />
 
-    <section className="py-24 md:py-32" style={{ background: GRAPHITE }}>
-      <div className="container">
+    {/* ============ PAIN POINTS ============ */}
+    <section className="py-24 md:py-32 relative" style={{ background: OBSIDIAN_LIFT }}>
+      <div className="absolute inset-0 gym-carbon-grid opacity-30 pointer-events-none" />
+      <div className="container relative">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5">
-            <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: GOLD }}>The Floor Leaks</span>
-            <h2 className="font-serif text-4xl md:text-5xl mt-5 leading-tight">
-              Where elite clubs <span className="italic" style={{ color: AMBER }}>quietly bleed</span> members.
+            <span className="text-[10px] uppercase tracking-[0.35em] font-athletic" style={{ color: VOLT }}>The Floor Leaks</span>
+            <h2 className="font-athletic uppercase font-bold text-4xl md:text-5xl mt-5 leading-tight tracking-tight">
+              Where elite clubs <span style={{ color: VOLT }}>quietly bleed</span> members.
             </h2>
-            <div className="mt-10 relative rounded-3xl overflow-hidden">
+            <div className="mt-10 relative rounded-3xl overflow-hidden border" style={{ borderColor: LINE }}>
               <img src={studioImg} alt="Premium studio interior" className="w-full h-[380px] object-cover" loading="lazy" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 40%, rgba(9,9,11,0.7) 100%)" }} />
             </div>
           </div>
           <div className="lg:col-span-7 space-y-4">
             {pains.map((p, i) => (
-              <div key={p.title} className="p-8 rounded-2xl flex gap-6" style={{ background: CARBON, border: `1px solid ${LINE}` }}>
-                <div className="font-serif text-4xl italic shrink-0" style={{ color: GOLD }}>0{i + 1}</div>
+              <div key={p.title} className="p-8 rounded-2xl flex gap-6 backdrop-blur-md gym-card-hover" style={{ background: GLASS, border: `1px solid ${LINE}` }}>
+                <div className="font-athletic font-bold text-4xl shrink-0" style={{ color: VOLT }}>0{i + 1}</div>
                 <div>
-                  <h3 className="font-serif text-2xl mb-2">{p.title}</h3>
-                  <p className="font-light leading-relaxed" style={{ color: MUTE }}>{p.desc}</p>
+                  <h3 className="font-athletic uppercase text-2xl tracking-tight mb-2">{p.title}</h3>
+                  <p className="font-light leading-relaxed" style={{ color: STEEL_MUTED }}>{p.desc}</p>
                 </div>
               </div>
             ))}
@@ -280,65 +318,68 @@ const Gym = () => (
       steps={gymJourney}
     />
 
-    <section className="py-24 md:py-32">
+    {/* ============ SOLUTIONS ============ */}
+    <section className="py-24 md:py-32" style={{ background: OBSIDIAN }}>
       <div className="container">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1">
-            <div className="relative rounded-3xl overflow-hidden">
+            <div className="relative rounded-3xl overflow-hidden border" style={{ borderColor: LINE }}>
               <img src={athleteImg} alt="Athlete in a luxury training club" className="w-full h-[520px] object-cover" loading="lazy" />
-              <div className="absolute inset-x-0 bottom-0 p-8" style={{ background: "linear-gradient(180deg, transparent, rgba(10,10,12,0.85))" }}>
-                <p className="text-xs uppercase tracking-[0.3em]" style={{ color: AMBER }}>Intake · Live</p>
-                <p className="font-serif text-2xl mt-2">VIP trial locked · Thursday 6:30am</p>
+              <div className="absolute inset-x-0 bottom-0 p-8" style={{ background: "linear-gradient(180deg, transparent, rgba(9,9,11,0.9))" }}>
+                <p className="text-xs uppercase tracking-[0.3em] font-athletic" style={{ color: VOLT }}>Intake · Live</p>
+                <p className="font-athletic uppercase text-2xl mt-2 tracking-tight">VIP trial locked · Thursday 6:30am</p>
               </div>
             </div>
           </div>
           <div className="lg:col-span-7 order-1 lg:order-2">
-            <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: GOLD }}>Automated Intake & Trial Pass</span>
-            <h2 className="font-serif text-4xl md:text-5xl mt-5">
-              From DM to first sweat <span className="italic" style={{ color: AMBER }}>in under a minute.</span>
+            <span className="text-[10px] uppercase tracking-[0.35em] font-athletic" style={{ color: VOLT }}>Automated Intake & Trial Pass</span>
+            <h2 className="font-athletic uppercase font-bold text-4xl md:text-5xl mt-5 tracking-tight">
+              From DM to first sweat <span style={{ color: VOLT }}>in under a minute.</span>
             </h2>
             <div className="mt-10 space-y-3">
               {solutions.map((s, i) => (
-                <div key={s.title} className="p-6 md:p-8 rounded-2xl" style={{ background: GRAPHITE, border: `1px solid ${LINE}` }}>
+                <div key={s.title} className="p-6 md:p-8 rounded-2xl backdrop-blur-md gym-card-hover" style={{ background: GLASS, border: `1px solid ${LINE}` }}>
                   <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ border: `1px solid ${LINE}` }}>
-                      <s.Icon className="w-5 h-5" style={{ color: GOLD }} strokeWidth={1.5} />
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ border: `1px solid ${VOLT_DIM}` }}>
+                      <s.Icon className="w-5 h-5" style={{ color: VOLT }} strokeWidth={1.5} />
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase tracking-[0.3em]" style={{ color: GOLD }}>0{i + 1}</span>
-                      <h3 className="font-serif text-xl md:text-2xl mt-1 mb-2">{s.title}</h3>
-                      <p className="text-sm font-light leading-relaxed" style={{ color: MUTE }}>{s.desc}</p>
+                      <span className="text-[10px] uppercase tracking-[0.3em] font-athletic" style={{ color: VOLT }}>0{i + 1}</span>
+                      <h3 className="font-athletic uppercase text-xl md:text-2xl mt-1 mb-2 tracking-tight">{s.title}</h3>
+                      <p className="text-sm font-light leading-relaxed" style={{ color: STEEL_MUTED }}>{s.desc}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
             <div className="mt-8">
-              <a href="/#contact"><LuxeButton>Activate Trial Pass Automation</LuxeButton></a>
+              <a href="/#contact"><VoltButton>Activate Trial Pass Automation</VoltButton></a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section className="py-24 md:py-32" style={{ background: GRAPHITE }}>
-      <div className="container">
+    {/* ============ TESTIMONIALS ============ */}
+    <section className="py-24 md:py-32 relative" style={{ background: OBSIDIAN_LIFT }}>
+      <div className="absolute inset-0 gym-carbon-grid opacity-30 pointer-events-none" />
+      <div className="container relative">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: GOLD }}>From the Floor</span>
-          <h2 className="font-serif text-4xl md:text-5xl mt-5">
-            Trusted by <span className="italic" style={{ color: AMBER }}>performance clubs.</span>
+          <span className="text-[10px] uppercase tracking-[0.35em] font-athletic" style={{ color: VOLT }}>From the Floor</span>
+          <h2 className="font-athletic uppercase font-bold text-4xl md:text-5xl mt-5 tracking-tight">
+            Trusted by <span style={{ color: VOLT }}>performance clubs.</span>
           </h2>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <figure key={t.author} className="p-8 rounded-2xl flex flex-col" style={{ background: CARBON, border: `1px solid ${LINE}` }}>
-              <div className="flex gap-1 mb-5" style={{ color: GOLD }}>
+            <figure key={t.author} className="p-8 rounded-2xl flex flex-col backdrop-blur-md gym-card-hover" style={{ background: GLASS, border: `1px solid ${LINE}` }}>
+              <div className="flex gap-1 mb-5" style={{ color: VOLT }}>
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
               </div>
-              <blockquote className="font-serif text-lg leading-relaxed flex-1">"{t.quote}"</blockquote>
+              <blockquote className="text-lg leading-relaxed flex-1" style={{ color: TITANIUM }}>"{t.quote}"</blockquote>
               <figcaption className="mt-6 pt-6" style={{ borderTop: `1px solid ${LINE}` }}>
-                <div className="font-medium text-sm">{t.author}</div>
-                <div className="text-xs mt-1" style={{ color: MUTE }}>{t.role}</div>
+                <div className="font-athletic uppercase tracking-wide font-medium text-sm">{t.author}</div>
+                <div className="text-xs mt-1" style={{ color: STEEL_MUTED }}>{t.role}</div>
               </figcaption>
             </figure>
           ))}
@@ -346,24 +387,25 @@ const Gym = () => (
       </div>
     </section>
 
-    <section className="py-24 md:py-32">
+    {/* ============ LOCAL AUTHORITY ============ */}
+    <section className="py-24 md:py-32" style={{ background: OBSIDIAN }}>
       <div className="container">
         <div className="grid md:grid-cols-2 gap-14 items-center">
           <div>
-            <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: GOLD }}>Local Authority</span>
-            <h2 className="font-serif text-4xl md:text-5xl mt-5 mb-6">
-              Own <span className="italic" style={{ color: AMBER }}>your city</span> on the map.
+            <span className="text-[10px] uppercase tracking-[0.35em] font-athletic" style={{ color: VOLT }}>Local Authority</span>
+            <h2 className="font-athletic uppercase font-bold text-4xl md:text-5xl mt-5 mb-6 tracking-tight">
+              Own <span style={{ color: VOLT }}>your city</span> on the map.
             </h2>
-            <p className="font-light leading-relaxed mb-8" style={{ color: MUTE }}>
+            <p className="font-light leading-relaxed mb-8" style={{ color: STEEL_MUTED }}>
               Hyper-local studio pages, automated Google reviews after every PR, and geo-targeted nurture — so “best gym near me” points to your door.
             </p>
-            <a href="/#contact"><LuxeButton>Claim Your Region</LuxeButton></a>
+            <a href="/#contact"><VoltButton>Claim Your Region</VoltButton></a>
           </div>
           <div className="grid grid-cols-2 gap-3">
             {cities.map((city) => (
-              <div key={city} className="flex items-center gap-3 p-4 rounded-xl" style={{ background: GRAPHITE, border: `1px solid ${LINE}` }}>
-                <MapPin className="w-4 h-4 shrink-0" style={{ color: GOLD }} strokeWidth={1.5} />
-                <span className="text-sm">{city}</span>
+              <div key={city} className="flex items-center gap-3 p-4 rounded-xl backdrop-blur-md gym-card-hover" style={{ background: GLASS, border: `1px solid ${LINE}` }}>
+                <MapPin className="w-4 h-4 shrink-0" style={{ color: VOLT }} strokeWidth={1.5} />
+                <span className="text-sm" style={{ color: TITANIUM }}>{city}</span>
               </div>
             ))}
           </div>
@@ -371,42 +413,43 @@ const Gym = () => (
       </div>
     </section>
 
-    <section className="py-24 md:py-32" style={{ background: GRAPHITE }}>
-      <div className="container max-w-4xl">
+    {/* ============ FAQ ============ */}
+    <section className="py-24 md:py-32 relative" style={{ background: OBSIDIAN_LIFT }}>
+      <div className="absolute inset-0 gym-carbon-grid opacity-30 pointer-events-none" />
+      <div className="container max-w-4xl relative">
         <div className="text-center mb-16">
-          <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: GOLD }}>Locker Room Questions</span>
-          <h2 className="font-serif text-4xl md:text-5xl mt-5">Frequently <span className="italic" style={{ color: AMBER }}>asked.</span></h2>
+          <span className="text-[10px] uppercase tracking-[0.35em] font-athletic" style={{ color: VOLT }}>Locker Room Questions</span>
+          <h2 className="font-athletic uppercase font-bold text-4xl md:text-5xl mt-5 tracking-tight">Frequently <span style={{ color: VOLT }}>asked.</span></h2>
         </div>
         <div className="space-y-4">
           {faqs.map((f) => (
-            <details key={f.q} className="group p-6 md:p-8 rounded-2xl" style={{ background: CARBON, border: `1px solid ${LINE}` }}>
+            <details key={f.q} className="group p-6 md:p-8 rounded-2xl backdrop-blur-md" style={{ background: GLASS, border: `1px solid ${LINE}` }}>
               <summary className="flex items-center justify-between cursor-pointer list-none">
-                <span className="font-serif text-lg md:text-xl">{f.q}</span>
-                <span className="ml-4 w-8 h-8 rounded-full flex items-center justify-center transition-transform group-open:rotate-45" style={{ background: STEEL, color: GOLD }}>+</span>
+                <span className="font-athletic uppercase tracking-wide text-lg md:text-xl">{f.q}</span>
+                <span className="ml-4 w-8 h-8 rounded-full flex items-center justify-center transition-transform group-open:rotate-45" style={{ background: "rgba(212,255,0,0.12)", color: VOLT }}>+</span>
               </summary>
-              <p className="mt-4 font-light leading-relaxed" style={{ color: MUTE }}>{f.a}</p>
+              <p className="mt-4 font-light leading-relaxed" style={{ color: STEEL_MUTED }}>{f.a}</p>
             </details>
           ))}
         </div>
       </div>
     </section>
 
-    <section className="py-24 md:py-32" style={{ background: `linear-gradient(135deg, ${CARBON} 0%, ${STEEL} 100%)` }}>
-      <div className="container text-center max-w-3xl">
-        <Activity className="w-6 h-6 mx-auto mb-6" style={{ color: AMBER }} strokeWidth={1.3} />
-        <h2 className="font-serif text-4xl md:text-6xl leading-tight">
-          Fill the floor. <span className="italic" style={{ color: AMBER }}>Close the member.</span>
+    {/* ============ FINAL CTA ============ */}
+    <section className="py-24 md:py-32 relative overflow-hidden" style={{ background: OBSIDIAN }}>
+      <div className="absolute inset-0 gym-carbon-grid opacity-50 pointer-events-none" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-15" style={{ background: VOLT }} />
+      <div className="container text-center max-w-3xl relative">
+        <Activity className="w-6 h-6 mx-auto mb-6" style={{ color: VOLT }} strokeWidth={1.3} />
+        <h2 className="font-athletic uppercase font-bold text-4xl md:text-6xl leading-tight tracking-tight">
+          Fill the floor. <span style={{ color: VOLT }}>Close the member.</span>
         </h2>
-        <p className="mt-6 font-light text-lg max-w-xl mx-auto" style={{ color: MUTE }}>
+        <p className="mt-6 font-light text-lg max-w-xl mx-auto" style={{ color: STEEL_MUTED }}>
           Join performance clubs already converting trials around the clock with NavAura’s Gym Membership Closer — from $1,497/mo.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <a href="/#contact"><LuxeButton>Request Private Access</LuxeButton></a>
-          <Link to="/demo-dashboard">
-            <button className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm tracking-wider" style={{ border: `1px solid ${LINE}`, color: IVORY }}>
-              View Live Demo <ArrowRight className="w-4 h-4" />
-            </button>
-          </Link>
+          <a href="/#contact"><VoltButton>Request Private Access</VoltButton></a>
+          <Link to="/demo-dashboard"><GhostButton>View Live Demo</GhostButton></Link>
         </div>
       </div>
     </section>
