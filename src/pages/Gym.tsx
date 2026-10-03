@@ -19,8 +19,6 @@ import { IndustryChallengeSection, IndustryROICalculator, IntakeJourneyShowcase 
 import { Seo } from "@/components/Seo";
 import gymHero from "@/assets/industry-gym.jpg";
 import marcusAvatar from "@/assets/marcus-avatar.jpg";
-import gymHeroVideo from "@/assets/gym-hero-bg.mp4.asset.json";
-import gymHeroVideoWebm from "@/assets/gym-hero-bg.webm.asset.json";
 
 // ============ Athletic palette ============
 const OBSIDIAN = "#09090B";
@@ -150,8 +148,8 @@ const Gym = () => (
           src={
             typeof document !== "undefined" &&
             document.createElement("video").canPlayType('video/webm; codecs="vp9"')
-              ? gymHeroVideoWebm.url
-              : gymHeroVideo.url
+              ? "/gym-hero-bg.webm"
+              : "/gym-hero-bg.mp4"
           }
         />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, #09090B 100%)" }} />
