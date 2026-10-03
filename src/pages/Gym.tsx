@@ -20,6 +20,7 @@ import { Seo } from "@/components/Seo";
 import gymHero from "@/assets/industry-gym.jpg";
 import marcusAvatar from "@/assets/marcus-avatar.jpg";
 import gymHeroVideo from "@/assets/gym-hero-bg.mp4.asset.json";
+import gymHeroVideoWebm from "@/assets/gym-hero-bg.webm.asset.json";
 
 // ============ Athletic palette ============
 const OBSIDIAN = "#09090B";
@@ -146,8 +147,10 @@ const Gym = () => (
           playsInline
           poster={heroImg}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none -z-10 opacity-40"
-          src={gymHeroVideo.url}
-        />
+        >
+          <source src={gymHeroVideoWebm.url} type="video/webm" />
+          <source src={gymHeroVideo.url} type="video/mp4" />
+        </video>
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, #09090B 100%)" }} />
         <div className="absolute inset-0 gym-carbon-grid opacity-60" />
         <div className="pointer-events-none absolute -top-32 right-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-25" style={{ background: VOLT }} />
