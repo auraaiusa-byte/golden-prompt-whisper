@@ -147,10 +147,13 @@ const Gym = () => (
           playsInline
           poster={heroImg}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none -z-10 opacity-40"
-        >
-          <source src={gymHeroVideoWebm.url} type="video/webm" />
-          <source src={gymHeroVideo.url} type="video/mp4" />
-        </video>
+          src={
+            typeof document !== "undefined" &&
+            document.createElement("video").canPlayType('video/webm; codecs="vp9"')
+              ? gymHeroVideoWebm.url
+              : gymHeroVideo.url
+          }
+        />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, #09090B 100%)" }} />
         <div className="absolute inset-0 gym-carbon-grid opacity-60" />
         <div className="pointer-events-none absolute -top-32 right-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-25" style={{ background: VOLT }} />
