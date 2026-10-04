@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
+import { Sparkles, Scale, Dumbbell } from "lucide-react";
 
 const ECOSYSTEMS: {
   niche: string;
+  icon: React.ComponentType<{ className?: string }>;
   accent: "gold" | "cyan";
   brands: string[];
 }[] = [
-  { niche: "Med-Spa", accent: "gold", brands: ["Boulevard", "Mindbody", "Zenoti"] },
-  { niche: "Legal", accent: "cyan", brands: ["Clio", "Filevine", "Smokeball"] },
-  { niche: "Fitness", accent: "gold", brands: ["PushPress", "Mariana Tek", "ClubReady"] },
+  { niche: "Med Spa", icon: Sparkles, accent: "gold", brands: ["Boulevard", "Mindbody", "Zenoti"] },
+  { niche: "Law Firms", icon: Scale, accent: "cyan", brands: ["Clio", "Filevine", "Smokeball"] },
+  { niche: "Gym", icon: Dumbbell, accent: "gold", brands: ["PushPress", "Mariana Tek", "ClubReady"] },
 ];
 
 const SYNC_FEATURES = [
