@@ -28,6 +28,7 @@ const Index = () => {
       <AsSeenIn />
       <Industries />
       <Concierge />
+      <Integrations />
       <Voice />
       <RoiCalculator />
       <Results />
