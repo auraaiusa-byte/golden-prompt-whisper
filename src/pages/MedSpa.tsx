@@ -75,7 +75,7 @@ const faqs = [
 const cities = ["Beverly Hills, CA", "Miami, FL", "Scottsdale, AZ", "Manhattan, NY", "Dallas, TX", "Austin, TX"];
 
 const MedSpa = () => (
-  <main className="min-h-screen" style={{ background: IVORY, color: INK }}>
+  <main className="min-h-screen bg-transparent" style={{ color: INK }}>
     <Seo
       title="Med Spa AI Automation & 24/7 Booking · NavAura AI"
       description="NavAura AI deploys 24/7 booking agents, automated patient intake, and VIP retention for medical spas. Stop losing DMs — request private access today."
@@ -85,20 +85,31 @@ const MedSpa = () => (
     <Nav />
 
     {/* HERO */}
-    <section className="relative pt-28 md:pt-36 pb-20 md:pb-28 overflow-hidden" style={{ background: `linear-gradient(180deg, ${BLUSH} 0%, ${IVORY} 100%)` }}>
-      {/* decorative ornaments */}
-      <div className="pointer-events-none absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full blur-3xl opacity-60" style={{ background: GOLD_SOFT }} />
-      <div className="pointer-events-none absolute -bottom-32 -right-16 w-[520px] h-[520px] rounded-full blur-3xl opacity-50" style={{ background: BLUSH }} />
+    <section className="relative overflow-hidden min-h-[85vh] flex items-center bg-transparent pt-28 md:pt-36 pb-20 md:pb-28">
+      <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover opacity-75"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        >
+          <source src="/medspa-hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-[#09090B]/40 to-black/70 pointer-events-none" />
+      </div>
 
-      <div className="container relative">
+      <div className="container relative z-10 w-full">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8" style={{ background: "rgba(255,255,255,0.7)", border: `1px solid ${LINE}` }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 backdrop-blur-md" style={{ background: "rgba(255,255,255,0.08)", border: `1px solid rgba(197,160,92,0.3)` }}>
               <Sparkles className="w-3.5 h-3.5" style={{ color: GOLD }} />
-              <span className="text-[10px] uppercase tracking-[0.3em]" style={{ color: MUTE }}>Luxury Medical Aesthetics · AI Concierge</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-white/80">Luxury Medical Aesthetics · AI Concierge</span>
             </div>
 
-            <h1 className="font-serif leading-[1.02] text-5xl md:text-6xl lg:text-7xl tracking-tight" style={{ color: INK }}>
+            <h1 className="font-serif leading-[1.02] text-5xl md:text-6xl lg:text-7xl tracking-tight text-white">
               Timeless beauty,
               <br />
               <span className="italic" style={{ color: GOLD }}>reimagined</span> for
@@ -106,7 +117,7 @@ const MedSpa = () => (
               the modern woman.
             </h1>
 
-            <p className="mt-8 text-lg md:text-xl font-light max-w-xl leading-relaxed" style={{ color: MUTE }}>
+            <p className="mt-8 text-lg md:text-xl font-light max-w-xl leading-relaxed text-white/80">
               A discreet, 24/7 aesthetic concierge — booking HydraFacials, Botox, and laser
               consultations while you focus on results. Elevated care, effortlessly delivered.
             </p>
@@ -115,62 +126,62 @@ const MedSpa = () => (
               <a href="/#contact"><LuxeButton>Request Private Access</LuxeButton></a>
               <Link to="/demo-dashboard">
                 <button
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm tracking-wider transition-all hover:gap-3"
-                  style={{ background: "transparent", color: INK, border: `1px solid ${INK}` }}
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-sm tracking-wider transition-all hover:gap-3 text-white border border-white/30 hover:border-gold hover:text-gold"
+                  style={{ background: "transparent" }}
                 >
                   Explore the Experience <ArrowRight className="w-4 h-4" />
                 </button>
               </Link>
             </div>
 
-            <div className="flex items-center gap-6 mt-12 pt-8" style={{ borderTop: `1px solid ${LINE}` }}>
+            <div className="flex items-center gap-6 mt-12 pt-8" style={{ borderTop: `1px solid rgba(255,255,255,0.12)` }}>
               <div className="flex -space-x-2">
                 {[portraitImg, treatmentsImg, heroImg].map((src, i) => (
-                  <img key={i} src={src} alt="" className="w-9 h-9 rounded-full object-cover ring-2" style={{ ["--tw-ring-color" as any]: IVORY }} />
+                  <img key={i} src={src} alt="" className="w-9 h-9 rounded-full object-cover ring-2" style={{ ["--tw-ring-color" as any]: "rgba(255,255,255,0.2)" }} />
                 ))}
               </div>
               <div>
                 <div className="flex items-center gap-1" style={{ color: GOLD }}>
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
                 </div>
-                <p className="text-xs mt-1" style={{ color: MUTE }}>Trusted by 200+ elite clinics nationwide</p>
+                <p className="text-xs mt-1 text-white/70">Trusted by 200+ elite clinics nationwide</p>
               </div>
             </div>
           </div>
 
-          {/* Hero image */}
+          {/* Hero image & preview */}
           <div className="lg:col-span-6 relative">
-            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl" style={{ boxShadow: "0 40px 100px -30px rgba(139, 108, 66, 0.35)" }}>
+            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/10" style={{ boxShadow: "0 40px 100px -30px rgba(0, 0, 0, 0.6)" }}>
               <img
                 src={heroImg}
                 alt="Woman receiving luxury facial treatment at premium medical spa"
                 width={1920}
                 height={1280}
-                className="w-full h-[520px] md:h-[640px] object-cover"
+                className="w-full h-[520px] md:h-[640px] object-cover opacity-90"
               />
-              <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, transparent 55%, rgba(43,38,34,0.15) 100%)` }} />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, transparent 55%, rgba(9,9,11,0.5) 100%)` }} />
             </div>
 
             {/* Floating card */}
-            <div className="absolute -bottom-8 -left-4 md:left-6 max-w-[280px] rounded-2xl p-5 backdrop-blur-xl" style={{ background: "rgba(255,255,255,0.85)", border: `1px solid ${LINE}`, boxShadow: "0 20px 60px -20px rgba(0,0,0,0.15)" }}>
+            <div className="absolute -bottom-8 -left-4 md:left-6 max-w-[280px] rounded-2xl p-5 backdrop-blur-xl border border-white/15 shadow-2xl" style={{ background: "rgba(18, 18, 24, 0.8)" }}>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: BLUSH }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center border border-gold/30" style={{ background: "rgba(197, 160, 92, 0.15)" }}>
                   <HeartPulse className="w-4 h-4" style={{ color: GOLD }} />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.2em]" style={{ color: MUTE }}>Just Booked</p>
-                  <p className="text-sm font-medium">HydraFacial · 2:30 PM</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Just Booked</p>
+                  <p className="text-sm font-medium text-white">HydraFacial · 2:30 PM</p>
                 </div>
               </div>
-              <div className="mt-3 pt-3 flex items-center justify-between" style={{ borderTop: `1px solid ${LINE}` }}>
-                <span className="text-xs" style={{ color: MUTE }}>via Instagram DM</span>
+              <div className="mt-3 pt-3 flex items-center justify-between border-t border-white/10">
+                <span className="text-xs text-white/60">via Instagram DM</span>
                 <span className="text-xs font-medium" style={{ color: GOLD }}>+ $420</span>
               </div>
             </div>
 
             {/* Floating badge */}
-            <div className="absolute -top-4 right-4 md:right-8 rounded-full px-5 py-3 flex items-center gap-2" style={{ background: INK, color: IVORY }}>
-              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: GOLD_SOFT }} />
+            <div className="absolute -top-4 right-4 md:right-8 rounded-full px-5 py-3 flex items-center gap-2 border border-white/15 backdrop-blur-md" style={{ background: "rgba(18, 18, 24, 0.85)", color: IVORY }}>
+              <span className="w-2 h-2 rounded-full animate-pulse bg-emerald-400" />
               <span className="text-[10px] uppercase tracking-[0.25em]">24/7 Live Concierge</span>
             </div>
           </div>
@@ -193,7 +204,7 @@ const MedSpa = () => (
     </section>
 
     {/* TREATMENTS */}
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32" style={{ background: IVORY }}>
       <div className="container">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: GOLD }}>Signature Treatments</span>

@@ -109,7 +109,7 @@ const lawJourney = [
 ];
 
 const LawFirm = () => (
-  <main className="min-h-screen" style={{ background: NAVY, color: IVORY }}>
+  <main className="min-h-screen bg-transparent" style={{ color: IVORY }}>
     <Seo
       title="Law Firm Intake AI & Confidential Case Triage · NavAura"
       description="NavAura AI delivers 24/7 confidential case triage, practice-area qualification, and attorney consultation scheduling for modern law firms. Request access."
@@ -118,17 +118,28 @@ const LawFirm = () => (
     />
     <Nav />
 
-    <section className="relative pt-28 md:pt-36 pb-24 overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={heroImg} alt="Prestigious law library and chambers" className="w-full h-full object-cover opacity-35" width={1920} height={1080} />
-        <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${NAVY}D9 0%, ${NAVY}F5 100%)` }} />
+    <section className="relative overflow-hidden min-h-[85vh] flex items-center bg-transparent pt-28 md:pt-36 pb-24">
+      <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover opacity-75"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        >
+          <source src="/law-hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Dark corporate vignette for legal readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-[#09090B]/40 to-black/70 pointer-events-none" />
       </div>
-      <div className="pointer-events-none absolute top-0 left-1/3 w-[520px] h-[520px] rounded-full blur-3xl opacity-20" style={{ background: BRASS }} />
+      <div className="pointer-events-none absolute top-0 left-1/3 w-[520px] h-[520px] rounded-full blur-3xl opacity-15" style={{ background: BRASS }} />
 
-      <div className="container relative">
+      <div className="container relative z-10 w-full">
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8" style={{ background: `${SLATE}CC`, border: `1px solid ${LINE}` }}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 backdrop-blur-md" style={{ background: `${SLATE}CC`, border: `1px solid ${LINE}` }}>
             <Landmark className="w-3.5 h-3.5" style={{ color: BRASS }} />
             <span className="text-[10px] uppercase tracking-[0.3em]" style={{ color: MUTE }}>White-Shoe Practice · Confidential Intake</span>
           </div>
@@ -160,8 +171,8 @@ const LawFirm = () => (
           </div>
         </div>
         <div className="relative lg:col-span-5">
-          <div className="relative overflow-hidden rounded-sm border" style={{ borderColor: LINE }}>
-            <img src={lawHero} alt="Law library prepared for a confidential client consultation" className="h-[380px] w-full object-cover md:h-[470px]" width={1920} height={1080} />
+          <div className="relative overflow-hidden rounded-sm border backdrop-blur-md" style={{ borderColor: LINE, background: "rgba(18, 26, 38, 0.75)" }}>
+            <img src={lawHero} alt="Law library prepared for a confidential client consultation" className="h-[380px] w-full object-cover md:h-[470px] opacity-90" width={1920} height={1080} />
             <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, transparent 42%, ${NAVY}E6 100%)` }} />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
               <div className="flex items-center gap-3 border-b pb-4" style={{ borderColor: LINE }}>
@@ -198,7 +209,7 @@ const LawFirm = () => (
       items={lawChallenges}
     />
 
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32" style={{ background: NAVY }}>
       <div className="container">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: BRASS }}>Practice Areas</span>
@@ -318,7 +329,7 @@ const LawFirm = () => (
       </div>
     </section>
 
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32" style={{ background: NAVY }}>
       <div className="container">
         <div className="grid md:grid-cols-2 gap-14 items-center">
           <div>

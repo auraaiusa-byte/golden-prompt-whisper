@@ -195,7 +195,30 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
       hsl(222 30% 6% / 0.92) 90%,
       hsl(var(--background)) 100%);
   }
+
+  /* Architectural Blueprint Matrix & Pipeline Animations */
+  .blueprint-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  @keyframes dashFlow {
+    from { stroke-dashoffset: 24; }
+    to { stroke-dashoffset: 0; }
+  }
+  .animate-dash-flow {
+    stroke-dasharray: 4, 4;
+    animation: dashFlow 1.2s linear infinite;
+  }
+  @keyframes pulseSubtle {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2.5s ease-in-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .pipeline-beam, .pipeline-scan { animation: none; }
+    .pipeline-beam, .pipeline-scan, .animate-dash-flow, .animate-pulse-subtle { animation: none; }
   }
 }
+
