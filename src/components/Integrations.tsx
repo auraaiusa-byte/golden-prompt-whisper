@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
+import { Sparkles, Scale, Dumbbell } from "lucide-react";
 
 const ECOSYSTEMS: {
   niche: string;
+  icon: React.ComponentType<{ className?: string }>;
   accent: "gold" | "cyan";
   brands: string[];
 }[] = [
-  { niche: "Med-Spa", accent: "gold", brands: ["Boulevard", "Mindbody", "Zenoti"] },
-  { niche: "Legal", accent: "cyan", brands: ["Clio", "Filevine", "Smokeball"] },
-  { niche: "Fitness", accent: "gold", brands: ["PushPress", "Mariana Tek", "ClubReady"] },
+  { niche: "Med Spa", icon: Sparkles, accent: "gold", brands: ["Boulevard", "Mindbody", "Zenoti"] },
+  { niche: "Law Firms", icon: Scale, accent: "cyan", brands: ["Clio", "Filevine", "Smokeball"] },
+  { niche: "Gym", icon: Dumbbell, accent: "gold", brands: ["PushPress", "Mariana Tek", "ClubReady"] },
 ];
 
 const SYNC_FEATURES = [
@@ -45,13 +47,6 @@ const FeatureBullet = ({ children }: { children: React.ReactNode }) => (
   </li>
 );
 
-const AccentDot = ({ accent }: { accent: "gold" | "cyan" }) => (
-  <span
-    className={`inline-block h-1.5 w-1.5 rounded-full ${
-      accent === "gold" ? "bg-gold shadow-[0_0_8px_hsl(39_65%_60%/0.9)]" : "bg-[hsl(var(--pipeline-cyan))] shadow-[0_0_8px_hsl(var(--pipeline-cyan)/0.9)]"
-    }`}
-  />
-);
 
 export const Integrations = () => (
   <section id="integrations" className="relative py-24 md:py-36 overflow-hidden">
@@ -105,11 +100,11 @@ export const Integrations = () => (
 
             {/* Brand badges by niche */}
             <div className="space-y-4 mb-8">
-              {ECOSYSTEMS.map(({ niche, accent, brands }) => (
-                <div key={niche} className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-luxe text-muted-foreground w-16 shrink-0">
-                    <AccentDot accent={accent} />
-                    {niche}
+              {ECOSYSTEMS.map(({ niche, icon: Icon, accent, brands }) => (
+                <div key={niche} className="flex items-center gap-2 sm:gap-3">
+                  <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-luxe text-muted-foreground min-w-[130px] shrink-0">
+                    <Icon className="h-3.5 w-3.5 shrink-0" />
+                    <span className="whitespace-nowrap">{niche}</span>
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {brands.map((brand) => (
