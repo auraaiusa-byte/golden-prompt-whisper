@@ -4,6 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/supabase/vite";
 
+const mcpEntry = "supabase/functions/mcp/_shared/index.ts";
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -13,7 +15,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger(), mcpPlugin()].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger(), mcpPlugin({ mcpEntry })].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
