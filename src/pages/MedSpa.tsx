@@ -98,6 +98,166 @@ const medspaPortalFeatures = [
   "HIPAA-aware encrypted patient logging",
 ];
 
+const MedSpaIntegrations = () => (
+  <section
+    className="relative py-24 md:py-32 overflow-hidden"
+    style={{ background: "linear-gradient(180deg, #09090B 0%, #14101A 50%, #09090B 100%)", color: IVORY }}
+  >
+    {/* ambient rose-gold glow */}
+    <div
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background:
+          "radial-gradient(circle at 15% 10%, rgba(201,139,126,0.10), transparent 42%), radial-gradient(circle at 85% 90%, rgba(197,160,92,0.08), transparent 40%)",
+      }}
+    />
+
+    <div className="container relative">
+      {/* Header */}
+      <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20">
+        <div
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-8 backdrop-blur-md"
+          style={{ background: "rgba(255,255,255,0.06)", border: `1px solid rgba(201,139,126,0.35)` }}
+        >
+          <Sparkles className="w-3.5 h-3.5" style={{ color: ROSE }} />
+          <span className="text-[10px] uppercase tracking-[0.3em]" style={{ color: ROSE_SOFT }}>
+            Med Spa Practice Integration
+          </span>
+        </div>
+
+        <h2 className="font-serif text-4xl md:text-5xl leading-tight text-white">
+          Syncs seamlessly with your <span className="italic" style={{ color: ROSE_SOFT }}>aesthetic EHR</span> —
+          <br className="hidden sm:block" /> or use NavAura Sovereign.
+        </h2>
+
+        <p className="mt-6 font-light text-lg leading-relaxed text-white/70">
+          Zero disruption to your clinic. Auto-book injectables and consultations directly into your
+          existing software, or run your practice via our secure patient dashboard.
+        </p>
+      </div>
+
+      {/* 2-column split */}
+      <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        {/* Card 1 — Practice Management Sync */}
+        <div
+          className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 transition-all duration-700 hover:border-[rgba(201,139,126,0.45)] hover:shadow-[0_24px_80px_-32px_rgba(201,139,126,0.4)] p-8 sm:p-10 lg:p-12 flex flex-col"
+        >
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(201,139,126,0.6), transparent)" }}
+          />
+
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-5">01 — Keep Your Stack</span>
+          <h3 className="font-serif text-2xl sm:text-3xl leading-snug text-white mb-3">
+            Aesthetic Practice Management Sync
+          </h3>
+          <p className="text-sm font-light leading-relaxed text-white/60 mb-8">
+            Instant 2-way real-time calendar &amp; chart synchronization.
+          </p>
+
+          {/* Platform pills */}
+          <div className="flex flex-wrap gap-2 mb-9">
+            {medspaPlatforms.map((p) => (
+              <span
+                key={p}
+                className="px-4 py-2 rounded-full text-xs font-medium tracking-wide border border-white/10 bg-zinc-950/60 text-white/75 transition-all duration-500 hover:border-[rgba(201,139,126,0.5)] hover:text-[#E8C9BE]"
+              >
+                {p}
+              </span>
+            ))}
+          </div>
+
+          <ul className="space-y-3.5 border-t border-white/10 pt-7 mt-auto">
+            {medspaSyncFeatures.map((f) => (
+              <li key={f} className="flex items-start gap-3 text-sm font-light text-white/70">
+                <span className="mt-[3px] text-[10px]" style={{ color: ROSE }}>◆</span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Card 2 — Sovereign Med Spa Portal */}
+        <div
+          className="group relative overflow-hidden rounded-3xl bg-zinc-900/50 backdrop-blur-md border border-white/10 transition-all duration-700 hover:border-[rgba(197,160,92,0.45)] hover:shadow-[0_24px_80px_-32px_rgba(197,160,92,0.4)] p-8 sm:p-10 lg:p-12 flex flex-col"
+        >
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(197,160,92,0.6), transparent)" }}
+          />
+
+          <div className="flex items-center gap-3 mb-5">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">02 — Or Go Sovereign</span>
+            <span className="ml-auto inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em]" style={{ color: ROSE_SOFT }}>
+              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: ROSE }} />
+              Live
+            </span>
+          </div>
+
+          <h3 className="font-serif text-2xl sm:text-3xl leading-snug text-white mb-3">
+            NavAura Sovereign Med Spa Portal
+          </h3>
+          <p className="text-sm font-light leading-relaxed text-white/60 mb-8">
+            No enterprise software? Complete patient intake &amp; booking command center.
+          </p>
+
+          {/* Live intake simulation */}
+          <div className="relative rounded-2xl border border-white/10 bg-zinc-950/70 p-5 mb-9 overflow-hidden">
+            <div
+              className="absolute inset-0 opacity-30 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(rgba(201,139,126,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(201,139,126,0.08) 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
+              }}
+            />
+            <div className="relative space-y-3">
+              {medspaIntakeRows.map((row) => (
+                <div
+                  key={row.label}
+                  className="flex items-center justify-between gap-3 rounded-lg border border-white/5 bg-zinc-900/60 px-3 py-2.5"
+                >
+                  <span className="text-xs font-light text-white/70 truncate">{row.label}</span>
+                  <span
+                    className={`shrink-0 text-[9px] uppercase tracking-[0.2em] px-2 py-1 rounded-full border ${
+                      row.tone === "rose"
+                        ? "text-[#E8C9BE] border-[rgba(201,139,126,0.35)] bg-[rgba(201,139,126,0.08)]"
+                        : "text-[#E9D6A8] border-[rgba(197,160,92,0.35)] bg-[rgba(197,160,92,0.08)]"
+                    }`}
+                  >
+                    {row.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <ul className="space-y-3.5 border-t border-white/10 pt-7 mb-9">
+            {medspaPortalFeatures.map((f) => (
+              <li key={f} className="flex items-start gap-3 text-sm font-light text-white/70">
+                <span className="mt-[3px] text-[10px]" style={{ color: ROSE }}>◆</span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-auto">
+            <Link
+              to="/demo"
+              className="group/btn relative inline-flex items-center justify-center gap-3 px-8 py-4 min-h-[48px] w-full sm:w-auto text-xs uppercase tracking-[0.25em] overflow-hidden rounded-full transition-all duration-500"
+              style={{ background: `linear-gradient(135deg, ${GOLD} 0%, ${ROSE} 100%)`, color: "#1A1512" }}
+            >
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-1000 group-hover/btn:translate-x-full" />
+              <span className="relative">Explore Live Demo Dashboard</span>
+              <ArrowRight className="relative w-4 h-4 transition-transform duration-500 group-hover/btn:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 const MedSpa = () => (
   <main className="min-h-screen bg-transparent" style={{ color: INK }}>
     <Seo
