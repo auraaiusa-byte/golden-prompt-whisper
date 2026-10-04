@@ -74,6 +74,30 @@ const faqs = [
 
 const cities = ["Beverly Hills, CA", "Miami, FL", "Scottsdale, AZ", "Manhattan, NY", "Dallas, TX", "Austin, TX"];
 
+/* Rose-gold accents for the dedicated integration section */
+const ROSE = "#C98B7E";
+const ROSE_SOFT = "#E8C9BE";
+
+const medspaPlatforms = ["Boulevard", "Mindbody", "Zenoti", "Jane App", "Vagaro"];
+
+const medspaSyncFeatures = [
+  "Live treatment room & provider calendar check",
+  "Zero double-booking for Botox, Fillers & Lasers",
+  "Automatic patient profile & consent status creation",
+];
+
+const medspaIntakeRows = [
+  { label: "Aura Voice Booking — Full Face Botox", status: "Confirmed", tone: "rose" },
+  { label: "New Patient Consultation — Laser Resurfacing", status: "Slot Locked", tone: "gold" },
+  { label: "VIP Membership Inquiry — HydraFacial Package", status: "Routed", tone: "rose" },
+] as const;
+
+const medspaPortalFeatures = [
+  "Real-time patient inquiry tracking with audio replay",
+  "Instant SMS deposit links & cancellation recovery",
+  "HIPAA-aware encrypted patient logging",
+];
+
 const MedSpa = () => (
   <main className="min-h-screen bg-transparent" style={{ color: INK }}>
     <Seo
