@@ -4,6 +4,7 @@ import { LiveTicker } from "@/components/LiveTicker";
 import { AsSeenIn } from "@/components/AsSeenIn";
 import { Industries } from "@/components/Industries";
 import { Concierge } from "@/components/Concierge";
+import { Integrations } from "@/components/Integrations";
 import { Voice } from "@/components/Voice";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { Results } from "@/components/Results";
