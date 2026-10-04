@@ -107,11 +107,11 @@ export const Integrations = () => (
 
             {/* Brand badges by niche */}
             <div className="space-y-4 mb-8">
-              {ECOSYSTEMS.map(({ niche, accent, brands }) => (
-                <div key={niche} className="flex flex-wrap items-center gap-2 sm:gap-3">
-                  <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-luxe text-muted-foreground w-16 shrink-0">
-                    <AccentDot accent={accent} />
-                    {niche}
+              {ECOSYSTEMS.map(({ niche, icon: Icon, accent, brands }) => (
+                <div key={niche} className="flex items-center gap-2 sm:gap-3">
+                  <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-luxe text-muted-foreground min-w-[130px] shrink-0">
+                    <Icon className="h-3.5 w-3.5 shrink-0" />
+                    <span className="whitespace-nowrap">{niche}</span>
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {brands.map((brand) => (
