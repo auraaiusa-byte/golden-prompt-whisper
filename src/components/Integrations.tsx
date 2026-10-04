@@ -47,13 +47,6 @@ const FeatureBullet = ({ children }: { children: React.ReactNode }) => (
   </li>
 );
 
-const AccentDot = ({ accent }: { accent: "gold" | "cyan" }) => (
-  <span
-    className={`inline-block h-1.5 w-1.5 rounded-full ${
-      accent === "gold" ? "bg-gold shadow-[0_0_8px_hsl(39_65%_60%/0.9)]" : "bg-[hsl(var(--pipeline-cyan))] shadow-[0_0_8px_hsl(var(--pipeline-cyan)/0.9)]"
-    }`}
-  />
-);
 
 export const Integrations = () => (
   <section id="integrations" className="relative py-24 md:py-36 overflow-hidden">
