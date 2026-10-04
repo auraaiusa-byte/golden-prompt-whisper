@@ -125,7 +125,7 @@ export const Integrations = () => (
               ))}
             </div>
 
-            <ul className="space-y-3.5 mt-auto border-t border-white/10 pt-7">
+            <ul className="space-y-3.5 mt-8 border-t border-white/10 pt-7">
               {SYNC_FEATURES.map((f) => (
                 <FeatureBullet key={f}>{f}</FeatureBullet>
               ))}
