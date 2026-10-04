@@ -571,6 +571,9 @@ const MedSpa = () => (
       </div>
     </section>
 
+    {/* MED SPA PRACTICE INTEGRATION */}
+    <MedSpaIntegrations />
+
     {/* FINAL CTA */}
     <section className="py-24 md:py-32" style={{ background: `linear-gradient(135deg, ${INK} 0%, #3B342E 100%)`, color: IVORY }}>
       <div className="container text-center max-w-3xl">
