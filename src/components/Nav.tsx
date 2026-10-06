@@ -18,9 +18,16 @@ export const Nav = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <span className="font-serif text-2xl tracking-tight">NavAura</span>
-          <span className="text-gold text-xs tracking-luxe uppercase pt-2">AI</span>
+        <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
+          <img 
+            src="/navaura-logo-new.png" 
+            alt="NavAura Logo" 
+            className="w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-[0_2px_8px_rgba(226,183,160,0.35)]"
+          />
+          <div className="flex items-baseline">
+            <span className="font-serif text-xl sm:text-2xl font-medium tracking-tight text-white">NavAura</span>
+            <span className="font-sans text-xs font-semibold text-[#E2B7A0] tracking-widest uppercase ml-1">AI</span>
+          </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-luxe text-muted-foreground">
