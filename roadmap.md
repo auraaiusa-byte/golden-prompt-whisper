@@ -4,3 +4,5 @@
 - [x] Replace the homepage hero robot with a responsive autonomous pipeline visualizer and industry switcher.
 - [x] Enlarge the floating agent launcher with dual glow rings, 24/7 status, and two quick actions.
 - [x] Verify homepage industry switching, assistant actions, and desktop/mobile viewport containment.
+- [ ] Add a dashboard-only Aura AI Guide with current-visit chat, business discovery, lead capture, and Calendly booking.
+- [ ] Verify live replies, saved lead details, calendar access, and dashboard guide layout.
