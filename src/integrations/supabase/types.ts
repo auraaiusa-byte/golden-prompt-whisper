@@ -14,6 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      concierge_leads: {
+        Row: {
+          business_type: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          service_interest: string
+          source: string
+        }
+        Insert: {
+          business_type: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          service_interest: string
+          source?: string
+        }
+        Update: {
+          business_type?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          service_interest?: string
+          source?: string
+        }
+        Relationships: []
+      }
+      guide_ai_access_state: {
+        Row: {
+          id: string
+          message: string | null
+          paused: boolean
+          status: number | null
+          updated_at: string
+        }
+        Insert: {
+          id: string
+          message?: string | null
+          paused?: boolean
+          status?: number | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          message?: string | null
+          paused?: boolean
+          status?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
