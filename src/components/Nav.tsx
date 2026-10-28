@@ -18,15 +18,17 @@ export const Nav = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <img 
-            src="/navaura-logo-new.png" 
-            alt="NavAura Logo" 
-            className="w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-[0_2px_8px_rgba(226,183,160,0.35)]"
-          />
+        <Link to="/" className="flex items-center gap-2.5 group" onClick={() => setOpen(false)}>
+          <span className="robot-avatar relative inline-flex items-center justify-center rounded-full w-9 h-9 sm:w-10 sm:h-10 shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <img
+              src="/navaura-robot.png"
+              alt="NavAura AI robot mascot"
+              className="w-[86%] h-[86%] object-contain"
+            />
+          </span>
           <div className="flex items-baseline">
             <span className="font-serif text-xl sm:text-2xl font-medium tracking-tight text-white">NavAura</span>
-            <span className="font-sans text-xs font-semibold text-[#E2B7A0] tracking-widest uppercase ml-1">AI</span>
+            <span className="font-sans text-xs font-semibold text-electric tracking-widest uppercase ml-1">AI</span>
           </div>
         </Link>
 
