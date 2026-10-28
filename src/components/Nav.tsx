@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { LuxeButton } from "./LuxeButton";
-import robotLogo from "../assets/navaura-robot.png.asset.json";
 
 const links = [
   { to: "/med-spa", label: "Med Spa" },
@@ -22,7 +21,7 @@ export const Nav = () => {
         <Link to="/" className="flex items-center gap-2.5 group" onClick={() => setOpen(false)}>
           <span className="robot-avatar relative inline-flex items-center justify-center rounded-full w-9 h-9 sm:w-10 sm:h-10 shrink-0 transition-transform duration-300 group-hover:scale-105">
             <img
-              src={robotLogo.url}
+              src="/navaura-robot.png"
               alt="NavAura AI robot mascot"
               className="w-[86%] h-[86%] object-contain"
             />
