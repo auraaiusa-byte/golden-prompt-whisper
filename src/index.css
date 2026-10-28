@@ -49,6 +49,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     --gold: 39 65% 60%;
     --gold-soft: 39 70% 75%;
     --gold-deep: 35 55% 45%;
+    --brand-cyan: 187 94% 55%;
+    --brand-electric: 198 100% 55%;
     --agent-medspa: 344 46% 76%;
     --agent-medspa-foreground: 222 30% 8%;
     --agent-gym: 88 72% 56%;
@@ -163,6 +165,19 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     50% { box-shadow: 0 0 0 12px hsl(var(--gold) / 0), 0 14px 40px -8px hsl(var(--gold) / 0.55); }
   }
   .animate-gold-pulse { animation: goldPulse 2.8s ease-in-out infinite; }
+  /* Robot mascot avatar — circular container with subtle cyan aura */
+  .robot-avatar {
+    background:
+      radial-gradient(circle at 30% 22%, hsl(var(--brand-cyan) / 0.14), transparent 62%),
+      radial-gradient(circle at 70% 85%, hsl(var(--brand-electric) / 0.1), transparent 55%),
+      hsl(222 30% 10%);
+    border: 1px solid hsl(var(--brand-cyan) / 0.4);
+    box-shadow:
+      0 0 14px -3px hsl(var(--brand-cyan) / 0.55),
+      0 0 34px -8px hsl(var(--brand-cyan) / 0.32),
+      inset 0 1px 0 hsl(var(--brand-cyan) / 0.18);
+  }
+  .text-electric { color: hsl(var(--brand-electric)); }
   .luxe-card {
     background: hsl(var(--card));
     border: 1px solid hsl(var(--gold) / 0.6);
