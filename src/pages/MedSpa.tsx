@@ -534,6 +534,45 @@ const MedSpa = () => (
       </div>
     </section>
 
+    {/* ELENA IN ACTION — EXPLAINER VIDEO */}
+    <section className="py-24 md:py-32 bg-[#FAF7F5]">
+      <div className="container">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="text-[10px] uppercase tracking-[0.35em] text-[#8C6B58] font-semibold">Meet Elena · Live Demonstration</span>
+          <h2 className="font-serif text-4xl md:text-5xl mt-5 text-[#1F1D1D]">
+            Watch Elena <span className="italic text-[#8C6B58]">in action.</span>
+          </h2>
+          <p className="mt-5 font-light text-lg text-[#7A6F66]">
+            A real walkthrough of how Elena answers, qualifies, and books for your
+            clients — gracefully, around the clock.
+          </p>
+        </div>
+        <div
+          className="relative max-w-4xl mx-auto rounded-[2rem] p-2 bg-white border border-[#EADFCF]"
+          style={{ boxShadow: "0 30px 80px -30px rgba(140,107,88,0.25)" }}
+        >
+          <video
+            className="w-full rounded-[1.6rem] aspect-video bg-black object-cover"
+            controls
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          >
+            <source src="/medspa-elena-explainer.webm" type="video/webm" />
+            <source src="/medspa-elena-explainer.mp4" type="video/mp4" />
+          </video>
+          <div className="flex items-center justify-center gap-2 pt-3 pb-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[#8C6B58] font-medium">
+              73-second walkthrough · unmute for the full experience
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     {/* TESTIMONIALS */}
     <section className="py-24 md:py-32 bg-[#F4ECE6] border-y border-[#EADFCF]/60">
       <div className="container">
